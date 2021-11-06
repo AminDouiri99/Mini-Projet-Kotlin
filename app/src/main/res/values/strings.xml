@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Talentium</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="welcome_word">You have a talent, you are in the right place.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="login">Login</string>
+    <string name="Register">Create an account</string>
+    <string name="forgetpassword">Forget your password?</string>
+    <string name="orconnectwith">Or connext with</string>
+
+    <string name="email_hint">user@email.com</string>
+    <string name="password_hint">*******</string>
+    <string name="policy">© 2021,esprit inc,Talentium</string>
+
+</resources>
