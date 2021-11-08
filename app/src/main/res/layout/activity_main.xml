@@ -11,15 +11,17 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
 
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="225dp"
             android:layout_height="225dp"
-            android:src="@mipmap/logotemp_foreground"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp" />
+            android:layout_marginTop="20dp"
+            android:src="@mipmap/logotemp_foreground" />
 
         <TextView
             android:id="@+id/textView"
@@ -40,15 +42,126 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <TextView
-            android:id="@+id/policy"
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonRegister"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_gravity="center_horizontal"
+
+            android:layout_marginTop="@dimen/_12sdp"
+            android:background="@drawable/btndark"
+            android:gravity="center"
+            android:text="@string/Register"
+            android:textAlignment="center"
             android:textColor="@color/Mint_Cream"
-            android:layout_marginTop="@dimen/_30sdp"
-            android:text="@string/policy"
-            android:gravity="bottom"
-            android:layout_gravity="center_horizontal"/>
+            android:textStyle="bold" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonBacktoLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_gravity="center_horizontal"
+
+            android:layout_marginTop="@dimen/_12sdp"
+            android:background="@drawable/btndark"
+            android:gravity="center"
+            android:text="@string/gotologin"
+            android:textAlignment="center"
+            android:textColor="@color/Mint_Cream"
+            android:textStyle="bold" />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/orconnectwith"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/orconnectwith"
+                app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <FrameLayout
+                    android:id="@+id/circleFB"
+                    android:layout_width="@dimen/_35sdp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:clickable="true"
+                    android:background="@drawable/fbroundbckground">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@mipmap/fbicon_foreground" />
+
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/circleGmail"
+                    android:layout_width="@dimen/_35sdp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:clickable="true"
+                    android:background="@drawable/fbroundbckground">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@mipmap/gmailicon_foreground" />
+
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/circleInsta"
+                    android:layout_width="@dimen/_35sdp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:clickable="true"
+                    android:background="@drawable/fbroundbckground">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@mipmap/instaicon_foreground" />
+
+                </FrameLayout>
+
+
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/policy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+
+                android:text="@string/policy"
+                android:textColor="@color/Mint_Cream"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     </LinearLayout>
 

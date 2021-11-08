@@ -81,7 +81,7 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
-                                                <entry key="imagePath" value="C:\Users\Amine Douiri\Desktop\logo3alzab.png" />
+                                                <entry key="imagePath" value="C:\Users\Amine Douiri\Downloads\kisspng-computer-icons-icon-design-youtube-material-design-5ae3a56fd79ba7.1377573615248684638831.png" />
                                                 <entry key="scalingPercent" value="68" />
                                               </map>
                                             </option>
@@ -114,7 +114,9 @@
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="outputName" value="logotemp" />
+                                      <entry key="backgroundAssetType" value="COLOR" />
+                                      <entry key="backgroundColor" value="ffffff" />
+                                      <entry key="outputName" value="instaicon" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -283,6 +285,44 @@
                                 </PersistentState>
                               </value>
                             </entry>
+                          </map>
+                        </option>
+                      </PersistentState>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </PersistentState>
+          </value>
+        </entry>
+        <entry key="vectorWizard">
+          <value>
+            <PersistentState>
+              <option name="children">
+                <map>
+                  <entry key="vectorAssetStep">
+                    <value>
+                      <PersistentState>
+                        <option name="children">
+                          <map>
+                            <entry key="clipartAsset">
+                              <value>
+                                <PersistentState>
+                                  <option name="values">
+                                    <map>
+                                      <entry key="url" value="file:/$PROJECT_DIR$/../../../Amine%20Douiri/AppData/Local/Android/Sdk/icons/material/materialicons/close/baseline_close_24.xml" />
+                                    </map>
+                                  </option>
+                                </PersistentState>
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                        <option name="values">
+                          <map>
+                            <entry key="color" value="ea0808" />
+                            <entry key="outputName" value="ic_baseline_close_24" />
+                            <entry key="sourceFile" value="C:\Users\Amine Douiri\AndroidStudioProjects\Talentium" />
                           </map>
                         </option>
                       </PersistentState>
