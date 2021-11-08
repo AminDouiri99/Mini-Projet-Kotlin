@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegisterFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/Register"
+            android:textColor="@color/Mint_Cream"
+            android:textSize="@dimen/_30sdp" />
+        <EditText
+            android:shadowColor="@color/Mint_Cream"
+            android:shadowDy="@integer/material_motion_duration_long_1"
+            android:shadowDx="@integer/material_motion_duration_long_1"
+            android:background="@drawable/edittextlogin"
+            android:id="@+id/editTextEmail"
+            android:textColor="@color/Mint_Cream"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="@dimen/_250sdp"
+            android:ems="10"
+            android:inputType="textEmailAddress"
+            android:hint="@string/email_hint"
+            android:paddingLeft="@dimen/_12sdp"
+            />
+        <EditText
+            android:shadowColor="@color/Mint_Cream"
+            android:shadowDy="@integer/material_motion_duration_long_1"
+            android:shadowDx="@integer/material_motion_duration_long_1"
+            android:background="@drawable/edittextlogin"
+            android:id="@+id/editTextUsername"
+            android:textColor="@color/Mint_Cream"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="@dimen/_250sdp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:hint="@string/username_hint"
+            android:paddingLeft="@dimen/_12sdp"
+            />
+        <EditText
+            android:shadowColor="@color/Mint_Cream"
+            android:shadowDy="@integer/material_motion_duration_long_1"
+            android:shadowDx="@integer/material_motion_duration_long_1"
+            android:background="@drawable/edittextlogin"
+            android:id="@+id/editTextFname"
+            android:textColor="@color/Mint_Cream"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="@dimen/_250sdp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:hint="@string/firstname_hint"
+            android:paddingLeft="@dimen/_12sdp"
+            />
+        <EditText
+            android:shadowColor="@color/Mint_Cream"
+            android:shadowDy="@integer/material_motion_duration_long_1"
+            android:shadowDx="@integer/material_motion_duration_long_1"
+            android:background="@drawable/edittextlogin"
+            android:id="@+id/editTextpassword"
+            android:textColor="@color/Mint_Cream"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="@dimen/_250sdp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:hint="@string/firstname_hint"
+            android:paddingLeft="@dimen/_12sdp"
+            />
+
+
+    </LinearLayout>
+
+</FrameLayout>
