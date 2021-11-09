@@ -95,13 +95,13 @@ class LoginFragment : Fragment() {
         getActivity()?.window?.addFlags(
             WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
         )
-        Log.i("http",pass)
-        Log.i("http",email)
+        Log.i("password",pass)
+        Log.i("email",email)
         apiInterface.seConnecter(ApiInterface.LoginBody(email,pass)).enqueue(object : Callback<ApiInterface.LoginResponse> {
             override fun onResponse(call: Call<ApiInterface.LoginResponse>, response: Response<ApiInterface.LoginResponse>) {
 
                 val token = response.body()
-                Log.i("http",response.body()?.token.toString())
+                Log.i("response",response.body()?.token.toString())
 
                 if (response.code()==200){
                     val preferences: SharedPreferences =
@@ -115,13 +115,14 @@ class LoginFragment : Fragment() {
 
 
                 }else{
+                    Log.i("fail",response.body()?.token.toString())
                 }
 
                 getActivity()?.window?.clearFlags( WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
             }
 
             override fun onFailure(call: Call<ApiInterface.LoginResponse>, t: Throwable) {
-                Log.i("http",t.message.toString())
+                Log.i("failer",t.message.toString())
                 getActivity()?.window?.clearFlags( WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
             }
 

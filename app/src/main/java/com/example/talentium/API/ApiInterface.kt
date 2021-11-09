@@ -20,11 +20,12 @@ interface ApiInterface {
         val user: User
     )
     data class LoginBody(val email:String,val password:String)
+    data class registerBody(val email:String,val password :String,val username:String)
     @POST("api/users/login")
     fun seConnecter(@Body credential : LoginBody): Call<LoginResponse>
 
     @POST("api/users/register")
-    fun Register(@Body map:HashMap<String,String>):Call<JsonObject>
+    fun Register(@Body credential : registerBody):Call<LoginResponse>
 
 
 
@@ -32,7 +33,6 @@ interface ApiInterface {
 
 
     companion object {
-
         var BASE_URL = "http://192.168.1.20:6000/"
 
         fun create() : ApiInterface {

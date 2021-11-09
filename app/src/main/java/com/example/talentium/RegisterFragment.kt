@@ -1,5 +1,7 @@
 package com.example.talentium
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.os.Bundle
@@ -20,6 +22,8 @@ import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import android.util.Patterns.EMAIL_ADDRESS
+import android.widget.Toast
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -51,12 +55,12 @@ class RegisterFragment : Fragment() {
         buttonRegister.setOnClickListener {
 
             if(validateForm()){
-                //make the call
+                Register(editRegisterEmail.text.toString(),editPassword.text.toString(),editTextUsername.text.toString())
             }
         }
     }
 
-    private fun Register(){
+    private fun Register(email:String,pass:String,username:String){
         val apiInterface = ApiInterface.create()
         getActivity()?.window?.addFlags(
             WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
@@ -65,27 +69,39 @@ class RegisterFragment : Fragment() {
 
         val map: HashMap<String, String> = HashMap()
 
-        map["email"] = editRegisterEmail.text.toString()
-        map["password"] = editPassword.text.toString()
-       /* apiInterface.Register(map).enqueue(object  : Callback<JsonObject> {
-            override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+        Log.i("password",pass)
+        Log.i("email",email)
+        apiInterface.Register(ApiInterface.registerBody(email,pass,username)).enqueue(object : Callback<ApiInterface.LoginResponse> {
+            override fun onResponse(call: Call<ApiInterface.LoginResponse>, response: Response<ApiInterface.LoginResponse>) {
 
                 val user = response.body()
-                Log.i("http",user.toString())
-
-                if (user != null){
+                Log.i("response ",user.toString())
+                if (response.code()==201){
+                    val preferences: SharedPreferences =
+                        requireActivity().getSharedPreferences("pref", Context.MODE_PRIVATE)
+                    val editor=preferences.edit()
+                    editor.putString("token",response.body()?.token.toString())
+                    editor.apply()
+                    buttonRegister.visibility=View.VISIBLE
+                    waitingRegister.visibility=View.GONE
                 }else{
+                    Log.i("fail",response.body()?.token.toString())
+                    val myToast = Toast.makeText(context,"this user already exists",Toast.LENGTH_SHORT)
+                    myToast.setGravity(Gravity.LEFT,200,200)
+                    myToast.show()
                 }
 
+
+
                 getActivity()?.window?.clearFlags( WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
             }
 
-            override fun onFailure(call: Call<User>, t: Throwable) {
-                Log.i("http",t.message.toString())
+            override fun onFailure(call: Call<ApiInterface.LoginResponse>, t: Throwable) {
+                Log.i("fail",t.message.toString())
                 getActivity()?.window?.clearFlags( WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
             }
 
-        })*/
+        })
     }
 
     fun  validateForm():Boolean{
@@ -95,6 +111,13 @@ class RegisterFragment : Fragment() {
         }else{
             emailRequired.visibility=View.INVISIBLE
         }
+        if(!EMAIL_ADDRESS.matcher(editRegisterEmail.text.toString()!!).matches()){
+            emailRequired.visibility=View.VISIBLE
+            return false
+        }else{
+            emailRequired.visibility=View.INVISIBLE
+        }
+
         if(editTextUsername.text.toString()==""){
             usernameRequired.visibility=View.VISIBLE
             return false
@@ -125,6 +148,7 @@ class RegisterFragment : Fragment() {
                 confirmpasswordRequired.visibility=View.INVISIBLE
 
             }
+
         return true
 
     }
