@@ -11,10 +11,12 @@ import android.widget.EditText
 import com.example.talentium.API.ApiInterface
 import com.example.talentium.Model.User
 import com.google.gson.JsonArray
+import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.android.synthetic.main.fragment_register.*
 import kotlinx.android.synthetic.main.fragment_register.emailRequired
 import kotlinx.android.synthetic.main.fragment_register.passwordRequired
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -45,7 +47,7 @@ class RegisterFragment : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        buttonEffect(buttonlogin)
+        buttonEffect(buttonRegister)
         buttonRegister.setOnClickListener {
 
             if(validateForm()){
@@ -65,8 +67,8 @@ class RegisterFragment : Fragment() {
 
         map["email"] = editRegisterEmail.text.toString()
         map["password"] = editPassword.text.toString()
-        /*apiInterface.Register(map).enqueue(JsonArray : Callback<User> {
-            override fun onResponse(call: Call<JsonArray>, response: Response<User>) {
+       /* apiInterface.Register(map).enqueue(object  : Callback<JsonObject> {
+            override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
 
                 val user = response.body()
                 Log.i("http",user.toString())
@@ -101,8 +103,7 @@ class RegisterFragment : Fragment() {
         else{
             usernameRequired.visibility=View.INVISIBLE
         }
-
-            if(editPassword.text.toString()=="") {
+        if(editPassword.text.toString()=="") {
             passwordRequired.visibility=View.VISIBLE
                 return false
         }else{
@@ -151,13 +152,13 @@ class RegisterFragment : Fragment() {
         button.setOnTouchListener { v, event ->
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
-                    buttonlogin.setTextColor(Color.WHITE)
+                    buttonRegister.setTextColor(Color.WHITE)
                     v.background.setColorFilter(-0x1f0b8adf, PorterDuff.Mode.SRC_ATOP)
                     v.invalidate()
                 }
                 MotionEvent.ACTION_UP -> {
 
-                    buttonlogin.setTextColor(resources.getColor(R.color.Roman_Silver))
+                    buttonRegister.setTextColor(resources.getColor(R.color.white))
 
                     v.background.clearColorFilter()
                     v.invalidate()

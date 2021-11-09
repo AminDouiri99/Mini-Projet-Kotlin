@@ -2,6 +2,8 @@ package com.example.talentium.API
 
 import android.util.Log
 import com.example.talentium.Model.User
+import com.google.gson.JsonObject
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -14,7 +16,7 @@ interface ApiInterface {
     fun seConnecter(@Query("log") login: String, @Query("pwd") password: String): Call<User>
 
     @POST("api/users/register")
-    fun Register(@Body map:HashMap<String,String>):Call<User>
+    fun Register(@Body map:HashMap<String,String>):Call<JsonObject>
 
 
 
