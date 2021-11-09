@@ -142,17 +142,23 @@
                 style="?android:attr/progressBarStyle"
                 android:layout_width="@dimen/_20sdp"
                 android:layout_gravity="center_vertical"
-
+                android:visibility="gone"
                 android:layout_height="@dimen/_20sdp"
                  />
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_close_24" />
+
             <TextView
+                android:id="@+id/textWaiting"
                 android:layout_width="@dimen/_100sdp"
                 android:layout_height="wrap_content"
-                android:textColor="@color/Roman_Silver"
-                android:layout_marginLeft="@dimen/_10sdp"
                 android:layout_gravity="center_vertical"
-                android:text="@string/waiting"/>
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:text="@string/waiting"
+                android:textColor="@color/Roman_Silver" />
 
         </LinearLayout>
 
