@@ -1,5 +1,6 @@
 package com.example.talentium
 
+import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.PorterDuff
@@ -13,9 +14,16 @@ import android.widget.Button
 import com.example.talentium.API.ApiInterface
 import com.example.talentium.Model.User
 import kotlinx.android.synthetic.main.fragment_login.*
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import retrofit2.http.Body
+import android.content.SharedPreferences
+
+
+
+
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
@@ -77,6 +85,7 @@ class LoginFragment : Fragment() {
                 // elkhedma hne bech tsir
                 buttonlogin.visibility=View.GONE
                 waiting.visibility=View.VISIBLE
+
                 callLoginApi(editTextEmail.text.toString(),editTextpassword.text.toString())
         }
         }
@@ -86,22 +95,32 @@ class LoginFragment : Fragment() {
         getActivity()?.window?.addFlags(
             WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
         )
-        Log.i("http","requette0")
+        Log.i("http",pass)
+        Log.i("http",email)
+        apiInterface.seConnecter(ApiInterface.LoginBody(email,pass)).enqueue(object : Callback<ApiInterface.LoginResponse> {
+            override fun onResponse(call: Call<ApiInterface.LoginResponse>, response: Response<ApiInterface.LoginResponse>) {
 
-        apiInterface.seConnecter(email, pass).enqueue(object : Callback<User> {
-            override fun onResponse(call: Call<User>, response: Response<User>) {
+                val token = response.body()
+                Log.i("http",response.body()?.token.toString())
 
-                val user = response.body()
-                Log.i("http",user.toString())
+                if (response.code()==200){
+                    val preferences: SharedPreferences =
+                    requireActivity().getSharedPreferences("pref", Context.MODE_PRIVATE)
+                    val editor=preferences.edit()
+                    editor.putString("token",response.body()?.token.toString())
+                    editor.apply()
+                    buttonlogin.visibility=View.VISIBLE
+                    waiting.visibility=View.GONE
 
-                if (user != null){
+
+
                 }else{
                 }
 
                 getActivity()?.window?.clearFlags( WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
             }
 
-            override fun onFailure(call: Call<User>, t: Throwable) {
+            override fun onFailure(call: Call<ApiInterface.LoginResponse>, t: Throwable) {
                 Log.i("http",t.message.toString())
                 getActivity()?.window?.clearFlags( WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
             }
