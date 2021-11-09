@@ -13,7 +13,7 @@
 
         <TextView
 
-            android:id="@+id/textView3"
+            android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -21,21 +21,45 @@
             android:textColor="@color/Mint_Cream"
             android:textSize="@dimen/_30sdp" />
         <EditText
-            android:shadowColor="@color/Mint_Cream"
-            android:shadowDy="@integer/material_motion_duration_long_1"
-            android:shadowDx="@integer/material_motion_duration_long_1"
-            android:background="@drawable/edittextlogin"
-            android:id="@+id/editTextEmail"
-            android:textColor="@color/Mint_Cream"
-            android:layout_marginTop="@dimen/_15sdp"
+            android:id="@+id/editRegisterEmail"
+            android:layout_width="@dimen/_250sdp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_width="@dimen/_250sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:background="@drawable/edittextlogin"
             android:ems="10"
-            android:inputType="textEmailAddress"
             android:hint="@string/email_hint"
+            android:inputType="textEmailAddress"
             android:paddingLeft="@dimen/_12sdp"
-            />
+            android:shadowColor="@color/Mint_Cream"
+            android:shadowDx="@integer/material_motion_duration_long_1"
+            android:shadowDy="@integer/material_motion_duration_long_1"
+            android:textColor="@color/Mint_Cream" />
+        <LinearLayout
+            android:id="@+id/emailRequired"
+            android:visibility="invisible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+
+            android:layout_marginTop="@dimen/_3sdp"
+            android:layout_marginLeft="@dimen/_40sdp"
+            android:layout_gravity="center_horizontal"
+            >
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/red"
+                android:text="@string/required" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_close_24" />
+        </LinearLayout>
         <EditText
             android:shadowColor="@color/Mint_Cream"
             android:shadowDy="@integer/material_motion_duration_long_1"
@@ -52,12 +76,37 @@
             android:hint="@string/username_hint"
             android:paddingLeft="@dimen/_12sdp"
             />
+        <LinearLayout
+            android:id="@+id/usernameRequired"
+            android:visibility="invisible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+
+            android:layout_marginTop="@dimen/_3sdp"
+            android:layout_marginLeft="@dimen/_40sdp"
+            android:layout_gravity="center_horizontal"
+            >
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/red"
+                android:text="@string/required" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_close_24" />
+        </LinearLayout>
         <EditText
             android:shadowColor="@color/Mint_Cream"
             android:shadowDy="@integer/material_motion_duration_long_1"
             android:shadowDx="@integer/material_motion_duration_long_1"
             android:background="@drawable/edittextlogin"
-            android:id="@+id/editTextFname"
+            android:id="@+id/editPassword"
             android:textColor="@color/Mint_Cream"
             android:layout_marginTop="@dimen/_15sdp"
             android:layout_height="wrap_content"
@@ -68,12 +117,37 @@
             android:hint="@string/firstname_hint"
             android:paddingLeft="@dimen/_12sdp"
             />
+        <LinearLayout
+            android:id="@+id/passwordRequired"
+            android:visibility="invisible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+
+            android:layout_marginTop="@dimen/_3sdp"
+            android:layout_marginLeft="@dimen/_40sdp"
+            android:layout_gravity="center_horizontal"
+            >
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/red"
+                android:text="@string/required" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_close_24" />
+        </LinearLayout>
         <EditText
             android:shadowColor="@color/Mint_Cream"
             android:shadowDy="@integer/material_motion_duration_long_1"
             android:shadowDx="@integer/material_motion_duration_long_1"
             android:background="@drawable/edittextlogin"
-            android:id="@+id/editTextpassword"
+            android:id="@+id/editConfirmPassword"
             android:textColor="@color/Mint_Cream"
             android:layout_marginTop="@dimen/_15sdp"
             android:layout_height="wrap_content"
@@ -81,9 +155,47 @@
             android:layout_width="@dimen/_250sdp"
             android:ems="10"
             android:inputType="textPersonName"
-            android:hint="@string/firstname_hint"
+            android:hint="@string/confirmPassword_hint"
             android:paddingLeft="@dimen/_12sdp"
             />
+        <LinearLayout
+            android:id="@+id/confirmpasswordRequired"
+            android:visibility="invisible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+
+            android:layout_marginTop="@dimen/_3sdp"
+            android:layout_marginLeft="@dimen/_40sdp"
+            android:layout_gravity="center_horizontal"
+            >
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/red"
+                android:text="@string/required" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_close_24" />
+        </LinearLayout>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonRegister"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_gravity="center_horizontal"
+
+            android:layout_marginTop="@dimen/_12sdp"
+            android:background="@drawable/btndark"
+            android:gravity="center"
+            android:text="@string/Register"
+            android:textAlignment="center"
+            android:textColor="@color/Mint_Cream"
+            android:textStyle="bold" />
 
 
     </LinearLayout>

@@ -13,7 +13,8 @@
 
     <string name="email_hint">user@email.com</string>
     <string name="username_hint">Your username</string>
-    <string name="firstname_hint">Your first name</string>
+    <string name="firstname_hint">Password</string>
+    <string name="confirmPassword_hint">Confirm Password</string>
     <string name="lastname_hint">Your last name</string>
     <string name="gotologin">Go to login</string>
     <string name="required">Required</string>

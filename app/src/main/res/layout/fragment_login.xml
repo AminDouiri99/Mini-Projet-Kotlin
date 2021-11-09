@@ -124,7 +124,7 @@
 
         <LinearLayout
             android:id="@+id/waiting"
-            android:visibility="visible"
+            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/_30sdp"
             android:layout_marginTop="@dimen/_35sdp"

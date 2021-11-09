@@ -21,9 +21,17 @@ interface ApiInterface {
     @POST("api/users/login")
     fun seConnecter(@Body credential : LoginBody): Call<LoginResponse>
 
+    @POST("api/users/register")
+    fun Register(@Body map:HashMap<String,String>):Call<User>
+
+
+
+
+
+
     companion object {
 
-        var BASE_URL = "http://192.168.1.24:6000/"
+        var BASE_URL = "http://192.168.1.20:6000/"
 
         fun create() : ApiInterface {
             val retrofit = Retrofit.Builder()
