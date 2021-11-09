@@ -4,6 +4,7 @@ import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.view.Window
 
@@ -85,12 +86,13 @@ class LoginFragment : Fragment() {
         getActivity()?.window?.addFlags(
             WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
         )
+        Log.i("http","requette0")
 
         apiInterface.seConnecter(email, pass).enqueue(object : Callback<User> {
-
             override fun onResponse(call: Call<User>, response: Response<User>) {
 
                 val user = response.body()
+                Log.i("http",user.toString())
 
                 if (user != null){
                 }else{
@@ -100,7 +102,7 @@ class LoginFragment : Fragment() {
             }
 
             override fun onFailure(call: Call<User>, t: Throwable) {
-
+                Log.i("http",t.message.toString())
                 getActivity()?.window?.clearFlags( WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
             }
 
