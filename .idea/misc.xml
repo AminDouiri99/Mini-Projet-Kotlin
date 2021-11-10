@@ -3,17 +3,36 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Amine Douiri/AndroidStudioProjects/Talentium/app/src/main/res/drawable/backgroundlight.xml" value="0.21296296296296297" />
         <entry key="..\:/Users/Amine Douiri/AndroidStudioProjects/Talentium/app/src/main/res/drawable/backgroundlogin.xml" value="0.18981481481481483" />
         <entry key="..\:/Users/Amine Douiri/AndroidStudioProjects/Talentium/app/src/main/res/drawable/btndark.xml" value="0.19537037037037036" />
+        <entry key="..\:/Users/Amine Douiri/AndroidStudioProjects/Talentium/app/src/main/res/drawable/btndesign.xml" value="0.2203125" />
         <entry key="..\:/Users/Amine Douiri/AndroidStudioProjects/Talentium/app/src/main/res/drawable/btnfb.xml" value="0.19537037037037036" />
+        <entry key="..\:/Users/Amine Douiri/AndroidStudioProjects/Talentium/app/src/main/res/drawable/check.xml" value="0.18645833333333334" />
         <entry key="..\:/Users/Amine Douiri/AndroidStudioProjects/Talentium/app/src/main/res/drawable/edittextlogin.xml" value="0.18981481481481483" />
+        <entry key="..\:/Users/Amine Douiri/AndroidStudioProjects/Talentium/app/src/main/res/drawable/enter_from_left.xml" value="0.18645833333333334" />
+        <entry key="..\:/Users/Amine Douiri/AndroidStudioProjects/Talentium/app/src/main/res/drawable/enter_from_right.xml" value="0.18645833333333334" />
+        <entry key="..\:/Users/Amine Douiri/AndroidStudioProjects/Talentium/app/src/main/res/drawable/exit_to_left.xml" value="0.18645833333333334" />
+        <entry key="..\:/Users/Amine Douiri/AndroidStudioProjects/Talentium/app/src/main/res/drawable/exit_to_right.xml" value="0.18645833333333334" />
+        <entry key="..\:/Users/Amine Douiri/AndroidStudioProjects/Talentium/app/src/main/res/drawable/fade_in.xml" value="0.18645833333333334" />
+        <entry key="..\:/Users/Amine Douiri/AndroidStudioProjects/Talentium/app/src/main/res/drawable/fade_out.xml" value="0.18645833333333334" />
         <entry key="..\:/Users/Amine Douiri/AndroidStudioProjects/Talentium/app/src/main/res/drawable/fbicon.xml" value="0.19537037037037036" />
+        <entry key="..\:/Users/Amine Douiri/AndroidStudioProjects/Talentium/app/src/main/res/drawable/fbroundbckground.xml" value="0.2203125" />
+        <entry key="..\:/Users/Amine Douiri/AndroidStudioProjects/Talentium/app/src/main/res/drawable/ic_baseline_cached_24.xml" value="0.1640625" />
+        <entry key="..\:/Users/Amine Douiri/AndroidStudioProjects/Talentium/app/src/main/res/drawable/ic_baseline_close_24.xml" value="0.18645833333333334" />
+        <entry key="..\:/Users/Amine Douiri/AndroidStudioProjects/Talentium/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.1640625" />
         <entry key="..\:/Users/Amine Douiri/AndroidStudioProjects/Talentium/app/src/main/res/drawable/ic_launcher_background.xml" value="0.19537037037037036" />
-        <entry key="..\:/Users/Amine Douiri/AndroidStudioProjects/Talentium/app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="..\:/Users/Amine Douiri/AndroidStudioProjects/Talentium/app/src/main/res/layout/fragment_login.xml" value="0.22" />
-        <entry key="..\:/Users/yessi/AndroidStudioProjects/Mini-Projet-Kotlin/app/src/main/res/layout/activity_main.xml" value="0.20520833333333333" />
-        <entry key="..\:/Users/yessi/AndroidStudioProjects/Mini-Projet-Kotlin/app/src/main/res/layout/fragment_login.xml" value="0.20520833333333333" />
-        <entry key="..\:/Users/yessi/AndroidStudioProjects/Mini-Projet-Kotlin/app/src/main/res/layout/fragment_register.xml" value="0.1" />
+        <entry key="..\:/Users/Amine Douiri/AndroidStudioProjects/Talentium/app/src/main/res/drawable/ic_retry.xml" value="0.165625" />
+        <entry key="..\:/Users/Amine Douiri/AndroidStudioProjects/Talentium/app/src/main/res/drawable/iconperson.xml" value="0.1640625" />
+        <entry key="..\:/Users/Amine Douiri/AndroidStudioProjects/Talentium/app/src/main/res/drawable/pdpcontainer.xml" value="0.2203125" />
+        <entry key="..\:/Users/Amine Douiri/AndroidStudioProjects/Talentium/app/src/main/res/drawable/profiletopcard.xml" value="0.18703703703703703" />
+        <entry key="..\:/Users/Amine Douiri/AndroidStudioProjects/Talentium/app/src/main/res/drawable/tabbarbackground.xml" value="0.1640625" />
+        <entry key="..\:/Users/Amine Douiri/AndroidStudioProjects/Talentium/app/src/main/res/layout/activity_landing.xml" value="0.22" />
+        <entry key="..\:/Users/Amine Douiri/AndroidStudioProjects/Talentium/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/Users/Amine Douiri/AndroidStudioProjects/Talentium/app/src/main/res/layout/fragment_login.xml" value="0.25" />
+        <entry key="..\:/Users/Amine Douiri/AndroidStudioProjects/Talentium/app/src/main/res/layout/fragment_profile.xml" value="0.22" />
+        <entry key="..\:/Users/Amine Douiri/AndroidStudioProjects/Talentium/app/src/main/res/layout/fragment_register.xml" value="0.17" />
+        <entry key="..\:/Users/Amine Douiri/AndroidStudioProjects/Talentium/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.14791666666666667" />
       </map>
     </option>
   </component>

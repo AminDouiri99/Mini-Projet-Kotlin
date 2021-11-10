@@ -310,7 +310,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:/$PROJECT_DIR$/../../../Amine%20Douiri/AppData/Local/Android/Sdk/icons/material/materialicons/close/baseline_close_24.xml" />
+                                      <entry key="url" value="file:/$PROJECT_DIR$/../../../Amine%20Douiri/AppData/Local/Android/Sdk/icons/material/materialicons/more_vert/baseline_more_vert_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -320,8 +320,9 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="color" value="ea0808" />
-                            <entry key="outputName" value="ic_baseline_close_24" />
+                            <entry key="autoMirrored" value="true" />
+                            <entry key="color" value="7d8491" />
+                            <entry key="outputName" value="ic_more" />
                             <entry key="sourceFile" value="C:\Users\Amine Douiri\AndroidStudioProjects\Talentium" />
                           </map>
                         </option>
