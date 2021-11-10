@@ -19,6 +19,9 @@
     <string name="gotologin">Go to login</string>
     <string name="required">Required</string>
     <string name="waiting">Please, wait!</string>
+    <string name="feed">Feed</string>
+    <string name="profile">Profile</string>
+    <string name="live">Live</string>
 
     <string name="password_hint">*******</string>
     <string name="policy">© 2021,esprit inc,Talentium</string>

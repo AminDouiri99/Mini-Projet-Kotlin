@@ -1,5 +1,8 @@
 package com.example.talentium
 
+import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.PorterDuff
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -23,11 +26,25 @@ class MainActivity : AppCompatActivity() {
     lateinit var  buttonRegister :AppCompatButton
      var iamLogin : Boolean = true
     override fun onCreate(savedInstanceState: Bundle?) {
+        val preferences: SharedPreferences =
+            this.getSharedPreferences("pref", Context.MODE_PRIVATE)
+
+        if(!preferences.getString("token",null).toString().equals("")){
+            val intent = Intent (this, LandingActivity::class.java)
+            startActivity(intent)
+        }
             super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         init()
     }
     fun init(){
+        val preferences: SharedPreferences =
+            this.getSharedPreferences("pref", Context.MODE_PRIVATE)
+
+        if(!preferences.getString("token",null).toString().equals("")){
+            val intent = Intent (this, LandingActivity::class.java)
+            startActivity(intent)
+        }
         iamLogin=true
 
         backToLogin=findViewById(R.id.buttonBacktoLogin)

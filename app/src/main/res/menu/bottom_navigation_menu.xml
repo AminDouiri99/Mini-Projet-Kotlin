@@ -1,0 +1,19 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/feedPage"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_person_24"
+        
+        android:title="@string/feed"/>
+    <item
+        android:id="@+id/livePage"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_person_24"
+        android:title="@string/live"/>
+
+    <item
+        android:id="@+id/profilePage"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_person_24"
+        android:title="@string/profile"/>
+</menu>

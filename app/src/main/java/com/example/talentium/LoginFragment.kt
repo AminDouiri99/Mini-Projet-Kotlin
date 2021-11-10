@@ -1,6 +1,7 @@
 package com.example.talentium
 
 import android.content.Context
+import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.PorterDuff
@@ -66,6 +67,7 @@ class LoginFragment : Fragment() {
 }
     fun doTheLogin(){
         buttonlogin.setOnClickListener {
+
             if(editTextEmail.text.toString().equals("")){
 
                 emailRequired.visibility=View.VISIBLE
@@ -91,6 +93,7 @@ class LoginFragment : Fragment() {
         }
     }
     fun callLoginApi(email:String,pass:String){
+        buttonlogin.isClickable=false
         val apiInterface = ApiInterface.create()
         getActivity()?.window?.addFlags(
             WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
@@ -111,10 +114,24 @@ class LoginFragment : Fragment() {
                     editor.apply()
                     buttonlogin.visibility=View.VISIBLE
                     waiting.visibility=View.GONE
+                    val intent = Intent (requireContext(), LandingActivity::class.java)
+                    startActivity(intent)
 
 
 
-                }else{
+                }
+                else{
+                    progressBar.visibility=View.GONE
+                    textWaiting.text="Login Failed"
+                    LoginFailed.visibility=View.VISIBLE
+
+                    waiting.isClickable=true
+                    buttonEffect(waiting)
+                    waiting.setOnClickListener {
+                        waiting.visibility=View.GONE
+                        buttonlogin.visibility=View.VISIBLE
+                        doTheLogin()
+                    }
                 }
 
                 getActivity()?.window?.clearFlags( WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
