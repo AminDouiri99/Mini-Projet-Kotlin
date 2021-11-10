@@ -2,6 +2,8 @@ package com.example.talentium.API
 
 import android.util.Log
 import com.example.talentium.Model.User
+import com.google.gson.JsonObject
+import org.json.JSONObject
 import com.google.gson.annotations.SerializedName
 import retrofit2.Call
 import retrofit2.Retrofit
@@ -18,17 +20,20 @@ interface ApiInterface {
         val user: User
     )
     data class LoginBody(val email:String,val password:String)
+    data class registerBody(val email:String,val password :String,val username:String)
     @POST("api/users/login")
     fun seConnecter(@Body credential : LoginBody): Call<LoginResponse>
 
     @POST("api/users/register")
-    fun Register(@Body map:HashMap<String,String>):Call<User>
+    fun Register(@Body registerBody: registerBody):Call<LoginResponse>
+
+
 
 
 
 
     companion object {
-        var BASE_URL = "http://192.168.1.24:6000/"
+        var BASE_URL = "http://172.16.45.83:6000/"
 
         fun create() : ApiInterface {
             val retrofit = Retrofit.Builder()

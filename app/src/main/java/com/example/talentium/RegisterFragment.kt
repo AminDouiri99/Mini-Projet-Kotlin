@@ -1,5 +1,8 @@
 package com.example.talentium
 
+import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.os.Bundle
@@ -11,13 +14,17 @@ import android.widget.EditText
 import com.example.talentium.API.ApiInterface
 import com.example.talentium.Model.User
 import com.google.gson.JsonArray
+import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.android.synthetic.main.fragment_register.*
 import kotlinx.android.synthetic.main.fragment_register.emailRequired
 import kotlinx.android.synthetic.main.fragment_register.passwordRequired
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import android.util.Patterns.EMAIL_ADDRESS
+import android.widget.Toast
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -49,12 +56,12 @@ class RegisterFragment : Fragment() {
         buttonRegister.setOnClickListener {
 
             if(validateForm()){
-                //make the call
+                Register(editRegisterEmail.text.toString(),editPassword.text.toString(),editTextUsername.text.toString())
             }
         }
     }
 
-    private fun Register(){
+    private fun Register(email:String,pass:String,username:String){
         val apiInterface = ApiInterface.create()
         getActivity()?.window?.addFlags(
             WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
@@ -63,27 +70,44 @@ class RegisterFragment : Fragment() {
 
         val map: HashMap<String, String> = HashMap()
 
-        map["email"] = editRegisterEmail.text.toString()
-        map["password"] = editPassword.text.toString()
-        /*apiInterface.Register(map).enqueue(JsonArray : Callback<User> {
-            override fun onResponse(call: Call<JsonArray>, response: Response<User>) {
+        Log.i("password",pass)
+        Log.i("email",email)
+        apiInterface.Register(ApiInterface.registerBody(email,pass,username)).enqueue(object : Callback<ApiInterface.LoginResponse> {
+            override fun onResponse(call: Call<ApiInterface.LoginResponse>, response: Response<ApiInterface.LoginResponse>) {
 
                 val user = response.body()
-                Log.i("http",user.toString())
+                Log.i("response ",user.toString())
+                if (response.code()==201){
+                    val preferences: SharedPreferences =
+                        requireActivity().getSharedPreferences("pref", Context.MODE_PRIVATE)
+                    val editor=preferences.edit()
+                    editor.putString("token",response.body()?.token.toString())
+                    editor.apply()
+                    buttonRegister.visibility=View.VISIBLE
+                    waitingRegister.visibility=View.GONE
+                    val changePage = Intent(requireContext(), MainActivity::class.java)
+                    // Error: "Please specify constructor invocation;
+                    // classifier 'Page2' does not have a companion object"
 
-                if (user != null){
+                    startActivity(changePage)
                 }else{
+                    Log.i("fail",response.body()?.token.toString())
+                    val myToast = Toast.makeText(context,"this user already exists",Toast.LENGTH_SHORT)
+                    myToast.setGravity(Gravity.LEFT,200,200)
+                    myToast.show()
                 }
 
+
+
                 getActivity()?.window?.clearFlags( WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
             }
 
-            override fun onFailure(call: Call<User>, t: Throwable) {
-                Log.i("http",t.message.toString())
+            override fun onFailure(call: Call<ApiInterface.LoginResponse>, t: Throwable) {
+                Log.i("fail",t.message.toString())
                 getActivity()?.window?.clearFlags( WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
             }
 
-        })*/
+        })
     }
 
     fun  validateForm():Boolean{
@@ -93,6 +117,13 @@ class RegisterFragment : Fragment() {
         }else{
             emailRequired.visibility=View.INVISIBLE
         }
+        if(!EMAIL_ADDRESS.matcher(editRegisterEmail.text.toString()!!).matches()){
+            emailRequired.visibility=View.VISIBLE
+            return false
+        }else{
+            emailRequired.visibility=View.INVISIBLE
+        }
+
         if(editTextUsername.text.toString()==""){
             usernameRequired.visibility=View.VISIBLE
             return false
@@ -101,8 +132,7 @@ class RegisterFragment : Fragment() {
         else{
             usernameRequired.visibility=View.INVISIBLE
         }
-
-            if(editPassword.text.toString()=="") {
+        if(editPassword.text.toString()=="") {
             passwordRequired.visibility=View.VISIBLE
                 return false
         }else{
@@ -124,6 +154,7 @@ class RegisterFragment : Fragment() {
                 confirmpasswordRequired.visibility=View.INVISIBLE
 
             }
+
         return true
 
     }
@@ -151,13 +182,13 @@ class RegisterFragment : Fragment() {
         button.setOnTouchListener { v, event ->
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
-                    buttonlogin.setTextColor(Color.WHITE)
+                    buttonRegister.setTextColor(Color.WHITE)
                     v.background.setColorFilter(-0x1f0b8adf, PorterDuff.Mode.SRC_ATOP)
                     v.invalidate()
                 }
                 MotionEvent.ACTION_UP -> {
 
-                    buttonlogin.setTextColor(resources.getColor(R.color.Roman_Silver))
+                    buttonRegister.setTextColor(resources.getColor(R.color.white))
 
                     v.background.clearColorFilter()
                     v.invalidate()

@@ -1,10 +1,14 @@
 package com.example.talentium
 
+import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import kotlinx.android.synthetic.main.fragment_profile.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -35,8 +39,24 @@ class ProfileFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_profile, container, false)
+
+        logou()
+           }
+fun logou(){
+    buttonlogout.setOnClickListener {
+        val preferences: SharedPreferences =
+            requireActivity().getSharedPreferences("pref", Context.MODE_PRIVATE)
+        preferences.edit().clear().apply()
+        val changePage = Intent(requireContext(), MainActivity::class.java)
+        // Error: "Please specify constructor invocation;
+        // classifier 'Page2' does not have a companion object"
+
+        startActivity(changePage)
+
+
     }
 
+}
     companion object {
         /**
          * Use this factory method to create a new instance of

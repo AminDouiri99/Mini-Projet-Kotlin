@@ -67,7 +67,6 @@ class LoginFragment : Fragment() {
 }
     fun doTheLogin(){
         buttonlogin.setOnClickListener {
-
             if(editTextEmail.text.toString().equals("")){
 
                 emailRequired.visibility=View.VISIBLE
@@ -93,7 +92,6 @@ class LoginFragment : Fragment() {
         }
     }
     fun callLoginApi(email:String,pass:String){
-        buttonlogin.isClickable=false
         val apiInterface = ApiInterface.create()
         getActivity()?.window?.addFlags(
             WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
@@ -114,10 +112,12 @@ class LoginFragment : Fragment() {
                     editor.apply()
                     buttonlogin.visibility=View.VISIBLE
                     waiting.visibility=View.GONE
-                    val intent = Intent (requireContext(), LandingActivity::class.java)
-                    startActivity(intent)
 
+                    val changePage = Intent(requireContext(), LandingActivity::class.java)
+                    // Error: "Please specify constructor invocation;
+                    // classifier 'Page2' does not have a companion object"
 
+                    startActivity(changePage)
 
                 }
                 else{

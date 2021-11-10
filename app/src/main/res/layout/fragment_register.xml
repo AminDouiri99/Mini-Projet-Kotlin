@@ -113,7 +113,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_width="@dimen/_250sdp"
             android:ems="10"
-            android:inputType="textPersonName"
+            android:inputType="textPassword"
             android:hint="@string/firstname_hint"
             android:paddingLeft="@dimen/_12sdp"
             />
@@ -154,7 +154,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_width="@dimen/_250sdp"
             android:ems="10"
-            android:inputType="textPersonName"
+            android:inputType="textPassword"
             android:hint="@string/confirmPassword_hint"
             android:paddingLeft="@dimen/_12sdp"
             />
@@ -188,7 +188,6 @@
             android:layout_width="wrap_content"
             android:layout_height="@dimen/_30sdp"
             android:layout_gravity="center_horizontal"
-
             android:layout_marginTop="@dimen/_12sdp"
             android:background="@drawable/btndark"
             android:gravity="center"
@@ -196,6 +195,45 @@
             android:textAlignment="center"
             android:textColor="@color/Mint_Cream"
             android:textStyle="bold" />
+        <LinearLayout
+            android:id="@+id/waitingRegister"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_35sdp"
+            android:background="@drawable/btndesign"
+            android:backgroundTint="@color/Mint_Cream"
+
+            android:gravity="center"
+
+
+            android:layout_gravity="center_horizontal">
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_marginLeft="@dimen/_30sdp"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_gravity="center_vertical"
+                android:visibility="gone"
+                android:layout_height="@dimen/_20sdp"
+                />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_close_24" />
+
+            <TextView
+                android:id="@+id/textWaiting"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:text="@string/waiting"
+                android:textColor="@color/Roman_Silver" />
+
+        </LinearLayout>
 
 
     </LinearLayout>

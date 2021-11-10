@@ -160,5 +160,22 @@
             app:layout_constraintStart_toStartOf="@+id/textView10"
             app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_marginTop="@dimen/_15sdp"
+            android:id="@+id/buttonlogout"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/btndesign"
+            android:backgroundTint="@color/Mint_Cream"
+            android:gravity="center"
+            android:text="Logout"
+            android:textAlignment="center"
+            android:textColor="@color/Roman_Silver"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView12" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
