@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         val preferences: SharedPreferences =
             this.getSharedPreferences("pref", Context.MODE_PRIVATE)
 
-        if(!preferences.getString("token",null).toString().equals("")){
+        if(preferences.getString("token","").toString()!=""){
             val intent = Intent (this, LandingActivity::class.java)
             startActivity(intent)
         }
@@ -37,14 +37,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         init()
     }
-    fun init(){
-        val preferences: SharedPreferences =
-            this.getSharedPreferences("pref", Context.MODE_PRIVATE)
 
-        if(!preferences.getString("token",null).toString().equals("")){
-            val intent = Intent (this, LandingActivity::class.java)
-            startActivity(intent)
-        }
+
+    fun init(){
+
+
+
         iamLogin=true
 
         backToLogin=findViewById(R.id.buttonBacktoLogin)

@@ -4,11 +4,14 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_profile.*
+import kotlinx.android.synthetic.main.fragment_register.*
+import kotlin.math.log
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -32,6 +35,18 @@ class ProfileFragment : Fragment() {
             param2 = it.getString(ARG_PARAM2)
         }
     }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        //buttonEffect(buttonRegister)
+
+        buttonlogout.setOnClickListener {
+            logou()
+            Log.i("logout","logout")
+        }
+
+
+
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,13 +55,22 @@ class ProfileFragment : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_profile, container, false)
 
-        logou()
+
            }
+
+
 fun logou(){
-    buttonlogout.setOnClickListener {
+
         val preferences: SharedPreferences =
             requireActivity().getSharedPreferences("pref", Context.MODE_PRIVATE)
-        preferences.edit().clear().apply()
+
+
+    Log.d("token",preferences.getString("token","defaultName").toString())
+        preferences.edit().clear().commit()
+
+    Log.d("token removed",preferences.getString("token","defaultName").toString())
+
+
         val changePage = Intent(requireContext(), MainActivity::class.java)
         // Error: "Please specify constructor invocation;
         // classifier 'Page2' does not have a companion object"
@@ -54,7 +78,7 @@ fun logou(){
         startActivity(changePage)
 
 
-    }
+
 
 }
     companion object {

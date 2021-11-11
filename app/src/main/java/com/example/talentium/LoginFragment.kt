@@ -131,6 +131,9 @@ class LoginFragment : Fragment() {
                         waiting.visibility=View.GONE
                         buttonlogin.visibility=View.VISIBLE
                         doTheLogin()
+                        editTextEmail.setText("")
+                        editTextpassword.setText("")
+
                     }
                 }
 
