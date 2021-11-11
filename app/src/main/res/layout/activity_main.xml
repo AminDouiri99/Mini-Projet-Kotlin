@@ -8,162 +8,151 @@
     android:background="@drawable/backgroundlogin"
     tools:context=".MainActivity">
 
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="@dimen/_225sdp"
+        android:layout_height="@dimen/_225sdp"
+        android:src="@mipmap/logotemp_foreground"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="@dimen/_180sdp"
+        android:layout_height="71dp"
+        android:layout_gravity="right"
+        android:gravity="right"
+        android:text="@string/welcome_word"
+        android:textAllCaps="true"
+        android:textColor="@color/Mint_Cream"
+        android:textSize="@dimen/_16sdp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerView2"
+        android:name="com.example.talentium.LoginFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_gravity="center_horizontal"
+
+        android:background="@drawable/btndark"
+        android:gravity="center"
+        android:text="@string/Register"
+        android:textAlignment="center"
+        android:textColor="@color/Mint_Cream"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragmentContainerView2" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonBacktoLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_gravity="center_horizontal"
+
+        android:background="@drawable/btndark"
+        android:gravity="center"
+        android:text="@string/gotologin"
+        android:textAlignment="center"
+        android:textColor="@color/Mint_Cream"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonRegister" />
+
+    <TextView
+        android:id="@+id/orconnectwith"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/orconnectwith"
+        app:layout_constraintEnd_toEndOf="@+id/buttonBacktoLogin"
+        app:layout_constraintStart_toStartOf="@+id/buttonBacktoLogin"
+        app:layout_constraintTop_toBottomOf="@+id/buttonBacktoLogin" />
+
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp">
+        android:id="@+id/linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="225dp"
-            android:layout_height="225dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp"
-            android:src="@mipmap/logotemp_foreground" />
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/policy"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/orconnectwith">
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="@dimen/_180sdp"
-            android:layout_height="71dp"
-            android:layout_gravity="right"
-            android:layout_marginRight="@dimen/_4sdp"
-            android:gravity="right"
-            android:text="@string/welcome_word"
-            android:textAllCaps="true"
-            android:textColor="@color/Mint_Cream"
-            android:textSize="@dimen/_16sdp"
-            android:textStyle="bold" />
+        <FrameLayout
+            android:id="@+id/circleFB"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:background="@drawable/fbroundbckground"
+            android:clickable="true">
 
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/fragmentContainerView2"
-            android:name="com.example.talentium.LoginFragment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@mipmap/fbicon_foreground" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/buttonRegister"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/_30sdp"
-            android:layout_gravity="center_horizontal"
+        </FrameLayout>
 
-            android:layout_marginTop="@dimen/_12sdp"
-            android:background="@drawable/btndark"
-            android:gravity="center"
-            android:text="@string/Register"
-            android:textAlignment="center"
-            android:textColor="@color/Mint_Cream"
-            android:textStyle="bold" />
+        <FrameLayout
+            android:id="@+id/circleGmail"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:background="@drawable/fbroundbckground"
+            android:clickable="true">
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/buttonBacktoLogin"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/_30sdp"
-            android:layout_gravity="center_horizontal"
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@mipmap/gmailicon_foreground" />
 
-            android:layout_marginTop="@dimen/_12sdp"
-            android:background="@drawable/btndark"
-            android:gravity="center"
-            android:text="@string/gotologin"
-            android:textAlignment="center"
-            android:textColor="@color/Mint_Cream"
-            android:textStyle="bold" />
+        </FrameLayout>
 
+        <FrameLayout
+            android:id="@+id/circleInsta"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:background="@drawable/fbroundbckground"
+            android:clickable="true">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@mipmap/instaicon_foreground" />
 
-            <TextView
-                android:id="@+id/orconnectwith"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/orconnectwith"
-                app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <LinearLayout
-                android:id="@+id/linearLayout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:layout_gravity="center_horizontal"
-                android:orientation="horizontal"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
-
-                <FrameLayout
-                    android:id="@+id/circleFB"
-                    android:layout_width="@dimen/_35sdp"
-                    android:layout_height="@dimen/_35sdp"
-                    android:layout_marginLeft="@dimen/_10sdp"
-                    android:background="@drawable/fbroundbckground"
-                    android:clickable="true">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:src="@mipmap/fbicon_foreground" />
-
-                </FrameLayout>
-
-                <FrameLayout
-                    android:id="@+id/circleGmail"
-                    android:layout_width="@dimen/_35sdp"
-                    android:layout_height="@dimen/_35sdp"
-                    android:layout_marginLeft="@dimen/_10sdp"
-                    android:background="@drawable/fbroundbckground"
-                    android:clickable="true">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:src="@mipmap/gmailicon_foreground" />
-
-                </FrameLayout>
-
-                <FrameLayout
-                    android:id="@+id/circleInsta"
-                    android:layout_width="@dimen/_35sdp"
-                    android:layout_height="@dimen/_35sdp"
-                    android:layout_marginLeft="@dimen/_10sdp"
-                    android:background="@drawable/fbroundbckground"
-                    android:clickable="true">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:src="@mipmap/instaicon_foreground" />
-
-                </FrameLayout>
-
-
-            </LinearLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/policy"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-
-                android:text="@string/policy"
-                android:textColor="@color/Mint_Cream"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </FrameLayout>
 
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/policy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+
+        android:text="@string/policy"
+        android:textColor="@color/Mint_Cream"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,11 +3,16 @@ package com.example.talentium
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.Color
+import android.graphics.PorterDuff
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.android.synthetic.main.fragment_profile.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -39,10 +44,11 @@ class ProfileFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_profile, container, false)
+        buttonEffect(buttonlogout)
 
-        logou()
            }
 fun logou(){
+    Log.i("lougout","rani tenzelt")
     buttonlogout.setOnClickListener {
         val preferences: SharedPreferences =
             requireActivity().getSharedPreferences("pref", Context.MODE_PRIVATE)
@@ -57,6 +63,26 @@ fun logou(){
     }
 
 }
+    fun buttonEffect(button: View) {
+        button.setOnTouchListener { v, event ->
+            when (event.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    buttonlogin.setTextColor(Color.WHITE)
+                    v.background.setColorFilter(-0x1f0b8adf, PorterDuff.Mode.SRC_ATOP)
+                    v.invalidate()
+                }
+                MotionEvent.ACTION_UP -> {
+
+                    buttonlogin.setTextColor(resources.getColor(R.color.Roman_Silver))
+
+                    v.background.clearColorFilter()
+                    v.invalidate()
+                }
+            }
+            false
+        }
+    }
+
     companion object {
         /**
          * Use this factory method to create a new instance of
