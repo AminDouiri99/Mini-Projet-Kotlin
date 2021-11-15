@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/purple_200"
+    >
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="this is a new item"
+        android:textSize="20dp"
+        android:textColor="@color/red"
+        android:layout_gravity="center"
+        tools:layout_editor_absoluteX="163dp"
+        tools:layout_editor_absoluteY="94dp" />
+</LinearLayout>
