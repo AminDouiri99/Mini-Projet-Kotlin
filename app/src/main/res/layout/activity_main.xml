@@ -35,12 +35,14 @@
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView2"
         android:name="com.example.talentium.LoginFragment"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <androidx.appcompat.widget.AppCompatButton
+        android:layout_marginTop="@dimen/_15sdp"
         android:id="@+id/buttonRegister"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/_30sdp"
@@ -61,16 +63,15 @@
         android:layout_width="wrap_content"
         android:layout_height="@dimen/_30sdp"
         android:layout_gravity="center_horizontal"
-
         android:background="@drawable/btndark"
-        android:gravity="center"
+
         android:text="@string/gotologin"
         android:textAlignment="center"
         android:textColor="@color/Mint_Cream"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonRegister" />
+        app:layout_constraintTop_toTopOf="@+id/buttonRegister" />
 
     <TextView
         android:id="@+id/orconnectwith"
@@ -78,9 +79,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="@string/orconnectwith"
-        app:layout_constraintEnd_toEndOf="@+id/buttonBacktoLogin"
-        app:layout_constraintStart_toStartOf="@+id/buttonBacktoLogin"
-        app:layout_constraintTop_toBottomOf="@+id/buttonBacktoLogin" />
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -91,8 +92,7 @@
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/policy"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/orconnectwith">
+        app:layout_constraintStart_toStartOf="parent">
 
         <FrameLayout
             android:id="@+id/circleFB"

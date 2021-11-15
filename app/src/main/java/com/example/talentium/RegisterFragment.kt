@@ -83,6 +83,12 @@ class RegisterFragment : Fragment() {
                     val editor=preferences.edit()
                     editor.putString("token",response.body()?.token.toString())
                     editor.apply()
+                    editor.putString("username",response.body()?.user?.username.toString()).apply()
+                    editor.putInt("followersNumber",response.body()!!.user.followers.size).apply()
+                    editor.putInt("followingNumber",response.body()!!.user.following.size).apply()
+
+                    editor.putString("avatar",response.body()?.user?.avatar.toString()).apply()
+
                     buttonRegister.visibility=View.VISIBLE
                     waitingRegister.visibility=View.GONE
                     val changePage = Intent(requireContext(), MainActivity::class.java)

@@ -3,18 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_gravity="top"
     tools:context=".ProfileFragment">
+<androidx.constraintlayout.widget.ConstraintLayout
 
-    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/imageView2"
-            android:layout_width="@dimen/_25sdp"
-            android:layout_height="@dimen/_25sdp"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
             android:layout_marginLeft="@dimen/_10sdp"
 
             android:src="@drawable/ic_arrow_back"
@@ -40,8 +40,8 @@
 
         <ImageView
             android:id="@+id/imageView3"
-            android:layout_width="@dimen/_25sdp"
-            android:layout_height="@dimen/_25sdp"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginRight="@dimen/_10sdp"
             android:src="@drawable/ic_more"
@@ -59,28 +59,27 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/username">
 
-            <ImageView
-
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/ic_baseline_person_24"
-                android:clipToOutline="true" />
-
+                <ImageView
+                    android:id="@+id/imageprofile"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:clipToOutline="true"
+                    android:src="@drawable/logotemp_background" />
         </androidx.cardview.widget.CardView>
 
         <TextView
             android:id="@+id/textView7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_10sdp"
             android:gravity="center_horizontal|top"
             android:lineSpacingExtra="1sp"
-            android:textSize="@dimen/_18sdp"
             android:text="UserName"
             android:textAppearance="@style/profiletext"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView" />
+            android:textSize="@dimen/_16sdp"
+            app:layout_constraintEnd_toEndOf="@+id/cardView"
+            app:layout_constraintHorizontal_bias="0.466"
+            app:layout_constraintStart_toStartOf="@+id/cardView"
+            app:layout_constraintTop_toBottomOf="@+id/progressBar2" />
 
         <TextView
             android:id="@+id/textView8"
@@ -92,7 +91,7 @@
             android:layout_marginTop="@dimen/_10sdp"
             android:gravity="center_horizontal"
             android:textAppearance="@style/profiletext"
-            android:textSize="@dimen/_25sdp"
+            android:textSize="@dimen/_22sdp"
             app:layout_constraintBottom_toBottomOf="@+id/textView9"
             app:layout_constraintEnd_toStartOf="@+id/textView9"
             app:layout_constraintStart_toStartOf="parent"
@@ -118,7 +117,7 @@
             android:text="1200"
             android:gravity="center_horizontal"
             android:textAppearance="@style/profiletext"
-            android:textSize="@dimen/_25sdp"
+            android:textSize="@dimen/_22sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
@@ -144,7 +143,7 @@
             android:layout_marginTop="@dimen/_10sdp"
             android:gravity="center_horizontal"
             android:textAppearance="@style/profiletext"
-            android:textSize="@dimen/_25sdp"
+            android:textSize="@dimen/_22sdp"
             app:layout_constraintBottom_toBottomOf="@+id/textView9"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/textView9"
@@ -177,5 +176,40 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonupdate"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/btndesign"
+            android:backgroundTint="@color/Mint_Cream"
+            android:gravity="center"
+            android:text="Update Picture"
+            android:textAlignment="center"
+            android:textColor="@color/Roman_Silver"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/buttonlogout"
+            app:layout_constraintStart_toStartOf="@+id/buttonlogout"
+            app:layout_constraintTop_toBottomOf="@+id/buttonlogout" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            app:layout_constraintTop_toBottomOf="@+id/buttonupdate"
+
+            tools:itemCount="2"
+            tools:listitem="@layout/profile_post" />
+
+        <ProgressBar
+            android:id="@+id/progressBar2"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@+id/cardView"
+            app:layout_constraintStart_toStartOf="@+id/cardView"
+            app:layout_constraintTop_toBottomOf="@+id/cardView" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout></ScrollView>

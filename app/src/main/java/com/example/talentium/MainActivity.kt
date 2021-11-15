@@ -19,6 +19,12 @@ import com.example.talentium.R.anim
 import com.example.talentium.R.id.buttonBacktoLogin
 import com.example.talentium.R.id.fragmentContainerView2
 import kotlinx.android.synthetic.main.activity_main.*
+import android.animation.AnimatorSet
+
+import android.animation.ObjectAnimator
+
+
+
 
 class MainActivity : AppCompatActivity() {
     lateinit var  backToLogin :AppCompatButton
@@ -29,7 +35,7 @@ class MainActivity : AppCompatActivity() {
         val preferences: SharedPreferences =
             this.getSharedPreferences("pref", Context.MODE_PRIVATE)
 
-        if(!preferences.getString("token","").toString().equals("")){
+        if(preferences.getString("token","").toString()!=""){
             val intent = Intent (this, LandingActivity::class.java)
             startActivity(intent)
         }
@@ -37,14 +43,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         init()
     }
-    fun init(){
-        val preferences: SharedPreferences =
-            this.getSharedPreferences("pref", Context.MODE_PRIVATE)
 
-        if(!preferences.getString("token",null).toString().equals("")){
-            val intent = Intent (this, LandingActivity::class.java)
-            startActivity(intent)
-        }
+
+    fun init(){
+
+
+
         iamLogin=true
 
         backToLogin=findViewById(R.id.buttonBacktoLogin)
@@ -61,11 +65,45 @@ class MainActivity : AppCompatActivity() {
         buttonEffect(circleGmail)
 
     }
+    fun animateLogoSmall(){
+        val scaleDownX = ObjectAnimator.ofFloat(imageView, "scaleX", 0.7f)
+        val scaleDownY = ObjectAnimator.ofFloat(imageView, "scaleY", 0.7f)
+        scaleDownX.duration = 1000
+        scaleDownY.duration = 1000
+        val scaleDown = AnimatorSet()
+        scaleDown.play(scaleDownX).with(scaleDownY)
+        scaleDown.start()
+
+        imageView.animate().translationY(-200F).duration = 500
+        textView.animate().translationY(-200F).duration = 500
+        fragmentContainerView2.animate().translationY(-200F).duration = 500
+        buttonRegister.animate().translationY(-200F).duration = 500
+        buttonBacktoLogin.animate().translationY(-200F).duration = 500
+    }
+    fun animateLogoBig(){
+        val scaleDownX = ObjectAnimator.ofFloat(imageView, "scaleX", 1f)
+        val scaleDownY = ObjectAnimator.ofFloat(imageView, "scaleY", 1f)
+        scaleDownX.duration = 1000
+        scaleDownY.duration = 1000
+
+        val scaleDown = AnimatorSet()
+        scaleDown.play(scaleDownX).with(scaleDownY)
+
+        scaleDown.start()
+
+        imageView.animate().translationY(0F).duration = 500
+        textView.animate().translationY(0F).duration = 500
+
+        fragmentContainerView2.animate().translationY(0F).duration = 500
+        buttonRegister.animate().translationY(0F).duration = 500
+        buttonBacktoLogin.animate().translationY(0F).duration = 500
+
+    }
     fun gotoReg(){
         buttonRegister=findViewById(R.id.buttonRegister)
 
         buttonRegister.setOnClickListener {
-
+            animateLogoSmall()
             supportFragmentManager.beginTransaction()
                 .replace(R.id.fragmentContainerView2, RegisterFragment())
                 .setCustomAnimations(
@@ -80,6 +118,7 @@ class MainActivity : AppCompatActivity() {
     }
     fun gotoLogin(){
         backToLogin.setOnClickListener {
+        animateLogoBig()
             supportFragmentManager.beginTransaction()
                 .replace(R.id.fragmentContainerView2, LoginFragment()).setCustomAnimations(
                     R.anim.enter_from_left,

@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".RegisterFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <LinearLayout
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
         <TextView
 
@@ -19,13 +20,16 @@
             android:layout_gravity="center_horizontal"
             android:text="@string/Register"
             android:textColor="@color/Mint_Cream"
-            android:textSize="@dimen/_30sdp" />
+            android:textSize="@dimen/_30sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <EditText
             android:id="@+id/editRegisterEmail"
             android:layout_width="@dimen/_250sdp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/_15sdp"
             android:background="@drawable/edittextlogin"
             android:ems="10"
             android:hint="@string/email_hint"
@@ -34,190 +38,211 @@
             android:shadowColor="@color/Mint_Cream"
             android:shadowDx="@integer/material_motion_duration_long_1"
             android:shadowDy="@integer/material_motion_duration_long_1"
-            android:textColor="@color/Mint_Cream" />
+            android:textColor="@color/Mint_Cream"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView1" />
+
         <LinearLayout
             android:id="@+id/emailRequired"
-            android:visibility="invisible"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-
-            android:layout_marginTop="@dimen/_3sdp"
-            android:layout_marginLeft="@dimen/_40sdp"
             android:layout_gravity="center_horizontal"
-            >
+            android:orientation="horizontal"
+            android:layout_marginLeft="@dimen/_85sdp"
+
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editRegisterEmail">
 
             <TextView
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textColor="@color/red"
-                android:text="@string/required" />
+                android:text="@string/required"
+                android:textColor="@color/red" />
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_baseline_close_24" />
         </LinearLayout>
+
         <EditText
-            android:shadowColor="@color/Mint_Cream"
-            android:shadowDy="@integer/material_motion_duration_long_1"
-            android:shadowDx="@integer/material_motion_duration_long_1"
-            android:background="@drawable/edittextlogin"
             android:id="@+id/editTextUsername"
-            android:textColor="@color/Mint_Cream"
-            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_width="@dimen/_250sdp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_width="@dimen/_250sdp"
+            android:background="@drawable/edittextlogin"
             android:ems="10"
-            android:inputType="textPersonName"
             android:hint="@string/username_hint"
+            android:inputType="textPersonName"
             android:paddingLeft="@dimen/_12sdp"
-            />
+            android:shadowColor="@color/Mint_Cream"
+            android:shadowDx="@integer/material_motion_duration_long_1"
+            android:shadowDy="@integer/material_motion_duration_long_1"
+            android:textColor="@color/Mint_Cream"
+            app:layout_constraintEnd_toEndOf="@+id/editRegisterEmail"
+            app:layout_constraintStart_toStartOf="@+id/editRegisterEmail"
+            app:layout_constraintTop_toBottomOf="@+id/emailRequired" />
+
         <LinearLayout
             android:id="@+id/usernameRequired"
-            android:visibility="invisible"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:orientation="horizontal"
 
-            android:layout_marginTop="@dimen/_3sdp"
-            android:layout_marginLeft="@dimen/_40sdp"
-            android:layout_gravity="center_horizontal"
-            >
+            android:visibility="invisible"
+            android:layout_marginLeft="@dimen/_85sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextUsername">
 
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textColor="@color/red"
-                android:text="@string/required" />
+                android:text="@string/required"
+                android:textColor="@color/red" />
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_baseline_close_24" />
         </LinearLayout>
+
         <EditText
-            android:shadowColor="@color/Mint_Cream"
-            android:shadowDy="@integer/material_motion_duration_long_1"
-            android:shadowDx="@integer/material_motion_duration_long_1"
-            android:background="@drawable/edittextlogin"
             android:id="@+id/editPassword"
-            android:textColor="@color/Mint_Cream"
-            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_width="@dimen/_250sdp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_width="@dimen/_250sdp"
+            android:background="@drawable/edittextlogin"
             android:ems="10"
-            android:inputType="textPassword"
             android:hint="@string/firstname_hint"
+            android:inputType="textPassword"
             android:paddingLeft="@dimen/_12sdp"
-            />
+            android:shadowColor="@color/Mint_Cream"
+            android:shadowDx="@integer/material_motion_duration_long_1"
+            android:shadowDy="@integer/material_motion_duration_long_1"
+            android:textColor="@color/Mint_Cream"
+            app:layout_constraintEnd_toEndOf="@+id/editTextUsername"
+            app:layout_constraintStart_toStartOf="@+id/editTextUsername"
+            app:layout_constraintTop_toBottomOf="@+id/usernameRequired" />
+
         <LinearLayout
             android:id="@+id/passwordRequired"
-            android:visibility="invisible"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_85sdp"
+            android:layout_gravity="center_horizontal"
             android:orientation="horizontal"
 
-            android:layout_marginTop="@dimen/_3sdp"
-            android:layout_marginLeft="@dimen/_40sdp"
-            android:layout_gravity="center_horizontal"
-            >
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editPassword">
 
             <TextView
                 android:id="@+id/textView4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textColor="@color/red"
-                android:text="@string/required" />
+                android:text="@string/required"
+                android:textColor="@color/red" />
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_baseline_close_24" />
         </LinearLayout>
+
         <EditText
-            android:shadowColor="@color/Mint_Cream"
-            android:shadowDy="@integer/material_motion_duration_long_1"
-            android:shadowDx="@integer/material_motion_duration_long_1"
-            android:background="@drawable/edittextlogin"
             android:id="@+id/editConfirmPassword"
-            android:textColor="@color/Mint_Cream"
-            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_width="@dimen/_250sdp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_width="@dimen/_250sdp"
+            android:background="@drawable/edittextlogin"
             android:ems="10"
-            android:inputType="textPassword"
             android:hint="@string/confirmPassword_hint"
+            android:inputType="textPassword"
             android:paddingLeft="@dimen/_12sdp"
-            />
+            android:shadowColor="@color/Mint_Cream"
+            android:shadowDx="@integer/material_motion_duration_long_1"
+            android:shadowDy="@integer/material_motion_duration_long_1"
+            android:textColor="@color/Mint_Cream"
+            app:layout_constraintEnd_toEndOf="@+id/editPassword"
+            app:layout_constraintStart_toStartOf="@+id/editPassword"
+            app:layout_constraintTop_toBottomOf="@+id/passwordRequired" />
+
         <LinearLayout
             android:id="@+id/confirmpasswordRequired"
-            android:visibility="invisible"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-
-            android:layout_marginTop="@dimen/_3sdp"
-            android:layout_marginLeft="@dimen/_40sdp"
             android:layout_gravity="center_horizontal"
-            >
+            android:orientation="horizontal"
+            android:layout_marginLeft="@dimen/_85sdp"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="@+id/editConfirmPassword"
+            app:layout_constraintStart_toStartOf="@+id/editConfirmPassword"
+            app:layout_constraintTop_toBottomOf="@+id/editConfirmPassword">
 
             <TextView
                 android:id="@+id/textView5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textColor="@color/red"
-                android:text="@string/required" />
+                android:text="@string/required"
+                android:textColor="@color/red" />
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_baseline_close_24" />
         </LinearLayout>
+
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/buttonRegister"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/_30sdp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/_12sdp"
             android:background="@drawable/btndark"
             android:gravity="center"
             android:text="@string/Register"
             android:textAlignment="center"
             android:textColor="@color/Mint_Cream"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/editConfirmPassword"
+            app:layout_constraintStart_toStartOf="@+id/editConfirmPassword"
+            app:layout_constraintTop_toBottomOf="@+id/confirmpasswordRequired" />
+
         <LinearLayout
             android:id="@+id/waitingRegister"
-            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/_30sdp"
-            android:layout_marginTop="@dimen/_35sdp"
+            android:layout_gravity="center_horizontal"
             android:background="@drawable/btndesign"
             android:backgroundTint="@color/Mint_Cream"
 
             android:gravity="center"
 
 
-            android:layout_gravity="center_horizontal">
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@+id/editConfirmPassword"
+            app:layout_constraintStart_toStartOf="@+id/editConfirmPassword"
+            app:layout_constraintTop_toTopOf="@+id/buttonRegister">
 
             <ProgressBar
                 android:id="@+id/progressBar"
-                android:layout_marginLeft="@dimen/_30sdp"
                 style="?android:attr/progressBarStyle"
                 android:layout_width="@dimen/_20sdp"
-                android:layout_gravity="center_vertical"
-                android:visibility="gone"
                 android:layout_height="@dimen/_20sdp"
-                />
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/_30sdp"
+                android:visibility="gone" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -235,7 +260,15 @@
 
         </LinearLayout>
 
+        <TextView
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_15sdp"
+            android:text="space"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buttonRegister" />
 
-    </LinearLayout>
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

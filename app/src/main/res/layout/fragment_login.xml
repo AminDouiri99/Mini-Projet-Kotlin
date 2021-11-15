@@ -7,10 +7,10 @@
     android:layout_height="match_parent"
     tools:context=".LoginFragment">
 
-    <LinearLayout
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
         <TextView
 
@@ -20,14 +20,16 @@
             android:layout_gravity="center_horizontal"
             android:text="@string/login"
             android:textColor="@color/Mint_Cream"
-            android:textSize="@dimen/_35sdp" />
+            android:textSize="@dimen/_35sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/editTextEmail"
             android:layout_width="@dimen/_250sdp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/_15sdp"
             android:background="@drawable/edittextlogin"
             android:ems="10"
             android:hint="@string/email_hint"
@@ -36,27 +38,30 @@
             android:shadowColor="@color/Mint_Cream"
             android:shadowDx="@integer/material_motion_duration_long_1"
             android:shadowDy="@integer/material_motion_duration_long_1"
-            android:textColor="@color/Mint_Cream" />
+            android:textColor="@color/Mint_Cream"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
         <LinearLayout
             android:id="@+id/emailRequired"
-            android:visibility="invisible"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-
-            android:layout_marginTop="@dimen/_3sdp"
-            android:layout_marginLeft="@dimen/_40sdp"
             android:layout_gravity="center_horizontal"
-            >
+            android:orientation="horizontal"
+            android:layout_marginLeft="@dimen/_85sdp"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="@+id/editTextEmail"
+            app:layout_constraintStart_toStartOf="@+id/editTextEmail"
+            app:layout_constraintTop_toBottomOf="@+id/editTextEmail">
 
             <TextView
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textColor="@color/red"
-                android:text="@string/required" />
+                android:text="@string/required"
+                android:textColor="@color/red" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -64,14 +69,12 @@
                 android:src="@drawable/ic_baseline_close_24" />
         </LinearLayout>
 
-
         <EditText
             android:id="@+id/editTextpassword"
             android:layout_width="@dimen/_250sdp"
             android:layout_height="wrap_content"
 
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/_5sdp"
             android:background="@drawable/edittextlogin"
             android:ems="10"
             android:hint="@string/password_hint"
@@ -80,25 +83,30 @@
             android:shadowColor="@color/Mint_Cream"
             android:shadowDx="@integer/material_motion_duration_long_1"
             android:shadowDy="@integer/material_motion_duration_long_1"
-            android:textColor="@color/Mint_Cream" />
+            android:textColor="@color/Mint_Cream"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/emailRequired" />
+
         <LinearLayout
             android:id="@+id/passwordRequired"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_85sdp"
+            android:layout_gravity="center_horizontal"
             android:orientation="horizontal"
             android:visibility="invisible"
-            android:layout_marginTop="@dimen/_3sdp"
-            android:layout_marginLeft="@dimen/_40sdp"
-            android:layout_gravity="center_horizontal"
-            >
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextpassword">
 
             <TextView
                 android:id="@+id/textView5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textColor="@color/red"
-                android:text="@string/required" />
+                android:text="@string/required"
+                android:textColor="@color/red" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -106,51 +114,53 @@
                 android:src="@drawable/ic_baseline_close_24" />
         </LinearLayout>
 
-
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/buttonlogin"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/_30sdp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/_35sdp"
             android:background="@drawable/btndesign"
             android:backgroundTint="@color/Mint_Cream"
             android:gravity="center"
             android:text="@string/login"
             android:textAlignment="center"
             android:textColor="@color/Roman_Silver"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/passwordRequired" />
 
         <LinearLayout
             android:id="@+id/waiting"
-            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/_30sdp"
-            android:layout_marginTop="@dimen/_35sdp"
+            android:layout_gravity="center_horizontal"
             android:background="@drawable/btndesign"
             android:backgroundTint="@color/Mint_Cream"
 
             android:gravity="center"
 
 
-            android:layout_gravity="center_horizontal">
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/buttonlogin">
 
             <ProgressBar
                 android:id="@+id/progressBar"
-                android:layout_marginLeft="@dimen/_30sdp"
                 style="?android:attr/progressBarStyle"
                 android:layout_width="@dimen/_20sdp"
-                android:layout_gravity="center_vertical"
-                android:visibility="visible"
                 android:layout_height="@dimen/_20sdp"
-                 />
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/_30sdp"
+                android:visibility="visible" />
 
             <ImageView
-                android:visibility="gone"
                 android:id="@+id/LoginFailed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_baseline_close_24" />
+                android:src="@drawable/ic_baseline_close_24"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/textWaiting"
@@ -162,22 +172,29 @@
                 android:textColor="@color/Roman_Silver" />
 
             <ImageView
-                android:visibility="visible"
                 android:id="@+id/retryicon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_baseline_cached_24" />
+                android:src="@drawable/ic_baseline_cached_24"
+                android:visibility="visible" />
 
         </LinearLayout>
+
 
         <TextView
             android:id="@+id/forgetpassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/forgetpassword" />
+            android:paddingBottom="@dimen/_10sdp"
+            android:text="@string/forgetpassword"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buttonlogin" />
 
 
-    </LinearLayout>
 
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

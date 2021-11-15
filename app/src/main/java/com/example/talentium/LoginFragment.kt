@@ -86,7 +86,7 @@ class LoginFragment : Fragment() {
                 // elkhedma hne bech tsir
                 buttonlogin.visibility=View.GONE
                 waiting.visibility=View.VISIBLE
-
+                forgetpassword.visibility=View.GONE
                 callLoginApi(editTextEmail.text.toString(),editTextpassword.text.toString())
         }
         }
@@ -110,6 +110,13 @@ class LoginFragment : Fragment() {
                     val editor=preferences.edit()
                     editor.putString("token",response.body()?.token.toString())
                     editor.apply()
+                    Log.i("bodyreq",response.body()?.user?.confirmed.toString())
+                    editor.putString("username",response.body()?.user?.username.toString()).apply()
+                    editor.putInt("followersNumber",response.body()!!.user.followers.size).apply()
+                    editor.putInt("followingNumber",response.body()!!.user.following.size).apply()
+
+                    editor.putString("avatar",response.body()?.user?.avatar.toString()).apply()
+                    editor.putString("id",response.body()?.user?.id.toString()).apply()
                     buttonlogin.visibility=View.VISIBLE
                     waiting.visibility=View.GONE
 
@@ -131,6 +138,9 @@ class LoginFragment : Fragment() {
                         waiting.visibility=View.GONE
                         buttonlogin.visibility=View.VISIBLE
                         doTheLogin()
+                        forgetpassword.visibility=View.VISIBLE
+                        editTextEmail.setText("")
+                        editTextpassword.setText("")
                     }
                 }
 
