@@ -29,6 +29,7 @@ import com.example.talentium.API.UploadRequestBody
 import com.example.talentium.Model.ProfilePost
 import com.example.talentium.Model.User
 import com.google.android.material.snackbar.Snackbar
+import com.mvp.handyopinion.UploadUtility
 import kotlinx.android.synthetic.main.activity_landing.*
 import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.android.synthetic.main.fragment_profile.*
@@ -54,7 +55,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [ProfileFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class ProfileFragment : Fragment(),UploadRequestBody.UploadCallBack {
+class ProfileFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -117,7 +118,7 @@ class ProfileFragment : Fragment(),UploadRequestBody.UploadCallBack {
         buttonupdate.setOnClickListener {
             Log.i("upload","failure1")
 
-            uploadImage()
+           // uploadImage()
             Log.i("upload","failure2")
 
         }
@@ -134,7 +135,7 @@ class ProfileFragment : Fragment(),UploadRequestBody.UploadCallBack {
 //            root.snackbar("select an image first")
             return
         }
-        val parceFileDescriptor =
+       /* val parceFileDescriptor =
             requireActivity().contentResolver
                 .openFileDescriptor(selectedImage!!,"r",null) ?:return
         val inputstream = FileInputStream(parceFileDescriptor.fileDescriptor)
@@ -162,7 +163,10 @@ class ProfileFragment : Fragment(),UploadRequestBody.UploadCallBack {
                   //  root.snackbar("uploaded image succesfully")
                 }
 
-            })
+            })*/
+
+
+
     }
 
 
@@ -178,10 +182,13 @@ class ProfileFragment : Fragment(),UploadRequestBody.UploadCallBack {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if(resultCode==Activity.RESULT_OK){
+            Log.i("image",data.toString())
             when (requestCode){
+
                 REQUEST_CODE_IMAGE_PICKER->{
                     selectedImage=data?.data
                     imageprofile.setImageURI(selectedImage)
+                    UploadUtility(requireActivity()).uploadFile(selectedImage!!)
                 }
             }
         }
@@ -242,7 +249,7 @@ fun logou(){
             }
     }
 
-    override fun onProgressUpdate(percentage: Int) {
+   /* override fun onProgressUpdate(percentage: Int) {
         TODO("Not yet implemented")
-    }
+    }*/
 }

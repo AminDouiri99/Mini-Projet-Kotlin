@@ -33,11 +33,11 @@ interface ApiInterface {
 
     @POST("api/users/register")
     fun Register(@Body registerBody: registerBody):Call<LoginResponse>
-    @Multipart
+    /*@Multipart
     @POST("api/users/changeprofile/pic/")
-    fun uploadImage(@Part image: MultipartBody.Part, @Query("id") userId : String):Call<User>
+    fun uploadImage(@Part image: MultipartBody.Part, @Query("id") userId : String):Call<User>*/
     companion object {
-        var BASE_URL = "http://172.16.45.85:6000/"
+        var BASE_URL = "http://172.16.74.101:6000/"
 
         fun create() : ApiInterface {
             val retrofit = Retrofit.Builder()
