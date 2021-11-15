@@ -12,7 +12,7 @@ class LandingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_landing)
-makeCurrentFragment(FeedFragment());
+        makeCurrentFragment(FeedFragment());
         bottom_navigation.setOnNavigationItemSelectedListener { item ->
             when(item.itemId) {
 
@@ -25,7 +25,6 @@ makeCurrentFragment(FeedFragment());
                 }
                 R.id.livePage -> {
                     // Respond to navigation item 2 click
-                    true
                 }
                 R.id.profilePage->{
 
@@ -41,7 +40,9 @@ makeCurrentFragment(FeedFragment());
 
     private fun makeCurrentFragment(fragment:Fragment){
         supportFragmentManager.beginTransaction().apply {
-            replace(R.id.fragmentContainerView,fragment).setCustomAnimations(R.anim.enter_from_left,R.anim.exit_to_right).commit()
+            replace(R.id.fragmentContainerView,fragment)
+                .setCustomAnimations(R.anim.enter_from_left,
+                    R.anim.exit_to_right).commit()
 
         }
     }
