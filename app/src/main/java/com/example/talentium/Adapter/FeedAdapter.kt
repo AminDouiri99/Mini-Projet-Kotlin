@@ -6,12 +6,12 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.talentium.Products
+import com.example.talentium.Post
 import com.example.talentium.R
 import kotlinx.android.synthetic.main.feed_item.view.*
 import org.w3c.dom.Text
 
-class FeedAdapter(private val ProductList :List<Products>):RecyclerView.Adapter<FeedAdapter.ViewHolder> (){
+class FeedAdapter(private val ProductList :List<Post>):RecyclerView.Adapter<FeedAdapter.ViewHolder> (){
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FeedAdapter.ViewHolder {

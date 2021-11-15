@@ -29,7 +29,7 @@ private const val ARG_PARAM2 = "param2"
  */
 
 
-data class Products(val name:String,val role :String){
+data class Post(val name:String,val role :String){
 
 }
 
@@ -46,9 +46,9 @@ class FeedFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
       feedrecyclerview.layoutManager=LinearLayoutManager(view.context);
-        val data =ArrayList<Products>()
+        val data =ArrayList<Post>()
         for(i in 1..10){
-            data.add(Products( "Name " + i,"role "+i))
+            data.add(Post( "Name " + i,"role "+i))
         }
         val adapter = FeedAdapter(data)
 
