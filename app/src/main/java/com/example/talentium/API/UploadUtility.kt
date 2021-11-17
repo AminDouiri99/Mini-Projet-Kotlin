@@ -15,13 +15,13 @@ import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 import java.io.IOException
 
-class UploadUtility(activity: Activity) {
+class UploadUtility(activity: Activity,id:String) {
 
 
 
     var activity = activity;
     var dialog: ProgressDialog? = null
-    var serverURL: String = ApiInterface.BASE_URL+"api/users/changeprofile/pic/"+"6192378eef1323636ab516fb"
+    var serverURL: String = ApiInterface.BASE_URL+"api/users/changeprofile/pic/"+id
     var serverUploadDirectoryPath: String = "https://handyopinion.com/tutorials/uploads/"
     val client = OkHttpClient()
 
@@ -45,9 +45,6 @@ class UploadUtility(activity: Activity) {
             toggleProgressDialog(true)
 
 
-
-
-           // try {
                 val requestBody: RequestBody =
                     MultipartBody.Builder().setType(MultipartBody.FORM)
                         .addFormDataPart("uploaded_file", fileName,sourceFile.asRequestBody(mimeType.toMediaTypeOrNull()))
@@ -70,24 +67,6 @@ class UploadUtility(activity: Activity) {
                 }
             })
 
-
-            /*    val request: Request = Request.Builder().url(serverURL).post(requestBody).build()
-                Log.i("request file  ",fileName)
-                val response: Response = client.newCall(request).execute()
-                Log.i("response ",response.toString())
-
-                if (response.isSuccessful) {
-                    Log.d("File upload","success, path: $serverUploadDirectoryPath$fileName")
-                    showToast("File uploaded successfully at $serverUploadDirectoryPath$fileName")
-                } else {
-                    Log.e("File upload", "failed")
-                    showToast("File uploading failed")
-                }*/
-          /*  } catch (ex: Exception) {
-                ex.printStackTrace()
-                Log.e("File upload", "failed")
-                showToast("File uploading failed")
-            }*/
             toggleProgressDialog(false)
         }.start()
     }

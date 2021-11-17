@@ -6,10 +6,7 @@ import com.example.talentium.Model.User
 import com.google.gson.JsonObject
 import org.json.JSONObject
 import com.google.gson.annotations.SerializedName
-import okhttp3.MediaType
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
-import okio.BufferedSink
+
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -37,7 +34,7 @@ interface ApiInterface {
     @POST("api/users/changeprofile/pic/")
     fun uploadImage(@Part image: MultipartBody.Part, @Query("id") userId : String):Call<User>*/
     companion object {
-        var BASE_URL = "http://172.16.74.101:6000/"
+        var BASE_URL = "http://192.168.1.20:6000/"
 
         fun create() : ApiInterface {
             val retrofit = Retrofit.Builder()
