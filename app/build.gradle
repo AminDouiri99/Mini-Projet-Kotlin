@@ -48,7 +48,6 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.1'
     implementation 'androidx.recyclerview:recyclerview:1.2.0'
     //volley for uploading image
-    implementation 'com.android.volley:volley:1.1.1'
 
     //glide for loading remote image
     implementation ("com.github.bumptech.glide:glide:4.11.0") {

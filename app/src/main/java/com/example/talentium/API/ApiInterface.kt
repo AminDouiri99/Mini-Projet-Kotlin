@@ -35,10 +35,9 @@ interface ApiInterface {
     fun Register(@Body registerBody: registerBody):Call<LoginResponse>
     @Multipart
     @POST("api/users/changeprofile/pic/")
-    fun uploadImage(@Part image: MultipartBody.Part, @Query("id") userId : String):Call<User>
+    fun uploadImage(@Part image: MultipartBody.Part):Call<User>
     companion object {
         var BASE_URL = "http://172.16.45.85:6000/"
-
         fun create() : ApiInterface {
             val retrofit = Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())

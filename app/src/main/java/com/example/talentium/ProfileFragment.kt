@@ -21,7 +21,6 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.android.volley.toolbox.Volley
 import com.bumptech.glide.Glide
 import com.example.talentium.API.ApiInterface
 import com.example.talentium.API.ApiInterface.Companion.BASE_URL
@@ -54,7 +53,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [ProfileFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class ProfileFragment : Fragment(),UploadRequestBody.UploadCallBack {
+class ProfileFragment : androidx.fragment.app.Fragment(),UploadRequestBody.UploadCallBack {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -149,7 +148,7 @@ class ProfileFragment : Fragment(),UploadRequestBody.UploadCallBack {
 
         val id = preferences.getString("id","")
 
-        apiInterface.uploadImage(MultipartBody.Part.createFormData("image",file.name,body),id.toString())
+        apiInterface.uploadImage(MultipartBody.Part.createFormData("image",file.name,body))
             .enqueue(object :Callback<User>{
                 override fun onResponse(call: Call<User>, response: Response<User>) {
                     progressBar2.progress=100
@@ -243,6 +242,6 @@ fun logou(){
     }
 
     override fun onProgressUpdate(percentage: Int) {
-        TODO("Not yet implemented")
+        progressBar2.progress=percentage
     }
 }
