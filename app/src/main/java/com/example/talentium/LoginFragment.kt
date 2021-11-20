@@ -21,8 +21,8 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.http.Body
 import android.content.SharedPreferences
-
-
+import com.example.talentium.util.AppDataBase
+import com.example.talentium.Model.Users
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -47,7 +47,6 @@ class LoginFragment : Fragment() {
             param2 = it.getString(ARG_PARAM2)
 
 
-
         }
     }
 
@@ -64,96 +63,111 @@ class LoginFragment : Fragment() {
 
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_login, container, false)
-}
-    fun doTheLogin(){
+    }
+
+    fun doTheLogin() {
         buttonlogin.setOnClickListener {
-            if(editTextEmail.text.toString().equals("")){
+            if (editTextEmail.text.toString().equals("")) {
 
-                emailRequired.visibility=View.VISIBLE
+                emailRequired.visibility = View.VISIBLE
 
 
-            }else{
-                emailRequired.visibility=View.INVISIBLE
-
-            }
-            if(editTextpassword.text.toString().equals("")){
-                passwordRequired.visibility=View.VISIBLE
-            }else{
-                passwordRequired.visibility=View.INVISIBLE
+            } else {
+                emailRequired.visibility = View.INVISIBLE
 
             }
-            if(editTextEmail.text.toString().equals("")==false && editTextpassword.text.toString().equals("")==false){
+            if (editTextpassword.text.toString().equals("")) {
+                passwordRequired.visibility = View.VISIBLE
+            } else {
+                passwordRequired.visibility = View.INVISIBLE
+
+            }
+            if (editTextEmail.text.toString()
+                    .equals("") == false && editTextpassword.text.toString().equals("") == false
+            ) {
                 // elkhedma hne bech tsir
-                buttonlogin.visibility=View.GONE
-                waiting.visibility=View.VISIBLE
-                forgetpassword.visibility=View.GONE
-                callLoginApi(editTextEmail.text.toString(),editTextpassword.text.toString())
-        }
+                buttonlogin.visibility = View.GONE
+                waiting.visibility = View.VISIBLE
+                forgetpassword.visibility = View.GONE
+                callLoginApi(editTextEmail.text.toString(), editTextpassword.text.toString())
+            }
         }
     }
-    fun callLoginApi(email:String,pass:String){
+
+    fun callLoginApi(email: String, pass: String) {
         val apiInterface = ApiInterface.create()
         getActivity()?.window?.addFlags(
             WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
         )
-        Log.i("http",pass)
-        Log.i("http",email)
-        apiInterface.seConnecter(ApiInterface.LoginBody(email,pass)).enqueue(object : Callback<ApiInterface.LoginResponse> {
-            override fun onResponse(call: Call<ApiInterface.LoginResponse>, response: Response<ApiInterface.LoginResponse>) {
+        Log.i("http", pass)
+        Log.i("http", email)
+        apiInterface.seConnecter(ApiInterface.LoginBody(email, pass))
+            .enqueue(object : Callback<ApiInterface.LoginResponse> {
+                override fun onResponse(
+                    call: Call<ApiInterface.LoginResponse>,
+                    response: Response<ApiInterface.LoginResponse>
+                ) {
 
-                val token = response.body()
-                Log.i("http",response.body()?.token.toString())
+                    val token = response.body()
+                    Log.i("http", response.body()?.token.toString())
 
-                if (response.code()==200){
-                    val preferences: SharedPreferences =
-                    requireActivity().getSharedPreferences("pref", Context.MODE_PRIVATE)
-                    val editor=preferences.edit()
-                    editor.putString("token",response.body()?.token.toString())
-                    editor.apply()
-                    Log.i("bodyreq",response.body()?.user?.confirmed.toString())
-                    editor.putString("username",response.body()?.user?.username.toString()).apply()
-                    editor.putInt("followersNumber",response.body()!!.user.followers.size).apply()
-                    editor.putInt("followingNumber",response.body()!!.user.following.size).apply()
+                    if (response.code() == 200) {
+                        val preferences: SharedPreferences =
+                            requireActivity().getSharedPreferences("pref", Context.MODE_PRIVATE)
+                        val editor = preferences.edit()
+                        editor.putString("token", response.body()?.token.toString())
 
-                    editor.putString("avatar",response.body()?.user?.avatar.toString()).apply()
-                    editor.putString("id",response.body()?.user?.id.toString()).apply()
-                    buttonlogin.visibility=View.VISIBLE
-                    waiting.visibility=View.GONE
+                        Log.i("id from back", response.body()?.user.toString())
+                        editor.putString("username", response.body()?.user?.username.toString())
+                            .apply()
+                        editor.putInt("followersNumber", response.body()!!.user.followers.size)
+                            .apply()
+                        editor.putInt("followingNumber", response.body()!!.user.following.size)
+                            .apply()
+                        editor.putString("id", response.body()?.user?._id.toString()).apply()
+                        editor.putString("avatar", response.body()?.user?.avatar.toString()).apply()
+                        AppDataBase.getDatabase(requireContext()).userDao()
+                            .insert(Users(response.body()?.user?._id.toString(), "", "", "", ""))
+                        buttonlogin.visibility = View.VISIBLE
+                        waiting.visibility = View.GONE
 
-                    val changePage = Intent(requireContext(), LandingActivity::class.java)
-                    // Error: "Please specify constructor invocation;
-                    // classifier 'Page2' does not have a companion object"
 
-                    startActivity(changePage)
 
-                }
-                else{
-                    progressBar.visibility=View.GONE
-                    textWaiting.text="Login Failed"
-                    LoginFailed.visibility=View.VISIBLE
 
-                    waiting.isClickable=true
-                    buttonEffect(waiting)
-                    waiting.setOnClickListener {
-                        waiting.visibility=View.GONE
-                        buttonlogin.visibility=View.VISIBLE
-                        doTheLogin()
-                        forgetpassword.visibility=View.VISIBLE
-                        editTextEmail.setText("")
-                        editTextpassword.setText("")
+                        val changePage = Intent(requireContext(), LandingActivity::class.java)
+                        // Error: "Please specify constructor invocation;
+                        // classifier 'Page2' does not have a companion object"
+
+                        startActivity(changePage)
+
+                    } else {
+                        progressBar.visibility = View.GONE
+                        textWaiting.text = "Login Failed"
+                        LoginFailed.visibility = View.VISIBLE
+
+                        waiting.isClickable = true
+                        buttonEffect(waiting)
+                        waiting.setOnClickListener {
+                            waiting.visibility = View.GONE
+                            buttonlogin.visibility = View.VISIBLE
+                            doTheLogin()
+                            forgetpassword.visibility = View.VISIBLE
+                            editTextEmail.setText("")
+                            editTextpassword.setText("")
+                        }
                     }
+
+                    getActivity()?.window?.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
                 }
 
-                getActivity()?.window?.clearFlags( WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
-            }
+                override fun onFailure(call: Call<ApiInterface.LoginResponse>, t: Throwable) {
+                    Log.i("http", t.message.toString())
+                    getActivity()?.window?.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+                }
 
-            override fun onFailure(call: Call<ApiInterface.LoginResponse>, t: Throwable) {
-                Log.i("http",t.message.toString())
-                getActivity()?.window?.clearFlags( WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
-            }
-
-        })
+            })
     }
+
     fun buttonEffect(button: View) {
         button.setOnTouchListener { v, event ->
             when (event.action) {
@@ -173,6 +187,7 @@ class LoginFragment : Fragment() {
             false
         }
     }
+
     companion object {
         /**
          * Use this factory method to create a new instance of

@@ -1,22 +1,13 @@
 package com.example.talentium.API
 
-import android.os.Looper
 import android.util.Log
 import com.example.talentium.Model.User
-import com.google.gson.JsonObject
-import org.json.JSONObject
 import com.google.gson.annotations.SerializedName
-import okhttp3.MediaType
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
-import okio.BufferedSink
+
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
-import java.io.File
-import java.io.FileInputStream
-import java.util.logging.Handler
 
 interface ApiInterface {
     data class LoginResponse(
@@ -33,11 +24,17 @@ interface ApiInterface {
 
     @POST("api/users/register")
     fun Register(@Body registerBody: registerBody):Call<LoginResponse>
-    @Multipart
+    /*@Multipart
     @POST("api/users/changeprofile/pic/")
+<<<<<<< HEAD
     fun uploadImage(@Part image: MultipartBody.Part):Call<User>
     companion object {
         var BASE_URL = "http://172.16.45.85:6000/"
+=======
+    fun uploadImage(@Part image: MultipartBody.Part, @Query("id") userId : String):Call<User>*/
+    companion object {
+        var BASE_URL = "http://192.168.1.20:6000/"
+
         fun create() : ApiInterface {
             val retrofit = Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())

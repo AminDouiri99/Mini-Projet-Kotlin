@@ -20,8 +20,12 @@ class UploadRequestBody(val file: File, val contentType:String,val callback:Uplo
         }
 
     }
-    override fun contentType()= MediaType.parse("$contentType/*")
+    //override fun contentType()= MediaType.parse("$contentType/*")
     override fun contentLength()=file.length()
+    override fun contentType(): MediaType? {
+        TODO("Not yet implemented")
+    }
+
     override fun writeTo(sink: BufferedSink) {
         val length = file.length()
         val buffer = ByteArray(DEFAULT_BUFFER_SIZE)

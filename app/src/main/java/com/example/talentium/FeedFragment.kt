@@ -48,7 +48,7 @@ class FeedFragment : Fragment() {
       feedrecyclerview.layoutManager=LinearLayoutManager(view.context);
         val data =ArrayList<Post>()
         for(i in 1..10){
-            data.add(Post( "Name " + i,"role "+i))
+            data.add(Post( "artical " + i,"role "+i))
         }
         val adapter = FeedAdapter(data)
 
