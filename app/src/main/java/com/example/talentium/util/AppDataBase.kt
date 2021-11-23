@@ -8,14 +8,14 @@ import com.example.talentium.dao.UsersDao
 
 import com.example.talentium.Model.Users
 
-@Database(entities  = [Users::class], version = 1)
-abstract class AppDataBase :RoomDatabase(){
+@Database(entities = [Users::class], version = 1)
+abstract class AppDataBase : RoomDatabase() {
     abstract fun userDao(): UsersDao
 
     companion object {
         @Volatile
         private var instance: AppDataBase? = null
-        fun getDatabase(context: Context): AppDataBase  {
+        fun getDatabase(context: Context): AppDataBase {
             if (instance == null) {
                 synchronized(this) {
                     instance =

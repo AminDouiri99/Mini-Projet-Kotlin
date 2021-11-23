@@ -5,7 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.talentium.Model.ProfilePost
 
-class ProfilePostAdapter (private val mList: MutableList<ProfilePost>) : RecyclerView.Adapter<ProfilePostViewHolder>() {
+class ProfilePostAdapter(private val mList: MutableList<ProfilePost>) :
+    RecyclerView.Adapter<ProfilePostViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProfilePostViewHolder {
         // inflates the card_view_design view
@@ -25,5 +26,5 @@ class ProfilePostAdapter (private val mList: MutableList<ProfilePost>) : Recycle
 
     }
 
-    override fun getItemCount()=mList.size
+    override fun getItemCount() = mList.size
 }

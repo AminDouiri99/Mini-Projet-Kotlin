@@ -1,6 +1,7 @@
 package com.example.talentium
 
 import android.app.Activity
+import android.app.ActivityOptions
 import android.app.AlertDialog
 import android.app.ProgressDialog
 import android.content.Context
@@ -67,10 +68,10 @@ class ProfileFragment : Fragment() {
     private var param2: String? = null
     lateinit var recylcerPost: RecyclerView
     lateinit var adapter: ProfilePostAdapter
-    var selectedImage :Uri?=null
-    val READ_EXTERNEL_CODE=41
+    var selectedImage: Uri? = null
+    val READ_EXTERNEL_CODE = 41
     lateinit var dataBase: AppDataBase
-    lateinit var user:MutableList<Users>
+    lateinit var user: MutableList<Users>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -87,71 +88,159 @@ class ProfileFragment : Fragment() {
             requireActivity().getSharedPreferences("pref", Context.MODE_PRIVATE)
 
 
-        dataBase= AppDataBase.getDatabase(requireActivity())
+        dataBase = AppDataBase.getDatabase(requireActivity())
 
-        user=dataBase.userDao().getAllUsers()
+        user = dataBase.userDao().getAllUsers()
 
-        Log.i("users",user[1].toString())
+//        Log.i("users",user[1].toString())
+        gotoSettings()
 
-        val usernameValue=preferences.getString("username","")
-        Log.d("username",usernameValue+"123"+preferences.getBoolean("confirmed",false).toString()+preferences.getInt("followingNumber",45))
-        textView9.text=preferences.getInt("followingNumber",45).toString()
-        textView10.text=preferences.getInt("followersNumber",45).toString()
-        username.text="@"+usernameValue
-        textView7.text="@"+usernameValue
-       // imageprofile.setImageURI(Uri.)
-
+        val usernameValue = preferences.getString("username", "")
+        Log.d(
+            "username",
+            usernameValue + "123" + preferences.getBoolean("confirmed", false)
+                .toString() + preferences.getInt("followingNumber", 45)
+        )
+        textView9.text = preferences.getInt("followingNumber", 45).toString()
+        textView10.text = preferences.getInt("followersNumber", 45).toString()
+        username.text = "@" + usernameValue
+        textView7.text = "@" + usernameValue
+        // imageprofile.setImageURI(Uri.)
         updatePhoto()
         buttonlogout.setOnClickListener {
             logou()
         }
-
-        var postList : MutableList<ProfilePost> = ArrayList()
-        recylcerPost=recyclerview
-        postList.add(ProfilePost(image = R.drawable.dummyimage,desc = "My beautifull awesome post"))
-        postList.add(ProfilePost(image = R.drawable.dummyimage,desc = "My beautifull awesome post"))
-        postList.add(ProfilePost(image = R.drawable.dummyimage,desc = "My beautifull awesome post"))
-        postList.add(ProfilePost(image = R.drawable.dummyimage,desc = "My beautifull awesome post"))
-        postList.add(ProfilePost(image = R.drawable.dummyimage,desc = "My beautifull awesome post"))
-        postList.add(ProfilePost(image = R.drawable.dummyimage,desc = "My beautifull awesome post"))
-        postList.add(ProfilePost(image = R.drawable.dummyimage,desc = "My beautifull awesome post"))
-        postList.add(ProfilePost(image = R.drawable.dummyimage,desc = "My beautifull awesome post"))
-        postList.add(ProfilePost(image = R.drawable.dummyimage,desc = "My beautifull awesome post"))
-        postList.add(ProfilePost(image = R.drawable.dummyimage,desc = "My beautifull awesome post"))
-        postList.add(ProfilePost(image = R.drawable.dummyimage,desc = "My beautifull awesome post"))
-        postList.add(ProfilePost(image = R.drawable.dummyimage,desc = "My beautifull awesome post"))
-        postList.add(ProfilePost(image = R.drawable.dummyimage,desc = "My beautifull awesome post"))
+        var postList: MutableList<ProfilePost> = ArrayList()
+        recylcerPost = recyclerview
+        postList.add(
+            ProfilePost(
+                image = R.drawable.dummyimage,
+                desc = "My beautifull awesome post"
+            )
+        )
+        postList.add(
+            ProfilePost(
+                image = R.drawable.dummyimage,
+                desc = "My beautifull awesome post"
+            )
+        )
+        postList.add(
+            ProfilePost(
+                image = R.drawable.dummyimage,
+                desc = "My beautifull awesome post"
+            )
+        )
+        postList.add(
+            ProfilePost(
+                image = R.drawable.dummyimage,
+                desc = "My beautifull awesome post"
+            )
+        )
+        postList.add(
+            ProfilePost(
+                image = R.drawable.dummyimage,
+                desc = "My beautifull awesome post"
+            )
+        )
+        postList.add(
+            ProfilePost(
+                image = R.drawable.dummyimage,
+                desc = "My beautifull awesome post"
+            )
+        )
+        postList.add(
+            ProfilePost(
+                image = R.drawable.dummyimage,
+                desc = "My beautifull awesome post"
+            )
+        )
+        postList.add(
+            ProfilePost(
+                image = R.drawable.dummyimage,
+                desc = "My beautifull awesome post"
+            )
+        )
+        postList.add(
+            ProfilePost(
+                image = R.drawable.dummyimage,
+                desc = "My beautifull awesome post"
+            )
+        )
+        postList.add(
+            ProfilePost(
+                image = R.drawable.dummyimage,
+                desc = "My beautifull awesome post"
+            )
+        )
+        postList.add(
+            ProfilePost(
+                image = R.drawable.dummyimage,
+                desc = "My beautifull awesome post"
+            )
+        )
+        postList.add(
+            ProfilePost(
+                image = R.drawable.dummyimage,
+                desc = "My beautifull awesome post"
+            )
+        )
+        postList.add(
+            ProfilePost(
+                image = R.drawable.dummyimage,
+                desc = "My beautifull awesome post"
+            )
+        )
         adapter = ProfilePostAdapter(postList)
-        Log.i("img",BASE_URL+preferences.getString("avatar",""))
+        Log.i("img", BASE_URL + preferences.getString("avatar", ""))
         recylcerPost.adapter = adapter
-        recylcerPost.layoutManager=GridLayoutManager(requireContext(),3)
+        recylcerPost.layoutManager = GridLayoutManager(requireContext(), 3)
 
         Glide.with(this)
-            .load(BASE_URL+preferences.getString("avatar","")).fitCenter()
+            .load(BASE_URL + preferences.getString("avatar", "")).fitCenter()
             .into(imageprofile)
-        Log.i("upload","failure1")
-
+        //   Log.i("upload","failure1")
 
 
     }
-    fun updatePhoto(){
+
+    fun updatePhoto() {
         imageprofile.setOnClickListener {
             permission()
-           launchGallery()
+            launchGallery()
         }
 
     }
 
+    fun gotoSettings() {
+        settingsWrapper.setOnClickListener {
+            val changePage = Intent(requireContext(), SettingsActivity::class.java)
+            startActivity(
+                changePage,
+                ActivityOptions.makeSceneTransitionAnimation(requireActivity()).toBundle()
+            )
 
+        }
+    }
 
-    private fun checkForPermissions(permission :String,name:String,requestCode: Int){
-        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
-            when{
-                ContextCompat.checkSelfPermission(requireContext(),permission)==PackageManager.PERMISSION_GRANTED->{
-                  //  Toast.makeText(requireActivity(),"$name permission granted ",Toast.LENGTH_LONG).show()
+    private fun checkForPermissions(permission: String, name: String, requestCode: Int) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            when {
+                ContextCompat.checkSelfPermission(
+                    requireContext(),
+                    permission
+                ) == PackageManager.PERMISSION_GRANTED -> {
+                    //  Toast.makeText(requireActivity(),"$name permission granted ",Toast.LENGTH_LONG).show()
                 }
-                shouldShowRequestPermissionRationale(permission)->showDialog(permission,name,requestCode)
-                else ->ActivityCompat.requestPermissions(requireActivity(), arrayOf(permission),requestCode)
+                shouldShowRequestPermissionRationale(permission) -> showDialog(
+                    permission,
+                    name,
+                    requestCode
+                )
+                else -> ActivityCompat.requestPermissions(
+                    requireActivity(),
+                    arrayOf(permission),
+                    requestCode
+                )
             }
         }
     }
@@ -161,39 +250,48 @@ class ProfileFragment : Fragment() {
         permissions: Array<out String>,
         grantResults: IntArray
     ) {
-        fun innerCheck(name:String){
-            if(grantResults.isEmpty()|| grantResults[0]!=PackageManager.PERMISSION_GRANTED){
-                Toast.makeText(requireContext(),"$name permission refused",Toast.LENGTH_SHORT).show()
+        fun innerCheck(name: String) {
+            if (grantResults.isEmpty() || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(requireContext(), "$name permission refused", Toast.LENGTH_SHORT)
+                    .show()
             }
         }
-        when(requestCode){
-            READ_EXTERNEL_CODE->innerCheck("externel storage")
+        when (requestCode) {
+            READ_EXTERNEL_CODE -> innerCheck("externel storage")
         }
     }
 
-    private fun showDialog(permission: String,name: String,requestCode: Int){
+    private fun showDialog(permission: String, name: String, requestCode: Int) {
         val builder = AlertDialog.Builder(requireContext())
 
         builder.apply {
             setMessage("Permission to access your $name is required to use this app")
             setTitle("Permission required")
-            setPositiveButton("OK"){dialog,which->
-                ActivityCompat.requestPermissions(requireActivity(), arrayOf(permission),requestCode)
+            setPositiveButton("OK") { dialog, which ->
+                ActivityCompat.requestPermissions(
+                    requireActivity(),
+                    arrayOf(permission),
+                    requestCode
+                )
             }
         }
         val dialog = builder.create()
         dialog.show()
     }
 
-    private fun permission(){
-        checkForPermissions(android.Manifest.permission.READ_EXTERNAL_STORAGE,"storage",READ_EXTERNEL_CODE)
+    private fun permission() {
+        checkForPermissions(
+            android.Manifest.permission.READ_EXTERNAL_STORAGE,
+            "storage",
+            READ_EXTERNEL_CODE
+        )
     }
 
     private fun launchGallery() {
         val intent = Intent(Intent.ACTION_PICK).also {
-            it.type="image/*"
-            val mimeType = arrayOf("images/jpeg","image/png")
-            it.putExtra(Intent.EXTRA_MIME_TYPES,mimeType)
+            it.type = "image/*"
+            val mimeType = arrayOf("images/jpeg", "image/png")
+            it.putExtra(Intent.EXTRA_MIME_TYPES, mimeType)
         }
         startActivityForResult(intent, REQUEST_CODE_IMAGE_PICKER)
     }
@@ -202,17 +300,16 @@ class ProfileFragment : Fragment() {
         val preferences: SharedPreferences =
             requireActivity().getSharedPreferences("pref", Context.MODE_PRIVATE)
 
-        val id = preferences.getString("id","")
+        val id = preferences.getString("id", "")
 
         super.onActivityResult(requestCode, resultCode, data)
-        if(resultCode==Activity.RESULT_OK){
-            Log.i("image",data.toString())
-            when (requestCode){
-                REQUEST_CODE_IMAGE_PICKER->{
-                    selectedImage=data?.data
+        if (resultCode == Activity.RESULT_OK) {
+            Log.i("image", data.toString())
+            when (requestCode) {
+                REQUEST_CODE_IMAGE_PICKER -> {
+                    selectedImage = data?.data
                     imageprofile.setImageURI(selectedImage)
-                    UploadUtility(requireActivity(),id.toString()).uploadFile(selectedImage!!)
-
+                    UploadUtility(requireActivity(), id.toString()).uploadFile(selectedImage!!)
                 }
             }
         }
@@ -225,19 +322,19 @@ class ProfileFragment : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_profile, container, false)
 
-           }
+    }
 
 
-fun logou(){
+    fun logou() {
 
         val preferences: SharedPreferences =
             requireActivity().getSharedPreferences("pref", Context.MODE_PRIVATE)
 
 
-    Log.d("token",preferences.getString("token","defaultName").toString())
+        Log.d("token", preferences.getString("token", "defaultName").toString())
         preferences.edit().clear().commit()
 
-    Log.d("token removed",preferences.getString("token","defaultName").toString())
+        Log.d("token removed", preferences.getString("token", "defaultName").toString())
 
 
         val changePage = Intent(requireContext(), MainActivity::class.java)
@@ -247,9 +344,7 @@ fun logou(){
         startActivity(changePage)
 
 
-
-
-}
+    }
 
     companion object {
         private const val REQUEST_CODE_IMAGE_PICKER = 100
@@ -273,7 +368,7 @@ fun logou(){
             }
     }
 
-   /* override fun onProgressUpdate(percentage: Int) {
-        TODO("Not yet implemented")
-    }*/
+    /* override fun onProgressUpdate(percentage: Int) {
+         TODO("Not yet implemented")
+     }*/
 }

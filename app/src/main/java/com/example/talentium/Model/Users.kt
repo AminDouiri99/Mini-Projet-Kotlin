@@ -17,6 +17,6 @@ data class Users(
     val username: String
 
 ) {
-    constructor(_id: String, avatar: String,name: String, email: String, username: String) :
+    constructor(_id: String, avatar: String, name: String, email: String, username: String) :
             this(_id, avatar, email, username)
 }

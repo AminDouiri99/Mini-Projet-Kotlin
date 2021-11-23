@@ -15,13 +15,12 @@ import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 import java.io.IOException
 
-class UploadUtility(activity: Activity,id:String) {
-
+class UploadUtility(activity: Activity, id: String) {
 
 
     var activity = activity;
     var dialog: ProgressDialog? = null
-    var serverURL: String = ApiInterface.BASE_URL+"api/users/changeprofile/pic/"+id
+    var serverURL: String = ApiInterface.BASE_URL + "api/users/changeprofile/pic/" + id
     var serverUploadDirectoryPath: String = "https://handyopinion.com/tutorials/uploads/"
     val client = OkHttpClient()
 
@@ -30,7 +29,7 @@ class UploadUtility(activity: Activity,id:String) {
     }
 
     fun uploadFile(sourceFileUri: Uri, uploadedFileName: String? = null) {
-        val pathFromUri = URIPathHelper().getPath(activity,sourceFileUri)
+        val pathFromUri = URIPathHelper().getPath(activity, sourceFileUri)
         uploadFile(File(pathFromUri), uploadedFileName)
     }
 
@@ -41,14 +40,19 @@ class UploadUtility(activity: Activity,id:String) {
                 Log.e("file error", "Not able to get mime type")
                 return@Thread
             }
-            val fileName: String = if (uploadedFileName == null)  sourceFile.name else uploadedFileName
+            val fileName: String =
+                if (uploadedFileName == null) sourceFile.name else uploadedFileName
             toggleProgressDialog(true)
 
 
-                val requestBody: RequestBody =
-                    MultipartBody.Builder().setType(MultipartBody.FORM)
-                        .addFormDataPart("uploaded_file", fileName,sourceFile.asRequestBody(mimeType.toMediaTypeOrNull()))
-                        .build()
+            val requestBody: RequestBody =
+                MultipartBody.Builder().setType(MultipartBody.FORM)
+                    .addFormDataPart(
+                        "uploaded_file",
+                        fileName,
+                        sourceFile.asRequestBody(mimeType.toMediaTypeOrNull())
+                    )
+                    .build()
 
 
             val request = Request.Builder()
@@ -58,12 +62,12 @@ class UploadUtility(activity: Activity,id:String) {
             client.newCall(request).enqueue(object : Callback {
                 override fun onFailure(call: Call, e: IOException) {
                     // Handle this
-                    Log.i("failed",e.toString())
+                    Log.i("failed", e.toString())
                 }
 
                 override fun onResponse(call: Call, response: Response) {
                     // Handle this
-                    Log.i("suucess",response.toString())
+                    Log.i("suucess", response.toString())
                 }
             })
 
@@ -83,7 +87,7 @@ class UploadUtility(activity: Activity,id:String) {
 
     fun showToast(message: String) {
         activity.runOnUiThread {
-            Toast.makeText( activity, message, Toast.LENGTH_LONG ).show()
+            Toast.makeText(activity, message, Toast.LENGTH_LONG).show()
         }
     }
 

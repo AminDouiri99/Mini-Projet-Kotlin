@@ -126,12 +126,10 @@ class LoginFragment : Fragment() {
                             .apply()
                         editor.putString("id", response.body()?.user?._id.toString()).apply()
                         editor.putString("avatar", response.body()?.user?.avatar.toString()).apply()
-                        AppDataBase.getDatabase(requireContext()).userDao()
-                            .insert(Users(response.body()?.user?._id.toString(), "", "", "", ""))
+                        //    AppDataBase.getDatabase(requireContext()).userDao()
+                        //      .insert(Users(response.body()?.user?._id.toString(), "", "", "", ""))
                         buttonlogin.visibility = View.VISIBLE
                         waiting.visibility = View.GONE
-
-
 
 
                         val changePage = Intent(requireContext(), LandingActivity::class.java)
@@ -139,6 +137,8 @@ class LoginFragment : Fragment() {
                         // classifier 'Page2' does not have a companion object"
 
                         startActivity(changePage)
+                        requireActivity().finish()
+
 
                     } else {
                         progressBar.visibility = View.GONE

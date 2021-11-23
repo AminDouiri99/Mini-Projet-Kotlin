@@ -38,128 +38,141 @@ private const val ARG_PARAM2 = "param2"
  */
 class RegisterFragment : Fragment() {
 
-   /* private lateinit var email:EditText
-    private lateinit var username:EditText
-    private lateinit var password:EditText
-    private lateinit var confirmPassword:EditText
-    private lateinit var register :Button*/
+    /* private lateinit var email:EditText
+     private lateinit var username:EditText
+     private lateinit var password:EditText
+     private lateinit var confirmPassword:EditText
+     private lateinit var register :Button*/
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        var rootView :View = inflater.inflate(R.layout.fragment_register, container, false)
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View? {
+        var rootView: View = inflater.inflate(R.layout.fragment_register, container, false)
 
         return rootView
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         buttonEffect(buttonRegister)
         buttonRegister.setOnClickListener {
 
-            if(validateForm()){
-                Register(editRegisterEmail.text.toString(),editPassword.text.toString(),editTextUsername.text.toString())
+            if (validateForm()) {
+                Register(
+                    editRegisterEmail.text.toString(),
+                    editPassword.text.toString(),
+                    editTextUsername.text.toString()
+                )
             }
         }
     }
 
-    private fun Register(email:String,pass:String,username:String){
+    private fun Register(email: String, pass: String, username: String) {
         val apiInterface = ApiInterface.create()
         getActivity()?.window?.addFlags(
             WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
         )
-        Log.i("http","requette0")
+        Log.i("http", "requette0")
 
         val map: HashMap<String, String> = HashMap()
 
-        Log.i("password",pass)
-        Log.i("email",email)
-        apiInterface.Register(ApiInterface.registerBody(email,pass,username)).enqueue(object : Callback<ApiInterface.LoginResponse> {
-            override fun onResponse(call: Call<ApiInterface.LoginResponse>, response: Response<ApiInterface.LoginResponse>) {
+        Log.i("password", pass)
+        Log.i("email", email)
+        apiInterface.Register(ApiInterface.registerBody(email, pass, username))
+            .enqueue(object : Callback<ApiInterface.LoginResponse> {
+                override fun onResponse(
+                    call: Call<ApiInterface.LoginResponse>,
+                    response: Response<ApiInterface.LoginResponse>
+                ) {
 
-                val user = response.body()
-                Log.i("response ",user.toString())
-                if (response.code()==201){
-                    val preferences: SharedPreferences =
-                        requireActivity().getSharedPreferences("pref", Context.MODE_PRIVATE)
-                    val editor=preferences.edit()
-                    editor.putString("token",response.body()?.token.toString())
-                    editor.apply()
-                    editor.putString("username",response.body()?.user?.username.toString()).apply()
-                    editor.putInt("followersNumber",response.body()!!.user.followers.size).apply()
-                    editor.putInt("followingNumber",response.body()!!.user.following.size).apply()
+                    val user = response.body()
+                    Log.i("response ", user.toString())
+                    if (response.code() == 201) {
+                        val preferences: SharedPreferences =
+                            requireActivity().getSharedPreferences("pref", Context.MODE_PRIVATE)
+                        val editor = preferences.edit()
+                        editor.putString("token", response.body()?.token.toString())
+                        editor.apply()
+                        editor.putString("username", response.body()?.user?.username.toString())
+                            .apply()
+                        editor.putInt("followersNumber", response.body()!!.user.followers.size)
+                            .apply()
+                        editor.putInt("followingNumber", response.body()!!.user.following.size)
+                            .apply()
 
-                    editor.putString("avatar",response.body()?.user?.avatar.toString()).apply()
+                        editor.putString("avatar", response.body()?.user?.avatar.toString()).apply()
 
-                    buttonRegister.visibility=View.VISIBLE
-                    waitingRegister.visibility=View.GONE
-                    val changePage = Intent(requireContext(), MainActivity::class.java)
-                    // Error: "Please specify constructor invocation;
-                    // classifier 'Page2' does not have a companion object"
+                        buttonRegister.visibility = View.VISIBLE
+                        waitingRegister.visibility = View.GONE
+                        val changePage = Intent(requireContext(), MainActivity::class.java)
+                        // Error: "Please specify constructor invocation;
+                        // classifier 'Page2' does not have a companion object"
 
-                    startActivity(changePage)
-                }else{
-                    Log.i("fail",response.body()?.token.toString())
-                    val myToast = Toast.makeText(context,"this user already exists",Toast.LENGTH_SHORT)
-                    myToast.setGravity(Gravity.LEFT,200,200)
-                    myToast.show()
+                        startActivity(changePage)
+                        requireActivity().finish()
+                    } else {
+                        Log.i("fail", response.body()?.token.toString())
+                        val myToast =
+                            Toast.makeText(context, "this user already exists", Toast.LENGTH_SHORT)
+                        myToast.setGravity(Gravity.LEFT, 200, 200)
+                        myToast.show()
+                    }
+
+
+
+                    getActivity()?.window?.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
                 }
 
+                override fun onFailure(call: Call<ApiInterface.LoginResponse>, t: Throwable) {
+                    Log.i("fail", t.message.toString())
+                    getActivity()?.window?.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+                }
 
-
-                getActivity()?.window?.clearFlags( WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
-            }
-
-            override fun onFailure(call: Call<ApiInterface.LoginResponse>, t: Throwable) {
-                Log.i("fail",t.message.toString())
-                getActivity()?.window?.clearFlags( WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
-            }
-
-        })
+            })
     }
 
-    fun  validateForm():Boolean{
-        if(editRegisterEmail.text.toString().equals("")){
-            emailRequired.visibility=View.VISIBLE
+    fun validateForm(): Boolean {
+        if (editRegisterEmail.text.toString().equals("")) {
+            emailRequired.visibility = View.VISIBLE
             return false
-        }else{
-            emailRequired.visibility=View.INVISIBLE
+        } else {
+            emailRequired.visibility = View.INVISIBLE
         }
-        if(!EMAIL_ADDRESS.matcher(editRegisterEmail.text.toString()!!).matches()){
-            emailRequired.visibility=View.VISIBLE
+        if (!EMAIL_ADDRESS.matcher(editRegisterEmail.text.toString()!!).matches()) {
+            emailRequired.visibility = View.VISIBLE
             return false
-        }else{
-            emailRequired.visibility=View.INVISIBLE
+        } else {
+            emailRequired.visibility = View.INVISIBLE
         }
 
-        if(editTextUsername.text.toString()==""){
-            usernameRequired.visibility=View.VISIBLE
+        if (editTextUsername.text.toString() == "") {
+            usernameRequired.visibility = View.VISIBLE
             return false
+        } else {
+            usernameRequired.visibility = View.INVISIBLE
+        }
+        if (editPassword.text.toString() == "") {
+            passwordRequired.visibility = View.VISIBLE
+            return false
+        } else {
+            passwordRequired.visibility = View.INVISIBLE
         }
 
-        else{
-            usernameRequired.visibility=View.INVISIBLE
+        if (editConfirmPassword.text.toString() == "") {
+            confirmpasswordRequired.visibility = View.VISIBLE
+            return false
+        } else {
+            confirmpasswordRequired.visibility = View.INVISIBLE
+
         }
-        if(editPassword.text.toString()=="") {
-            passwordRequired.visibility=View.VISIBLE
-                return false
-        }else{
-                passwordRequired.visibility=View.INVISIBLE
-            }
 
-            if(editConfirmPassword.text.toString()==""){
-            confirmpasswordRequired.visibility=View.VISIBLE
-                return false
-        }else{
-                confirmpasswordRequired.visibility=View.INVISIBLE
+        if (editConfirmPassword.text.toString() != editPassword.text.toString()) {
+            confirmpasswordRequired.visibility = View.VISIBLE
+            return false
+        } else {
+            confirmpasswordRequired.visibility = View.INVISIBLE
 
-            }
-
-            if(editConfirmPassword.text.toString()!=editPassword.text.toString()){
-            confirmpasswordRequired.visibility=View.VISIBLE
-                return false
-        }else{
-                confirmpasswordRequired.visibility=View.INVISIBLE
-
-            }
+        }
 
         return true
 
@@ -184,6 +197,7 @@ class RegisterFragment : Fragment() {
                 }
             }
     }
+
     fun buttonEffect(button: View) {
         button.setOnTouchListener { v, event ->
             when (event.action) {

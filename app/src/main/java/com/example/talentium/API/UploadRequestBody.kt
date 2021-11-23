@@ -8,20 +8,21 @@ import okio.BufferedSink
 import java.io.File
 import java.io.FileInputStream
 
-class UploadRequestBody(val file: File, val contentType:String,val callback:UploadCallBack):
+class UploadRequestBody(val file: File, val contentType: String, val callback: UploadCallBack) :
     RequestBody() {
-    interface  UploadCallBack{
-        fun onProgressUpdate(percentage : Int)
+    interface UploadCallBack {
+        fun onProgressUpdate(percentage: Int)
     }
 
-    inner class progressupdate(val uploaded:Long,val total:Long):Runnable{
+    inner class progressupdate(val uploaded: Long, val total: Long) : Runnable {
         override fun run() {
-            callback.onProgressUpdate((100*uploaded/total).toInt())
+            callback.onProgressUpdate((100 * uploaded / total).toInt())
         }
 
     }
+
     //override fun contentType()= MediaType.parse("$contentType/*")
-    override fun contentLength()=file.length()
+    override fun contentLength() = file.length()
     override fun contentType(): MediaType? {
         TODO("Not yet implemented")
     }
@@ -31,19 +32,21 @@ class UploadRequestBody(val file: File, val contentType:String,val callback:Uplo
         val buffer = ByteArray(DEFAULT_BUFFER_SIZE)
         val fileinputstream = FileInputStream(file)
         var uploaded = 0L
-        fileinputstream.use { inputstream->
-            var read:Int
+        fileinputstream.use { inputstream ->
+            var read: Int
             val handler = android.os.Handler(Looper.getMainLooper())
             while (inputstream.read(buffer).also {
                     read = it
-                }!= -1){
-            handler.post(progressupdate(uploaded,length))
-                uploaded+=read
-                sink.write(buffer,0,read)            }
+                } != -1) {
+                handler.post(progressupdate(uploaded, length))
+                uploaded += read
+                sink.write(buffer, 0, read)
+            }
         }
 
     }
-    companion object{
+
+    companion object {
         private const val DEFAULT_BUFFER_SIZE = 1048
     }
 }

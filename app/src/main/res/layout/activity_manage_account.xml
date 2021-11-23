@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/Mint_Cream"
+    tools:context=".Settings.ManageAccountActivity">
+
+    <FrameLayout
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_10sdp"
+        android:id="@+id/backButtonWraper"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:src="@drawable/ic_arrow_back" />
+
+    </FrameLayout>
+    <TextView
+        android:id="@+id/titleSettings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:text="@string/editaccount"
+        android:textSize="@dimen/_16sdp"
+        android:textColor="@color/Black_Coffe"
+        android:textAllCaps="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <FrameLayout
+        android:id="@+id/manageWrapper"
+        android:background="@drawable/riple"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="@dimen/_10sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+
+
+            android:src="@drawable/ic_baseline_person_24"
+            />
+    </FrameLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleSettings">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:background="@drawable/riple"
+            android:clickable="true"
+            android:focusable="true"
+            android:id="@+id/updatepicturemenu"
+            android:gravity="center|start"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/_20sdp"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_baseline_add_a_photo_24" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginLeft="@dimen/_2sdp"
+                android:text="@string/updatephoto"
+                android:textColor="@color/Black_Coffe"
+                android:textSize="@dimen/_14sdp"
+                app:layout_constraintTop_toBottomOf="parent" />
+            <RelativeLayout
+                android:id="@+id/rllRight"
+                android:layout_width="match_parent"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:layout_height="wrap_content"
+                android:gravity="right">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/updatepicarrow"
+                    android:src="@drawable/ic_baseline_arrow_forward_ios_24" /></RelativeLayout>
+        </LinearLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/updatephotoLayout"
+            android:visibility="visible"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/_40sdp"
+                android:text="@string/updatephotodesc"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_marginTop="@dimen/_10sdp"
+                android:id="@+id/cardView"
+                android:layout_width="@dimen/_95sdp"
+                android:layout_height="@dimen/_95sdp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/fbroundbckground"
+                app:cardCornerRadius="@dimen/_35sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView15">
+
+                <ImageView
+                    android:id="@+id/imageprofile"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:clipToOutline="true"
+                    android:foreground="?attr/selectableItemBackgroundBorderless"
+
+                    android:src="@drawable/logotemp_background" />
+
+            </androidx.cardview.widget.CardView>
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/ic_baseline_add_a_photo_24"
+                android:translationZ="@dimen/_3sdp"
+                app:layout_constraintBottom_toBottomOf="@+id/cardView"
+                app:layout_constraintEnd_toEndOf="@+id/cardView" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:background="@drawable/riple"
+            android:clickable="true"
+            android:focusable="true"
+            android:id="@+id/updatenameemenu"
+            android:gravity="center|start"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/_20sdp"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_baseline_info_24" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginLeft="@dimen/_2sdp"
+                android:text="@string/updatename"
+                android:textColor="@color/Black_Coffe"
+                android:textSize="@dimen/_14sdp"
+                app:layout_constraintTop_toBottomOf="parent" />
+            <RelativeLayout
+                android:id="@+id/rlRight"
+                android:layout_width="match_parent"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:layout_height="wrap_content"
+                android:gravity="right">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:src="@drawable/ic_baseline_arrow_forward_ios_24" /></RelativeLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/updateinfolayout"
+            android:layout_width="match_parent"
+            android:background="@color/white"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            >
+
+            <EditText
+                android:layout_width="@dimen/_250sdp"
+                android:hint="@string/updateusername"
+                android:textColorHint="@color/Roman_Silver"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:ems="10"
+                android:paddingLeft="@dimen/_12sdp"
+                android:shadowColor="@color/Mint_Cream"
+                android:shadowDx="@integer/material_motion_duration_long_1"
+                android:shadowDy="@integer/material_motion_duration_long_1"
+                android:layout_marginTop="@dimen/_10sdp"
+
+                android:background="@drawable/btndesign"
+                />
+            <EditText
+                android:layout_width="@dimen/_250sdp"
+                android:hint="@string/updatename"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:textColorHint="@color/Roman_Silver"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:ems="10"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:paddingLeft="@dimen/_12sdp"
+                android:shadowColor="@color/Mint_Cream"
+                android:shadowDx="@integer/material_motion_duration_long_1"
+                android:shadowDy="@integer/material_motion_duration_long_1"
+
+                android:background="@drawable/btndesign"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

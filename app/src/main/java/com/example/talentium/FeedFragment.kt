@@ -29,7 +29,7 @@ private const val ARG_PARAM2 = "param2"
  */
 
 
-data class Post(val name:String,val role :String){
+data class Post(val name: String, val role: String) {
 
 }
 
@@ -45,60 +45,60 @@ class FeedFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-      feedrecyclerview.layoutManager=LinearLayoutManager(view.context);
-        val data =ArrayList<Post>()
-        for(i in 1..10){
-            data.add(Post( "artical " + i,"role "+i))
+        feedrecyclerview.layoutManager = LinearLayoutManager(view.context);
+        val data = ArrayList<Post>()
+        for (i in 1..10) {
+            data.add(Post("artical " + i, "role " + i))
         }
         val adapter = FeedAdapter(data)
 
         // Setting the Adapter with the recyclerview
         feedrecyclerview.adapter = adapter
 
-        val snapHelper:SnapHelper=LinearSnapHelper()
+        val snapHelper: SnapHelper = LinearSnapHelper()
         snapHelper.attachToRecyclerView(feedrecyclerview)
 
-       // recyclerview.smoothScrollToPosition(adapter.getItemCount())
-       /* feedrecyclerview.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-                if (dy > 0) {
-                    // Scrolling up
-                    Log.i("RecyclerView scrolled: ", "scroll up!");
+        // recyclerview.smoothScrollToPosition(adapter.getItemCount())
+        /* feedrecyclerview.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                 super.onScrolled(recyclerView, dx, dy)
+                 if (dy > 0) {
+                     // Scrolling up
+                     Log.i("RecyclerView scrolled: ", "scroll up!");
 
-                   //recyclerView.smoothScrollToPosition(position)
-                } else {
-                    // Scrolling down
-
-
-                    Log.i("RecyclerView scrolled: ", "scroll down!");
                     //recyclerView.smoothScrollToPosition(position)
-                }
-            }
-            var position =0
+                 } else {
+                     // Scrolling down
+
+
+                     Log.i("RecyclerView scrolled: ", "scroll down!");
+                     //recyclerView.smoothScrollToPosition(position)
+                 }
+             }
+             var position =0
 
 
 
-           override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-               val linearLayoutManager =recyclerView.linearLayout;
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                val linearLayoutManager =recyclerView.linearLayout;
 
-                Log.i("int",newState.toString())
-                super.onScrollStateChanged(recyclerView, newState)
+                 Log.i("int",newState.toString())
+                 super.onScrollStateChanged(recyclerView, newState)
 
-                if (newState == AbsListView.OnScrollListener.SCROLL_STATE_FLING) {
-                    // Do something
-                    recyclerView.smoothScrollToPosition(linearLayoutManager.)
-                } else if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
-                    // Do something
+                 if (newState == AbsListView.OnScrollListener.SCROLL_STATE_FLING) {
+                     // Do something
+                     recyclerView.smoothScrollToPosition(linearLayoutManager.)
+                 } else if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
+                     // Do something
 
-                } else {
-                    // Do something
+                 } else {
+                     // Do something
 
-                }
-            }
+                 }
+             }
 
 
-        })*/
+         })*/
 
     }
 
