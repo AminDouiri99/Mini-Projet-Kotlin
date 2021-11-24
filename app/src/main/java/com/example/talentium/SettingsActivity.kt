@@ -26,7 +26,6 @@ class SettingsActivity : AppCompatActivity() {
         gotoSecurityandLogin.setOnClickListener {
             val changePage = Intent(this, SecurityActivity::class.java)
             startActivity(changePage, ActivityOptions.makeSceneTransitionAnimation(this).toBundle())
-
         }
     }
     fun gotoManageAccount() {

@@ -11,8 +11,8 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="@dimen/_225sdp"
-        android:layout_height="@dimen/_225sdp"
+        android:layout_width="@dimen/_200sdp"
+        android:layout_height="@dimen/_200sdp"
         android:src="@mipmap/logotemp_foreground"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,7 +21,7 @@
     <TextView
         android:id="@+id/textView"
         android:layout_width="@dimen/_180sdp"
-        android:layout_height="71dp"
+        android:layout_height="@dimen/_71sdp"
         android:layout_gravity="right"
         android:gravity="right"
         android:text="@string/welcome_word"
@@ -38,9 +38,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/buttonBacktoLogin"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
-
+   c
     <androidx.appcompat.widget.AppCompatButton
         android:layout_marginTop="@dimen/_15sdp"
         android:id="@+id/buttonRegister"
@@ -60,6 +61,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonBacktoLogin"
+        android:visibility="invisible"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/_30sdp"
         android:layout_gravity="center_horizontal"
@@ -72,6 +74,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/buttonRegister" />
+
+
 
     <TextView
         android:id="@+id/orconnectwith"

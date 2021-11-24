@@ -87,6 +87,7 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val preferences: SharedPreferences =
             requireActivity().getSharedPreferences("pref", Context.MODE_PRIVATE)
+        gotoSettings()
 
         pulltorefresh.setOnRefreshListener{
             val usernameValue = preferences.getString("username", "")
@@ -104,7 +105,6 @@ class ProfileFragment : Fragment() {
         user = dataBase.userDao().getAllUsers()
 
 //        Log.i("users",user[1].toString())
-        gotoSettings()
 
         val usernameValue = preferences.getString("username", "")
         Log.d(

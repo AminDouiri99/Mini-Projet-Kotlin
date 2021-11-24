@@ -229,6 +229,7 @@
             >
             <com.google.android.material.switchmaterial.SwitchMaterial
                 android:layout_width="match_parent"
+                android:textColor="@color/Black_Coffe"
                 android:layout_margin="@dimen/_20sdp"
                 android:layout_height="match_parent"
                 android:text="@string/privacystatus"/>

@@ -231,6 +231,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
             tools:listitem="@layout/profile_post" />
 
         <ProgressBar
+            android:visibility="invisible"
             android:id="@+id/progressBar2"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="@dimen/_100sdp"
