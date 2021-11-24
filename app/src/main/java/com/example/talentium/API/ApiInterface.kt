@@ -45,7 +45,7 @@ interface ApiInterface {
     @POST("api/users/changeprofile/pic/")
     fun uploadImage(@Part image: MultipartBody.Part, @Query("id") userId : String):Call<User>*/
     companion object {
-        var BASE_URL = "http://172.17.4.96:6000/"
+        var BASE_URL = "http://172.17.9.204:6000/"
 
         fun create() : ApiInterface {
             val retrofit = Retrofit.Builder()

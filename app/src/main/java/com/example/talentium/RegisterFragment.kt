@@ -102,6 +102,8 @@ class RegisterFragment : Fragment() {
 
                         editor.putString("avatar", response.body()?.user?.avatar.toString()).apply()
 
+                        editor.putString("id", response.body()?.user?._id.toString()).apply()
+
                         buttonRegister.visibility = View.VISIBLE
                         waitingRegister.visibility = View.GONE
                         val changePage = Intent(requireContext(), MainActivity::class.java)
