@@ -2,34 +2,27 @@ package com.example.talentium
 
 import android.app.Activity
 import android.app.AlertDialog
-import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
-import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Build
 
 import android.os.Bundle
-import android.os.Environment
-import android.provider.MediaStore
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.android.volley.toolbox.Volley
 import com.bumptech.glide.Glide
 import com.example.talentium.API.ApiInterface
 import com.example.talentium.API.ApiInterface.Companion.BASE_URL
-import com.example.talentium.API.UploadRequestBody
 import com.example.talentium.Model.ProfilePost
 import com.example.talentium.Model.User
 import com.example.talentium.Model.Users
