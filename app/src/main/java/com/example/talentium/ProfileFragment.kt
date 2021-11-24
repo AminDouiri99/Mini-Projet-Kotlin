@@ -22,8 +22,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.toolbox.Volley
@@ -83,9 +85,18 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //buttonEffect(buttonRegister)
         val preferences: SharedPreferences =
             requireActivity().getSharedPreferences("pref", Context.MODE_PRIVATE)
+
+        pulltorefresh.setOnRefreshListener{
+            val usernameValue = preferences.getString("username", "")
+            username.text = "@" + usernameValue
+            textView7.text = "@" + usernameValue
+
+            pulltorefresh.isRefreshing=false
+
+        }
+        //buttonEffect(buttonRegister)
 
 
         dataBase = AppDataBase.getDatabase(requireActivity())

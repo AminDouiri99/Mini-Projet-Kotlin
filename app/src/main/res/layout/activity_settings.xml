@@ -84,6 +84,7 @@
     </LinearLayout>
         <LinearLayout
             android:orientation="horizontal"
+            android:id="@+id/gotoSecurityandLogin"
             android:layout_width="match_parent"
             android:background="@drawable/riple"
             android:clickable="true"

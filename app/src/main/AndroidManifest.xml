@@ -15,9 +15,13 @@
         android:theme="@style/Theme.Talentium"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".Settings.SecurityActivity"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
             android:name=".Settings.ManageAccountActivity"
             android:exported="true"
-            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".SplashActivity"
             android:exported="true"

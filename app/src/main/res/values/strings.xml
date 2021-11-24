@@ -37,6 +37,13 @@
     <string name="updatephotodesc">Here you can change your profile picture</string>
     <string name="updatename">Update your information</string>
     <string name="updateusername">Update your username</string>
+    <string name="submit">Submit</string>
+    <string name="changepassword">Change your password</string>
+    <string name="changeprivacy">Change your privacy status</string>
+    <string name="oldpassword">Your old password</string>
+    <string name="newpassword">Your new password</string>
+    <string name="confirmpassword">Confirm new password</string>
+    <string name="privacystatus">Make your profile private</string>
 
     <string name="password_hint">*******</string>
     <string name="policy">© 2021,esprit inc,Talentium</string>

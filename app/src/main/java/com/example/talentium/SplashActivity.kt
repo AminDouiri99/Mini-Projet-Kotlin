@@ -15,10 +15,10 @@ class SplashActivity : AppCompatActivity() {
         Handler(Looper.getMainLooper()).postDelayed({
             val preferences: SharedPreferences =
                 this.getSharedPreferences("pref", Context.MODE_PRIVATE)
-
             if (preferences.getString("token", "").toString() != "") {
                 val intent = Intent(this, LandingActivity::class.java)
                 startActivity(intent)
+                finish()
             } else {
                 val mainIntent = Intent(this, MainActivity::class.java)
                 startActivity(mainIntent)

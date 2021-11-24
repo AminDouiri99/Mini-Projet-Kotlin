@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:id="@+id/rootmanageaccount"
     android:layout_height="match_parent"
     android:background="@color/Mint_Cream"
     tools:context=".Settings.ManageAccountActivity">
@@ -18,6 +19,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
+            android:id="@+id/gobackarrow"
             android:layout_width="@dimen/_20sdp"
             android:layout_height="@dimen/_20sdp"
             android:src="@drawable/ic_arrow_back" />
@@ -105,7 +107,7 @@
         </LinearLayout>
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/updatephotoLayout"
-            android:visibility="visible"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -124,6 +126,7 @@
                 android:id="@+id/cardView"
                 android:layout_width="@dimen/_95sdp"
                 android:layout_height="@dimen/_95sdp"
+
                 android:layout_gravity="center_horizontal"
                 android:background="@drawable/fbroundbckground"
                 app:cardCornerRadius="@dimen/_35sdp"
@@ -132,7 +135,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView15">
 
                 <ImageView
-                    android:id="@+id/imageprofile"
+                    android:id="@+id/imageprofileinsettings"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:clipToOutline="true"
@@ -143,9 +146,10 @@
             </androidx.cardview.widget.CardView>
 
             <ImageButton
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/_35sdp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:background="@drawable/btndesign"
                 android:src="@drawable/ic_baseline_add_a_photo_24"
                 android:translationZ="@dimen/_3sdp"
                 app:layout_constraintBottom_toBottomOf="@+id/cardView"
@@ -191,10 +195,12 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
+                    android:id="@+id/updatenamearrow"
                     android:src="@drawable/ic_baseline_arrow_forward_ios_24" /></RelativeLayout>
         </LinearLayout>
         <LinearLayout
+
+            android:visibility="gone"
             android:id="@+id/updateinfolayout"
             android:layout_width="match_parent"
             android:background="@color/white"
@@ -205,11 +211,12 @@
 
             <EditText
                 android:layout_width="@dimen/_250sdp"
-                android:hint="@string/updateusername"
                 android:textColorHint="@color/Roman_Silver"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:ems="10"
+                android:id="@+id/updateusernameEditText"
+                android:textColor="@color/Black_Coffe"
                 android:paddingLeft="@dimen/_12sdp"
                 android:shadowColor="@color/Mint_Cream"
                 android:shadowDx="@integer/material_motion_duration_long_1"
@@ -218,23 +225,17 @@
 
                 android:background="@drawable/btndesign"
                 />
-            <EditText
-                android:layout_width="@dimen/_250sdp"
-                android:hint="@string/updatename"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:textColorHint="@color/Roman_Silver"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:ems="10"
-                android:layout_marginBottom="@dimen/_10sdp"
-                android:paddingLeft="@dimen/_12sdp"
-                android:shadowColor="@color/Mint_Cream"
-                android:shadowDx="@integer/material_motion_duration_long_1"
-                android:shadowDy="@integer/material_motion_duration_long_1"
-
+            <Button
+                android:layout_margin="@dimen/_10sdp"
+                android:layout_width="wrap_content"
+                android:text="@string/submit"
+                android:clickable="true"
+                android:id="@+id/updateusernameBtn"
+                android:focusable="true"
+                android:textColor="@color/Roman_Silver"
                 android:background="@drawable/btndesign"
-                />
-        </LinearLayout>
+                android:layout_height="wrap_content"/>
+           </LinearLayout>
 
     </LinearLayout>
 
