@@ -22,39 +22,45 @@ import kotlinx.android.synthetic.main.activity_main.*
 import android.animation.AnimatorSet
 
 import android.animation.ObjectAnimator
-
-
+import android.util.Log
+import com.example.talentium.API.ApiInterface
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class MainActivity : AppCompatActivity() {
-    lateinit var  backToLogin :AppCompatButton
+    lateinit var backToLogin: AppCompatButton
 
-    lateinit var  buttonRegister :AppCompatButton
-     var iamLogin : Boolean = true
+    lateinit var buttonRegister: AppCompatButton
+    var iamLogin: Boolean = true
     override fun onCreate(savedInstanceState: Bundle?) {
         val preferences: SharedPreferences =
             this.getSharedPreferences("pref", Context.MODE_PRIVATE)
 
-        if(preferences.getString("token","").toString()!=""){
-            val intent = Intent (this, LandingActivity::class.java)
+        if (preferences.getString("token", "").toString() != "") {
+            val intent = Intent(this, LandingActivity::class.java)
             startActivity(intent)
         }
-            super.onCreate(savedInstanceState)
+        super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         init()
+        val apiInterface = ApiInterface.create()
+        circleFB.setOnClickListener {
+
+        }
     }
 
 
-    fun init(){
+    fun init() {
 
 
+        iamLogin = true
 
-        iamLogin=true
+        backToLogin = findViewById(R.id.buttonBacktoLogin)
 
-        backToLogin=findViewById(R.id.buttonBacktoLogin)
-
-        if(iamLogin){
-            backToLogin.isVisible=false
+        if (iamLogin) {
+            backToLogin.isVisible = false
         }
         gotoReg()
         gotoLogin()
@@ -65,7 +71,8 @@ class MainActivity : AppCompatActivity() {
         buttonEffect(circleGmail)
 
     }
-    fun animateLogoSmall(){
+
+    fun animateLogoSmall() {
         val scaleDownX = ObjectAnimator.ofFloat(imageView, "scaleX", 0.7f)
         val scaleDownY = ObjectAnimator.ofFloat(imageView, "scaleY", 0.7f)
         scaleDownX.duration = 1000
@@ -80,7 +87,8 @@ class MainActivity : AppCompatActivity() {
         buttonRegister.animate().translationY(-200F).duration = 500
         buttonBacktoLogin.animate().translationY(-200F).duration = 500
     }
-    fun animateLogoBig(){
+
+    fun animateLogoBig() {
         val scaleDownX = ObjectAnimator.ofFloat(imageView, "scaleX", 1f)
         val scaleDownY = ObjectAnimator.ofFloat(imageView, "scaleY", 1f)
         scaleDownX.duration = 1000
@@ -99,35 +107,38 @@ class MainActivity : AppCompatActivity() {
         buttonBacktoLogin.animate().translationY(0F).duration = 500
 
     }
-    fun gotoReg(){
-        buttonRegister=findViewById(R.id.buttonRegister)
+
+    fun gotoReg() {
+        buttonRegister = findViewById(R.id.buttonRegister)
 
         buttonRegister.setOnClickListener {
             animateLogoSmall()
             supportFragmentManager.beginTransaction()
                 .replace(R.id.fragmentContainerView2, RegisterFragment())
                 .setCustomAnimations(
-                     R.anim.enter_from_left,
-            R.anim.exit_to_left
-            )
+                    R.anim.enter_from_left,
+                    R.anim.exit_to_left
+                )
                 .commit()
 
-            backToLogin.isVisible=true
-            buttonRegister.isVisible=false
-        iamLogin=false}
+            backToLogin.isVisible = true
+            buttonRegister.isVisible = false
+            iamLogin = false
+        }
     }
-    fun gotoLogin(){
+
+    fun gotoLogin() {
         backToLogin.setOnClickListener {
-        animateLogoBig()
+            animateLogoBig()
             supportFragmentManager.beginTransaction()
                 .replace(R.id.fragmentContainerView2, LoginFragment()).setCustomAnimations(
                     R.anim.enter_from_left,
                     R.anim.exit_to_left
                 ).commit()
 
-            backToLogin.isVisible=false
-            buttonRegister.isVisible=true
-        iamLogin=true
+            backToLogin.isVisible = false
+            buttonRegister.isVisible = true
+            iamLogin = true
         }
     }
 
@@ -146,4 +157,5 @@ class MainActivity : AppCompatActivity() {
             false
         }
     }
+
 }

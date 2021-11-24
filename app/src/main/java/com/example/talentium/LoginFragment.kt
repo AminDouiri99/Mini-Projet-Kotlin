@@ -132,8 +132,6 @@ class LoginFragment : Fragment() {
                         waiting.visibility = View.GONE
 
 
-
-
                         val changePage = Intent(requireContext(), LandingActivity::class.java)
                         // Error: "Please specify constructor invocation;
                         // classifier 'Page2' does not have a companion object"

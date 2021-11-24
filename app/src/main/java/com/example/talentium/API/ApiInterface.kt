@@ -23,25 +23,33 @@ interface ApiInterface {
         val user: User
     )
 
-    data class LoginBody(val email:String,val password:String)
-    data class registerBody(val email:String,val password :String,val username:String)
+    data class LoginBody(val email: String, val password: String)
+    data class registerBody(val email: String, val password: String, val username: String)
+
     @POST("api/users/login")
-    fun seConnecter(@Body credential : LoginBody): Call<LoginResponse>
+    fun seConnecter(@Body credential: LoginBody): Call<LoginResponse>
 
     @POST("api/users/register")
-    fun Register(@Body registerBody: registerBody):Call<LoginResponse>
+    fun Register(@Body registerBody: registerBody): Call<LoginResponse>
+
+
+    // Facebook login
+    @GET("api/auth/facebook/secrets")
+    fun FacebookLogin(): Call<LoginResponse>
+
+
     /*@Multipart
     @POST("api/users/changeprofile/pic/")
     fun uploadImage(@Part image: MultipartBody.Part, @Query("id") userId : String):Call<User>*/
     companion object {
         var BASE_URL = "http://192.168.1.20:6000/"
 
-        fun create() : ApiInterface {
+        fun create(): ApiInterface {
             val retrofit = Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
                 .baseUrl(BASE_URL)
                 .build()
-            Log.i("http","requette")
+            Log.i("http", "requette")
 
             return retrofit.create(ApiInterface::class.java)
         }

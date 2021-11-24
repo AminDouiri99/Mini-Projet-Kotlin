@@ -25,6 +25,7 @@ class LandingActivity : AppCompatActivity() {
                 }
                 R.id.livePage -> {
                     // Respond to navigation item 2 click
+                    makeCurrentFragment(VideoFragment());
                 }
                 R.id.profilePage->{
 

@@ -91,7 +91,7 @@ class ProfileFragment : Fragment() {
 
         user=dataBase.userDao().getAllUsers()
 
-        Log.i("users",user[1].toString())
+
 
         val usernameValue=preferences.getString("username","")
         Log.d("username",usernameValue+"123"+preferences.getBoolean("confirmed",false).toString()+preferences.getInt("followingNumber",45))

@@ -26,4 +26,8 @@
     <string name="password_hint">*******</string>
     <string name="policy">© 2021,esprit inc,Talentium</string>
 
+    <string name="facebook_app_id">4308791225898702</string>
+    <string name="fb_login_protocol_scheme">fb4308791225898702</string>
+
+
 </resources>
