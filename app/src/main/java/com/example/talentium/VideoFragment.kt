@@ -22,6 +22,7 @@ import android.webkit.PermissionRequest
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.camera.core.CameraSelector
+import androidx.camera.core.CameraX
 import androidx.camera.core.Preview
 import androidx.camera.core.VideoCapture
 import androidx.camera.lifecycle.ProcessCameraProvider
@@ -51,6 +52,7 @@ import java.util.*
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
+private var lensFacing = CameraSelector.DEFAULT_FRONT_CAMERA
 
 /**
  * A simple [Fragment] subclass.
@@ -68,7 +70,7 @@ class VideoFragment : Fragment() , ly.img.android.pesdk.ui.utils.PermissionReque
 
     private var videoCapture: VideoCapture? = null
     private lateinit var outputDirectory: File
-
+    var camera=false;
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -87,7 +89,9 @@ class VideoFragment : Fragment() , ly.img.android.pesdk.ui.utils.PermissionReque
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        switchCamera.setOnClickListener {
+            flipCamera()
+        }
         outputDirectory = getOutputDirectory()
         openVideoGallery.setOnClickListener {
             openSystemGalleryToSelectAVideo()
@@ -146,6 +150,7 @@ class VideoFragment : Fragment() , ly.img.android.pesdk.ui.utils.PermissionReque
 
         }*/
     }
+
     fun openSystemGalleryToSelectAVideo() {
         val intent = Intent(Intent.ACTION_PICK)
         intent.setDataAndType(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, "video/*")
@@ -242,8 +247,15 @@ class VideoFragment : Fragment() , ly.img.android.pesdk.ui.utils.PermissionReque
 
 
     }
-
+    private var lensFacing = CameraSelector.DEFAULT_FRONT_CAMERA
+    private fun flipCamera() {
+        if (lensFacing == CameraSelector.DEFAULT_FRONT_CAMERA) lensFacing =
+            CameraSelector.DEFAULT_BACK_CAMERA else if (lensFacing == CameraSelector.DEFAULT_BACK_CAMERA) lensFacing =
+            CameraSelector.DEFAULT_FRONT_CAMERA
+        startCamera()
+    }
     private fun startCamera() {
+
         val cameraProviderFuture = ProcessCameraProvider.getInstance(requireContext())
         cameraProviderFuture.addListener({
             val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
@@ -252,12 +264,11 @@ class VideoFragment : Fragment() , ly.img.android.pesdk.ui.utils.PermissionReque
 
             videoCapture = VideoCapture.Builder().build()
 
-            val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
 
             try {
                 cameraProvider.unbindAll()
                 cameraProvider.bindToLifecycle(
-                    this, cameraSelector, preview, videoCapture
+                    this, lensFacing, preview, videoCapture
                 )
 
 
