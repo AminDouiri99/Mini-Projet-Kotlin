@@ -51,8 +51,6 @@ class FeedFragment : Fragment() {
             data.add(Post("artical " + i, "role " + i))
         }
         val adapter = FeedAdapter(data)
-
-        // Setting the Adapter with the recyclerview
         feedrecyclerview.adapter = adapter
 
         val snapHelper: SnapHelper = LinearSnapHelper()
@@ -70,8 +68,8 @@ class FeedFragment : Fragment() {
                  } else {
                      // Scrolling down
 
-
                      Log.i("RecyclerView scrolled: ", "scroll down!");
+
                      //recyclerView.smoothScrollToPosition(position)
                  }
              }

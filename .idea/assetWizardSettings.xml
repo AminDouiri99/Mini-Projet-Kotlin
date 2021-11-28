@@ -310,7 +310,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:/$PROJECT_DIR$/../../../Amine%20Douiri/AppData/Local/Android/Sdk/icons/material/materialicons/privacy_tip/baseline_privacy_tip_24.xml" />
+                                      <entry key="url" value="file:/$PROJECT_DIR$/../../../Amine%20Douiri/AppData/Local/Android/Sdk/icons/material/materialicons/video_library/baseline_video_library_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -322,7 +322,7 @@
                           <map>
                             <entry key="autoMirrored" value="true" />
                             <entry key="color" value="7d8491" />
-                            <entry key="outputName" value="ic_baseline_privacy_tip_24" />
+                            <entry key="outputName" value="ic_baseline_video_library_24" />
                             <entry key="sourceFile" value="C:\Users\Amine Douiri\AndroidStudioProjects\Talentium" />
                           </map>
                         </option>

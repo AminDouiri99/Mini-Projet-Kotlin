@@ -50,4 +50,23 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <TextView
+        android:id="@+id/UserNamePublication"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Foulen"
+        app:layout_constraintBottom_toTopOf="@+id/DescriptionPost"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/DescriptionPost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:textSize="@dimen/_16sdp"
+        android:text="Karaoke Challenge "
+        android:layout_marginBottom="@dimen/_35sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
