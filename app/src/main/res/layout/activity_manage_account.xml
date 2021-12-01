@@ -193,9 +193,9 @@
                 android:gravity="right">
 
                 <ImageView
+                    android:id="@+id/updatenamearrow"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/updatenamearrow"
                     android:src="@drawable/ic_baseline_arrow_forward_ios_24" /></RelativeLayout>
         </LinearLayout>
         <LinearLayout

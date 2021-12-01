@@ -89,12 +89,40 @@ class ProfileFragment : Fragment() {
             requireActivity().getSharedPreferences("pref", Context.MODE_PRIVATE)
         gotoSettings()
 
+        gotToDiscover()
         pulltorefresh.setOnRefreshListener{
-            val usernameValue = preferences.getString("username", "")
+            val apiInterface = ApiInterface.create()
+            apiInterface.getUser(ApiInterface.GetUserBody(preferences.getString("id", "").toString())).enqueue(
+                object : Callback<ApiInterface.GetUserResponse>{
+                    override fun onResponse(
+                        call: Call<ApiInterface.GetUserResponse>,
+                        response: Response<ApiInterface.GetUserResponse>
+                    ) {
+                        username.text = "@" + response.body()?.user?.username.toString()
+                        textView7.text = "@" + response.body()?.user?.username.toString()
+                        textView9.text = response.body()?.user?.following?.size.toString()
+                        textView10.text = response.body()?.user?.followers?.size.toString()
+                        pulltorefresh.isRefreshing=false
+
+                        Log.i("initprofile","aaaasucces")
+                    }
+
+                    override fun onFailure(call: Call<ApiInterface.GetUserResponse>, t: Throwable) {
+                        Log.i("initprofile","aaaasucces")
+
+                    }
+
+                }
+            )
+
+
+
+            //
+
+        /*    val usernameValue = preferences.getString("username", "")
             username.text = "@" + usernameValue
             textView7.text = "@" + usernameValue
-
-            pulltorefresh.isRefreshing=false
+*/
 
         }
         //buttonEffect(buttonRegister)
@@ -104,7 +132,7 @@ class ProfileFragment : Fragment() {
 
         user = dataBase.userDao().getAllUsers()
 
-//        Log.i("users",user[1].toString())
+//      Log.i("users",user[1].toString())
 
         val usernameValue = preferences.getString("username", "")
         Log.d(
@@ -116,7 +144,6 @@ class ProfileFragment : Fragment() {
         textView10.text = preferences.getInt("followersNumber", 45).toString()
         username.text = "@" + usernameValue
         textView7.text = "@" + usernameValue
-        // imageprofile.setImageURI(Uri.)
         updatePhoto()
         buttonlogout.setOnClickListener {
             logou()
@@ -213,7 +240,16 @@ class ProfileFragment : Fragment() {
 
 
     }
+    fun gotToDiscover(){
+        addFriendWrapper.setOnClickListener {
+            val changePage = Intent(requireContext(), DiscoverActivity::class.java)
+            startActivity(
+                changePage,
+                ActivityOptions.makeSceneTransitionAnimation(requireActivity()).toBundle()
+            )
 
+        }
+    }
     fun updatePhoto() {
         imageprofile.setOnClickListener {
             permission()

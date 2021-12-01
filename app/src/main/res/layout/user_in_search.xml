@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_55sdp">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="@dimen/_45sdp"
+        android:layout_height="@dimen/_45sdp"
+
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:background="@drawable/fbroundbckground"
+        app:cardCornerRadius="@dimen/_15sdp">
+
+        <ImageView
+            android:id="@+id/imageprofileInsearch"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToOutline="true"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/logotemp_background" />
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/UserNameInsearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:lineSpacingExtra="1sp"
+        android:text="UserName"
+        android:textAppearance="@style/profiletext"
+        android:textSize="@dimen/_16sdp" />
+
+    <RelativeLayout
+        android:id="@+id/rlRight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginRight="@dimen/_10sdp"
+        android:gravity="right">
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btnUnFollowInseatch"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:backgroundTint="@color/Roman_Silver"
+            android:src="@drawable/ic_baseline_person_add_disabled_white" />
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btnFollowInseatch"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:backgroundTint="@color/Black_Coffe"
+            android:src="@drawable/addperson" />
+    </RelativeLayout>
+</LinearLayout>

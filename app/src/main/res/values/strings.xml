@@ -44,6 +44,9 @@
     <string name="newpassword">Your new password</string>
     <string name="confirmpassword">Confirm new password</string>
     <string name="privacystatus">Make your profile private</string>
+    <string name="DicoverFriendsTitle">Dicover friends</string>
+    <string name="SearchFriendsHint">Discover new friends</string>
+    <string name="NoResultFound">No result found</string>
 
     <string name="password_hint">*******</string>
     <string name="policy">© 2021,esprit inc,Talentium</string>
