@@ -20,9 +20,13 @@
         android:theme="@style/Theme.Talentium"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".DiscoverActivity"
+            android:name=".VideoPlayer"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.NoActionBar"/>
+        <activity
+            android:name=".DiscoverActivity"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"

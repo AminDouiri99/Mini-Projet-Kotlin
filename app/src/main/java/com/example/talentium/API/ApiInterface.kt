@@ -65,11 +65,8 @@ interface ApiInterface {
     fun FacebookLogin(): Call<LoginResponse>
 
 
-    /*@Multipart
-    @POST("api/users/changeprofile/pic/")
-    fun uploadImage(@Part image: MultipartBody.Part, @Query("id") userId : String):Call<User>*/
     companion object {
-        var BASE_URL = "http://192.168.1.22:6000/"
+        var BASE_URL = "http://192.168.1.15:6000/"
 
         fun create(): ApiInterface {
             val retrofit = Retrofit.Builder()

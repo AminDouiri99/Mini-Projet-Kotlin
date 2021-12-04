@@ -1,5 +1,6 @@
 package com.example.talentium
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Activity.RESULT_CANCELED
 import android.app.Activity.RESULT_OK
@@ -47,6 +48,7 @@ import java.io.File
 import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.concurrent.Executors
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -87,6 +89,7 @@ class VideoFragment : Fragment() , ly.img.android.pesdk.ui.utils.PermissionReque
         return inflater.inflate(R.layout.fragment_video, container, false)
     }
 
+    @SuppressLint("RestrictedApi", "ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         switchCamera.setOnClickListener {
@@ -112,7 +115,7 @@ class VideoFragment : Fragment() , ly.img.android.pesdk.ui.utils.PermissionReque
         /*  btn_record.setOnClickListener {
               takeVideo()
           }*/
-        val videoCapture = videoCapture ?: return
+        val executor = Executors.newSingleThreadExecutor()
         val videoFile = File(
             outputDirectory,
             SimpleDateFormat(
@@ -123,32 +126,40 @@ class VideoFragment : Fragment() , ly.img.android.pesdk.ui.utils.PermissionReque
 
         val outputOption = VideoCapture.OutputFileOptions.Builder(videoFile).build()
 
-        /*    btn_record.setOnTouchListener { v, event ->
+            btn_record.setOnTouchListener { v, event ->
             if (event.action == MotionEvent.ACTION_DOWN) {
                 btn_record.setBackgroundColor(Color.GREEN)
 
-                videoCapture.startRecording(videoFile, object :VideoCapture.OnVideoSavedCallback{
-                    override fun onVideoSaved(file: File?) {
-                        Log.i(tag, "Video File : $file")
+                videoCapture?.startRecording(outputOption, executor,object :VideoCapture.OnVideoSavedCallback{
+
+                    override fun onVideoSaved(outputFileResults: VideoCapture.OutputFileResults) {
+                        Log.i("video saved",outputFileResults.savedUri.toString())
+                        val intent = Intent(requireActivity(), VideoPlayer::class.java)
+                        intent.putExtra("video",outputFileResults.savedUri.toString())
+                        startActivity(intent)
+                        //openEditor(outputFileResults.savedUri)
+
                     }
 
                     override fun onError(
-                        useCaseError: VideoCapture.UseCaseError?,
-                        message: String?,
+                        videoCaptureError: Int,
+                        message: String,
                         cause: Throwable?
                     ) {
-                        Log.i(tag, "Video Error: $message")
+                        Log.i("video error","error $message")
+
                     }
+
 
                 })
             }else if(event.action==MotionEvent.ACTION_UP){
                 btn_record.setBackgroundColor(Color.RED)
-                videoCapture.stopRecording()
+                videoCapture?.stopRecording()
             }
             false
 
 
-        }*/
+        }
     }
 
     fun openSystemGalleryToSelectAVideo() {
