@@ -29,7 +29,7 @@ private const val ARG_PARAM2 = "param2"
  */
 
 
-data class Post(val name: String, val role: String) {
+data class Post(val name: String, val role: String,val src:String) {
 
 }
 
@@ -45,16 +45,16 @@ class FeedFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        feedrecyclerview.layoutManager = LinearLayoutManager(view.context);
+       // feedrecyclerview.layoutManager = LinearLayoutManager(view.context);
         val data = ArrayList<Post>()
         for (i in 1..10) {
-            data.add(Post("artical " + i, "role " + i))
+            data.add(Post("artical " + i, "role " + i,"https://videocdn.bodybuilding.com/video/mp4/62000/62792m.mp4"))
         }
         val adapter = FeedAdapter(data)
         feedrecyclerview.adapter = adapter
 
         val snapHelper: SnapHelper = LinearSnapHelper()
-        snapHelper.attachToRecyclerView(feedrecyclerview)
+      //  snapHelper.attachToRecyclerView(feedrecyclerview)
 
         // recyclerview.smoothScrollToPosition(adapter.getItemCount())
         /* feedrecyclerview.addOnScrollListener(object : RecyclerView.OnScrollListener() {

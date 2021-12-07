@@ -92,13 +92,17 @@ dependencies {
     //volley for uploading image
     implementation 'com.android.volley:volley:1.1.1'
     implementation "com.squareup.okhttp3:okhttp:4.7.2"
-
+    //ffmpeg
+    implementation 'com.writingminds:FFmpegAndroid:0.3.2'
+    implementation 'org.jcodec:jcodec-android:0.1.9'
     //glide for loading remote image
     implementation ("com.github.bumptech.glide:glide:4.11.0") {
         exclude group: "com.android.support"
     }
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.preference:preference:1.1.1'
+    implementation 'androidx.media2:media2-player:1.1.2'
+    implementation 'androidx.media2:media2:1.0.0-alpha04'
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
 

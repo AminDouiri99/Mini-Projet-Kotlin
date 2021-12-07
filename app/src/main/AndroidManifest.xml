@@ -19,10 +19,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Talentium"
         android:usesCleartextTraffic="true">
+     
         <activity
             android:name=".VideoPlayer"
             android:exported="true"
-            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".DiscoverActivity"
             android:exported="true"
