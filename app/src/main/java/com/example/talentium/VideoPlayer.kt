@@ -19,5 +19,11 @@ class VideoPlayer : AppCompatActivity() {
         videoPlyaer.requestFocus()
         videoPlyaer.start()
 
+        nextBtn.setOnClickListener {
+            val intent = Intent(this, UploadVideo::class.java)
+            intent.putExtra("video",uri.toString())
+            startActivity(intent)
+            finish()
+        }
     }
 }

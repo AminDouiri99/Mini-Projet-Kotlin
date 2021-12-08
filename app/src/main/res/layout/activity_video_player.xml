@@ -8,6 +8,20 @@
     <VideoView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/videoPlyaer"/>
+        android:id="@+id/videoPlyaer">
 
+
+
+    </VideoView>
+
+    <ImageView
+        android:id="@+id/nextBtn"
+        android:layout_width="95dp"
+        android:layout_height="67dp"
+        android:layout_marginBottom="32dp"
+        android:src="@drawable/ic_baseline_navigate_next_24"
+        app:layout_constraintBottom_toBottomOf="@+id/videoPlyaer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.952"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -134,10 +134,13 @@ class VideoFragment : Fragment() , ly.img.android.pesdk.ui.utils.PermissionReque
 
                     override fun onVideoSaved(outputFileResults: VideoCapture.OutputFileResults) {
                         Log.i("video saved",outputFileResults.savedUri.toString())
-                        val intent = Intent(requireActivity(), VideoPlayer::class.java)
+
+                        val intent = Intent(requireContext(), VideoPlayer::class.java)
                         intent.putExtra("video",outputFileResults.savedUri.toString())
                         startActivity(intent)
-                        //openEditor(outputFileResults.savedUri)
+                        activity?.finish()
+                        btn_record.setBackgroundColor(Color.BLUE)
+
 
                     }
 

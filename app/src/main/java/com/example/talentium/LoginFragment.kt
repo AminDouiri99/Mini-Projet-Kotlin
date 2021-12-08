@@ -124,6 +124,8 @@ class LoginFragment : Fragment() {
                             .apply()
                         editor.putInt("followingNumber", response.body()!!.user.following.size)
                             .apply()
+                        editor.putInt("publication", response.body()!!.user.publication.size)
+                            .apply()
                         editor.putString("id", response.body()?.user?._id.toString()).apply()
                         editor.putString("avatar", response.body()?.user?.avatar.toString()).apply()
                         //    AppDataBase.getDatabase(requireContext()).userDao()

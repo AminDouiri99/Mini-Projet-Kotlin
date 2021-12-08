@@ -18,9 +18,11 @@ class ProfilePostAdapter(private val mList: MutableList<ProfilePost>) :
     }
 
     override fun onBindViewHolder(holder: ProfilePostViewHolder, position: Int) {
+        val imageTest = R.drawable.dummyimage
+        val image = imageTest
+        val desc = mList[position].description
 
-        val image = mList[position].image
-        val desc = mList[position].desc
+
         holder.ProfilePostPic.setImageResource(image)
         holder.ProfilePostDesc.text = desc
 
