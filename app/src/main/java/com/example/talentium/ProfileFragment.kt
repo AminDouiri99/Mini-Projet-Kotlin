@@ -90,10 +90,14 @@ class ProfileFragment : Fragment() {
         gotoSettings()
 
         gotToDiscover()
-        pulltorefresh.setOnRefreshListener{
+        pulltorefresh.setOnRefreshListener {
             val apiInterface = ApiInterface.create()
-            apiInterface.getUser(ApiInterface.GetUserBody(preferences.getString("id", "").toString())).enqueue(
-                object : Callback<ApiInterface.GetUserResponse>{
+            apiInterface.getUser(
+                ApiInterface.GetUserBody(
+                    preferences.getString("id", "").toString()
+                )
+            ).enqueue(
+                object : Callback<ApiInterface.GetUserResponse> {
                     override fun onResponse(
                         call: Call<ApiInterface.GetUserResponse>,
                         response: Response<ApiInterface.GetUserResponse>
@@ -102,13 +106,13 @@ class ProfileFragment : Fragment() {
                         textView7.text = "@" + response.body()?.user?.username.toString()
                         textView9.text = response.body()?.user?.following?.size.toString()
                         textView10.text = response.body()?.user?.followers?.size.toString()
-                        pulltorefresh.isRefreshing=false
+                        pulltorefresh.isRefreshing = false
 
-                        Log.i("initprofile","aaaasucces")
+                        Log.i("initprofile", "aaaasucces")
                     }
 
                     override fun onFailure(call: Call<ApiInterface.GetUserResponse>, t: Throwable) {
-                        Log.i("initprofile","aaaasucces")
+                        Log.i("initprofile", "aaaasucces")
 
                     }
 
@@ -116,13 +120,12 @@ class ProfileFragment : Fragment() {
             )
 
 
-
             //
 
-        /*    val usernameValue = preferences.getString("username", "")
-            username.text = "@" + usernameValue
-            textView7.text = "@" + usernameValue
-*/
+            /*    val usernameValue = preferences.getString("username", "")
+                username.text = "@" + usernameValue
+                textView7.text = "@" + usernameValue
+    */
 
         }
         //buttonEffect(buttonRegister)
@@ -148,99 +151,60 @@ class ProfileFragment : Fragment() {
         buttonlogout.setOnClickListener {
             logou()
         }
+
+        //get publications
+
+        getVideos(requireContext())
+
         var postList: MutableList<ProfilePost> = ArrayList()
+
+
         recylcerPost = recyclerview
-        postList.add(
-            ProfilePost(
-                image = R.drawable.dummyimage,
-                desc = "My beautifull awesome post"
-            )
-        )
-        postList.add(
-            ProfilePost(
-                image = R.drawable.dummyimage,
-                desc = "My beautifull awesome post"
-            )
-        )
-        postList.add(
-            ProfilePost(
-                image = R.drawable.dummyimage,
-                desc = "My beautifull awesome post"
-            )
-        )
-        postList.add(
-            ProfilePost(
-                image = R.drawable.dummyimage,
-                desc = "My beautifull awesome post"
-            )
-        )
-        postList.add(
-            ProfilePost(
-                image = R.drawable.dummyimage,
-                desc = "My beautifull awesome post"
-            )
-        )
-        postList.add(
-            ProfilePost(
-                image = R.drawable.dummyimage,
-                desc = "My beautifull awesome post"
-            )
-        )
-        postList.add(
-            ProfilePost(
-                image = R.drawable.dummyimage,
-                desc = "My beautifull awesome post"
-            )
-        )
-        postList.add(
-            ProfilePost(
-                image = R.drawable.dummyimage,
-                desc = "My beautifull awesome post"
-            )
-        )
-        postList.add(
-            ProfilePost(
-                image = R.drawable.dummyimage,
-                desc = "My beautifull awesome post"
-            )
-        )
-        postList.add(
-            ProfilePost(
-                image = R.drawable.dummyimage,
-                desc = "My beautifull awesome post"
-            )
-        )
-        postList.add(
-            ProfilePost(
-                image = R.drawable.dummyimage,
-                desc = "My beautifull awesome post"
-            )
-        )
-        postList.add(
-            ProfilePost(
-                image = R.drawable.dummyimage,
-                desc = "My beautifull awesome post"
-            )
-        )
-        postList.add(
-            ProfilePost(
-                image = R.drawable.dummyimage,
-                desc = "My beautifull awesome post"
-            )
-        )
-        adapter = ProfilePostAdapter(postList)
-        Log.i("img", BASE_URL + preferences.getString("avatar", ""))
-        recylcerPost.adapter = adapter
-        recylcerPost.layoutManager = GridLayoutManager(requireContext(), 3)
 
         Glide.with(this)
             .load(BASE_URL + preferences.getString("avatar", "")).fitCenter()
             .into(imageprofile)
-        //   Log.i("upload","failure1")
-
 
     }
-    fun gotToDiscover(){
+
+    fun getVideos(context: Context) {
+        val preferences: SharedPreferences =
+            requireActivity().getSharedPreferences("pref", Context.MODE_PRIVATE)
+
+        val id = preferences.getString("id", "")
+        val apiInterface = ApiInterface.create()
+        apiInterface.GetVideosByUser(ApiInterface.PublicationRequestBody(id.toString(), ""))
+            .enqueue(object : Callback<ApiInterface.VideoResponse> {
+                override fun onResponse(
+                    call: Call<ApiInterface.VideoResponse>,
+                    response: Response<ApiInterface.VideoResponse>
+                ) {
+                    if (response.code() == 200) {
+
+                        val list: ArrayList<ProfilePost>? = response.body()?.publications
+                        if(list==null){
+                            noContentProfile.visibility=View.VISIBLE
+                            recylcerPost.visibility=View.GONE
+                        }else{
+                            adapter = ProfilePostAdapter(list)
+                   //         noContentProfile.visibility=View.GONE
+
+                            recylcerPost.adapter = adapter
+                            recylcerPost.layoutManager = GridLayoutManager(context, 3)
+
+                        }
+//                        Log.i("success", list!![0]?.description)
+
+                    }
+                }
+
+                override fun onFailure(call: Call<ApiInterface.VideoResponse>, t: Throwable) {
+                    Log.i("get videos", "failed")
+                }
+            })
+    }
+
+    fun gotToDiscover() {
         addFriendWrapper.setOnClickListener {
             val changePage = Intent(requireContext(), DiscoverActivity::class.java)
             startActivity(
@@ -250,6 +214,7 @@ class ProfileFragment : Fragment() {
 
         }
     }
+
     fun updatePhoto() {
         imageprofile.setOnClickListener {
             permission()
@@ -356,7 +321,10 @@ class ProfileFragment : Fragment() {
                 REQUEST_CODE_IMAGE_PICKER -> {
                     selectedImage = data?.data
                     imageprofile.setImageURI(selectedImage)
-                    UploadUtility(requireActivity(), id.toString()).uploadFile(selectedImage!!)
+                    UploadUtility(requireActivity(), id.toString(), "").uploadFile(
+                        selectedImage!!,
+                        "image"
+                    )
                 }
             }
         }

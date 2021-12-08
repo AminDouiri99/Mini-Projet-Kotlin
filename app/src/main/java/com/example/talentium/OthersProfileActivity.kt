@@ -45,7 +45,7 @@ class OthersProfileActivity : AppCompatActivity() {
             FollowImageButton.visibility = View.VISIBLE
         }
         backWrapper.setOnClickListener {
-            onBackPressed()hfnn
+            //onBackPressed()
         }
         FollowImageButton.setOnClickListener {
             apiInterface.Follow(ApiInterface.FollowBody(idConnected!!, id!!)).enqueue(object :

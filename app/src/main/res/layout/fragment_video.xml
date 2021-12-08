@@ -40,10 +40,13 @@
            android:src="@drawable/ic_baseline_video_library_24"
            app:layout_constraintBottom_toBottomOf="@+id/btn_record"
            app:layout_constraintEnd_toEndOf="parent" />
+
        <Button
            android:id="@+id/btn_record"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
+           android:background="#3F51B5"
+
            android:text="Record"
            app:layout_constraintBottom_toBottomOf="parent"
            app:layout_constraintEnd_toEndOf="parent"

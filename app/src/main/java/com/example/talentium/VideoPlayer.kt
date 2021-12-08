@@ -24,7 +24,6 @@ class VideoPlayer : AppCompatActivity() {
         val intent  :Intent = getIntent()
         val uri : Uri = Uri.parse( intent.extras?.getString("video"))
         Log.i("Uri",uri.toString())
-        openMusic()
         val mediaController = MediaController(this)
         mediaController.setBackgroundColor(resources.getColor(R.color.Mango_Tango))
         mediaController.setAnchorView(videoPlyaer)
@@ -33,12 +32,14 @@ class VideoPlayer : AppCompatActivity() {
         videoPlyaer.requestFocus()
         videoPlyaer.start()
 
-    }
-    fun openMusic(){
-        addmusicbtn.setOnClickListener {
-            openSystemGalleryToSelectAVideo()
+        nextBtn.setOnClickListener {
+            val intent = Intent(this, UploadVideo::class.java)
+            intent.putExtra("video",uri.toString())
+            startActivity(intent)
+            finish()
         }
     }
+
     fun openSystemGalleryToSelectAVideo() {
         val intent = Intent(Intent.ACTION_PICK)
         intent.setDataAndType(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, "audio/*")

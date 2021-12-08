@@ -3,6 +3,7 @@ package com.example.talentium.API
 import android.os.Looper
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import com.example.talentium.Model.ProfilePost
 import com.example.talentium.Model.User
 import com.google.gson.JsonObject
 import org.json.JSONObject
@@ -42,6 +43,15 @@ interface ApiInterface {
     data class registerBody(val email: String, val password: String, val username: String)
     data class updateUserBody(val id: String, val username: String)
 
+    data class PublicationRequestBody(val userid :String , val caption :String)
+    data class PublicationResponse(
+        @SerializedName("publicationId")
+        val publicationId:String)
+
+    data class VideoResponse(
+        val publications:ArrayList<ProfilePost>
+    )
+
     @POST("api/users/search")
     fun search(@Body text: SearchBody): Call<SearchResponse>
 
@@ -63,6 +73,12 @@ interface ApiInterface {
     // Facebook login
     @GET("api/auth/facebook/secrets")
     fun FacebookLogin(): Call<LoginResponse>
+
+    @POST("api/publication/create/video")
+    fun CreatePublicatin(@Body publication :PublicationRequestBody):Call<PublicationResponse>
+
+    @POST("api/publication/byuser/",)
+    fun GetVideosByUser(@Body videos :PublicationRequestBody):Call<VideoResponse>
 
 
     companion object {

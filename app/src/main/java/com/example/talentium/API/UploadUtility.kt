@@ -15,25 +15,24 @@ import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 import java.io.IOException
 
-class UploadUtility(activity: Activity, id: String) {
+class UploadUtility(activity: Activity, userId: String,videoId:String) {
 
 
     var activity = activity;
     var dialog: ProgressDialog? = null
-    var serverURL: String = ApiInterface.BASE_URL + "api/users/changeprofile/pic/" + id
+    var serverURLPic: String = ApiInterface.BASE_URL + "api/users/changeprofile/pic/" + userId
+    var serverURLVideo: String = ApiInterface.BASE_URL + "api/publication/upload/video/"+videoId+"/"+userId
     var serverUploadDirectoryPath: String = "https://handyopinion.com/tutorials/uploads/"
     val client = OkHttpClient()
 
-    fun uploadFile(sourceFilePath: String, uploadedFileName: String? = null) {
-        uploadFile(File(sourceFilePath), uploadedFileName)
-    }
 
-    fun uploadFile(sourceFileUri: Uri, uploadedFileName: String? = null) {
+
+    fun uploadFile(sourceFileUri: Uri, type:String) {
         val pathFromUri = URIPathHelper().getPath(activity, sourceFileUri)
-        uploadFile(File(pathFromUri), uploadedFileName)
+        uploadFile(File(pathFromUri), null,type)
     }
 
-    fun uploadFile(sourceFile: File, uploadedFileName: String? = null) {
+    fun uploadFile(sourceFile: File, uploadedFileName: String? = null,type:String) {
         Thread {
             val mimeType = getMimeType(sourceFile);
             if (mimeType == null) {
@@ -53,23 +52,42 @@ class UploadUtility(activity: Activity, id: String) {
                         sourceFile.asRequestBody(mimeType.toMediaTypeOrNull())
                     )
                     .build()
+            Log.i("request body",requestBody.toString())
 
+            if(type=="image"){
+                val request = Request.Builder()
+                    .method("POST", requestBody)
+                    .url(serverURLPic)
+                    .build()
+                client.newCall(request).enqueue(object : Callback {
+                    override fun onFailure(call: Call, e: IOException) {
+                        // Handle this
+                        Log.i("failed", e.toString())
+                    }
 
-            val request = Request.Builder()
-                .method("POST", requestBody)
-                .url(serverURL)
-                .build()
-            client.newCall(request).enqueue(object : Callback {
-                override fun onFailure(call: Call, e: IOException) {
-                    // Handle this
-                    Log.i("failed", e.toString())
-                }
+                    override fun onResponse(call: Call, response: Response) {
+                        // Handle this
+                        Log.i("suucess", response.toString())
+                    }
+                })
+            }else if (type=="video"){
+                val request = Request.Builder()
+                    .method("POST", requestBody)
+                    .url(serverURLVideo)
+                    .build()
+                client.newCall(request).enqueue(object : Callback {
+                    override fun onFailure(call: Call, e: IOException) {
+                        // Handle this
+                        Log.i("failed", e.toString())
+                    }
 
-                override fun onResponse(call: Call, response: Response) {
-                    // Handle this
-                    Log.i("suucess", response.toString())
-                }
-            })
+                    override fun onResponse(call: Call, response: Response) {
+                        // Handle this
+                        Log.i("video success", response.toString())
+                    }
+                })
+            }
+
 
             toggleProgressDialog(false)
         }.start()

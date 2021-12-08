@@ -22,7 +22,6 @@
         android:id="@+id/PostImage"
         android:layout_gravity="center"
         android:layout_width="@dimen/_90sdp"
-
         android:layout_height="@dimen/_80sdp"
         app:srcCompat="@drawable/dummyimage" />
 

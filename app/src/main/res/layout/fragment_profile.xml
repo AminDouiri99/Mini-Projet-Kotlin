@@ -230,6 +230,37 @@ xmlns:android="http://schemas.android.com/apk/res/android"
             tools:itemCount="2"
             tools:listitem="@layout/profile_post" />
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/noContentProfile"
+            android:layout_width="match_parent"
+
+            android:layout_height="@dimen/_150sdp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buttonupdate">
+
+                <ImageView
+                    android:id="@+id/imageView7"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:src="@drawable/ic_baseline_info_24"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView17"
+                    app:layout_constraintEnd_toStartOf="@+id/textView17"
+                    app:layout_constraintTop_toTopOf="@+id/textView17" />
+
+                <TextView
+                    android:id="@+id/textView17"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:text="@string/nocontent"
+                    android:textSize="@dimen/_15sdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
         <ProgressBar
             android:visibility="invisible"
             android:id="@+id/progressBar2"

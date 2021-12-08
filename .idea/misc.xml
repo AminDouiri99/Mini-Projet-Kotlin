@@ -58,16 +58,20 @@
         <entry key="..\:/Users/Amine Douiri/AndroidStudioProjects/Talentium/app/src/main/res/mipmap-anydpi-v26/instaicon.xml" value="0.2203125" />
         <entry key="..\:/Users/Amine Douiri/AndroidStudioProjects/Talentium/app/src/main/res/mipmap-anydpi-v26/logotemp_round.xml" value="0.2203125" />
         <entry key="..\:/Users/Amine Douiri/AndroidStudioProjects/Talentium/app/src/main/res/xml/root_preferences.xml" value="0.33" />
+        <entry key="..\:/Users/yessi/AndroidStudioProjects/Mini-Projet-Kotlin/app/src/main/res/drawable/ic_baseline_cancel_24.xml" value="0.25625" />
         <entry key="..\:/Users/yessi/AndroidStudioProjects/Mini-Projet-Kotlin/app/src/main/res/drawable/ic_baseline_favorite_border_24.xml" value="0.3098958333333333" />
         <entry key="..\:/Users/yessi/AndroidStudioProjects/Mini-Projet-Kotlin/app/src/main/res/drawable/logotemp_background.xml" value="0.3769230769230769" />
         <entry key="..\:/Users/yessi/AndroidStudioProjects/Mini-Projet-Kotlin/app/src/main/res/layout/activity_landing.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/yessi/AndroidStudioProjects/Mini-Projet-Kotlin/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Users/yessi/AndroidStudioProjects/Mini-Projet-Kotlin/app/src/main/res/layout/activity_upload_video.xml" value="0.22" />
+        <entry key="..\:/Users/yessi/AndroidStudioProjects/Mini-Projet-Kotlin/app/src/main/res/layout/activity_video_player.xml" value="0.25" />
         <entry key="..\:/Users/yessi/AndroidStudioProjects/Mini-Projet-Kotlin/app/src/main/res/layout/feed_item.xml" value="0.33" />
         <entry key="..\:/Users/yessi/AndroidStudioProjects/Mini-Projet-Kotlin/app/src/main/res/layout/fragment_feed.xml" value="0.33" />
         <entry key="..\:/Users/yessi/AndroidStudioProjects/Mini-Projet-Kotlin/app/src/main/res/layout/fragment_login.xml" value="0.34444444444444444" />
         <entry key="..\:/Users/yessi/AndroidStudioProjects/Mini-Projet-Kotlin/app/src/main/res/layout/fragment_profile.xml" value="0.2015625" />
         <entry key="..\:/Users/yessi/AndroidStudioProjects/Mini-Projet-Kotlin/app/src/main/res/layout/fragment_register.xml" value="0.11388888888888889" />
         <entry key="..\:/Users/yessi/AndroidStudioProjects/Mini-Projet-Kotlin/app/src/main/res/layout/fragment_video.xml" value="0.25" />
+        <entry key="..\:/Users/yessi/AndroidStudioProjects/Mini-Projet-Kotlin/app/src/main/res/layout/profile_post.xml" value="0.21666666666666667" />
         <entry key="..\:/Users/yessi/AndroidStudioProjects/Mini-Projet-Kotlin/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.36666666666666664" />
       </map>
     </option>

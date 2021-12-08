@@ -21,6 +21,8 @@ data class User(
 
     val password: String,
 
+    val publication:Array<String>,
+
     val followers: Array<String>,
 
     val following: Array<String>,

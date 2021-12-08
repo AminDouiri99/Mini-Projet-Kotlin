@@ -20,6 +20,10 @@
         android:theme="@style/Theme.Talentium"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".UploadVideo"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
             android:name=".OthersProfileActivity"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
