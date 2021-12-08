@@ -1,5 +1,6 @@
 package com.example.talentium
 
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -39,6 +40,14 @@ class UserAdapter(
             holder.follow.visibility = View.GONE
             holder.unfollow.visibility = View.GONE
 
+        }
+        holder.ProfilePic.setOnClickListener{
+            val intent = Intent(holder.itemView.context, OthersProfileActivity::class.java)
+            intent.apply {
+                putExtra("id", mList[position]._id)
+                putExtra("idConnected", idConncted)
+            }
+            holder.itemView.context.startActivity(intent)
         }
         //val apiInterface1 = ApiInterface.create()
         apiInterface.getUser(ApiInterface.GetUserBody(idConncted)).enqueue(
