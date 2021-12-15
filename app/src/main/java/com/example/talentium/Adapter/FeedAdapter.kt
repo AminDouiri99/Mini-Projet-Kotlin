@@ -30,6 +30,7 @@ class FeedAdapter(private val ProductList: List<Post>) :
 
         holder.text.setText(ItemsViewModel.name)
         holder.video.setVideoURI(Uri.parse(ItemsViewModel.src));
+
         holder.video.setOnPreparedListener {
             holder.progressbar.visibility=View.GONE
             it.start()

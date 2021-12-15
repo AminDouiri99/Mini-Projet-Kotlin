@@ -19,7 +19,7 @@ class LandingActivity : AppCompatActivity() {
                 R.id.feedPage -> {
 
                     // Respond to navigation item 1 click
-                    Log.i("feed", "feed")
+
                     makeCurrentFragment(FeedFragment());
 
                 }

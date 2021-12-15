@@ -187,17 +187,20 @@
             app:layout_constraintEnd_toEndOf="@+id/textView12"
             app:layout_constraintStart_toStartOf="@+id/textView12"
             app:layout_constraintTop_toBottomOf="@+id/textView12" />
+
         <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/reportPerson"
             android:layout_width="@dimen/_50sdp"
             android:layout_height="wrap_content"
-            android:id="@+id/reportPerson"
             android:backgroundTint="@color/red"
             android:src="@drawable/ic_baseline_report_problem_24"
             app:layout_constraintEnd_toEndOf="@+id/textView16"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/textView16"
             app:layout_constraintTop_toBottomOf="@+id/textView12" />
+
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerview"
+            android:id="@+id/recyclerOtherProfilview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:visibility="visible"

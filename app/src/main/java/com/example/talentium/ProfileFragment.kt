@@ -52,6 +52,7 @@ import java.io.FileInputStream
 import java.io.FileOutputStream
 import java.io.IOException
 import java.util.logging.Logger
+import kotlin.concurrent.thread
 import kotlin.math.log
 
 // TODO: Rename parameter arguments, choose names that match
@@ -74,7 +75,10 @@ class ProfileFragment : Fragment() {
     val READ_EXTERNEL_CODE = 41
     lateinit var dataBase: AppDataBase
     lateinit var user: MutableList<Users>
+
+    lateinit var preferences: SharedPreferences
     override fun onCreate(savedInstanceState: Bundle?) {
+        preferences = requireActivity().getSharedPreferences("pref", Context.MODE_PRIVATE)
         super.onCreate(savedInstanceState)
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
@@ -85,8 +89,8 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val preferences: SharedPreferences =
-            requireActivity().getSharedPreferences("pref", Context.MODE_PRIVATE)
+        /*val preferences: SharedPreferences =
+            requireActivity().getSharedPreferences("pref", Context.MODE_PRIVATE)*/
         gotoSettings()
 
         gotToDiscover()
@@ -108,7 +112,7 @@ class ProfileFragment : Fragment() {
                         textView10.text = response.body()?.user?.followers?.size.toString()
                         pulltorefresh.isRefreshing = false
 
-                        Log.i("initprofile", "aaaasucces")
+
                     }
 
                     override fun onFailure(call: Call<ApiInterface.GetUserResponse>, t: Throwable) {
@@ -119,30 +123,14 @@ class ProfileFragment : Fragment() {
                 }
             )
 
-
-            //
-
-            /*    val usernameValue = preferences.getString("username", "")
-                username.text = "@" + usernameValue
-                textView7.text = "@" + usernameValue
-    */
-
         }
-        //buttonEffect(buttonRegister)
 
 
-        dataBase = AppDataBase.getDatabase(requireActivity())
+        //dataBase = AppDataBase.getDatabase(requireActivity())
 
-        user = dataBase.userDao().getAllUsers()
-
-//      Log.i("users",user[1].toString())
 
         val usernameValue = preferences.getString("username", "")
-        Log.d(
-            "username",
-            usernameValue + "123" + preferences.getBoolean("confirmed", false)
-                .toString() + preferences.getInt("followingNumber", 45)
-        )
+
         textView9.text = preferences.getInt("followingNumber", 45).toString()
         textView10.text = preferences.getInt("followersNumber", 45).toString()
         username.text = "@" + usernameValue
@@ -156,7 +144,7 @@ class ProfileFragment : Fragment() {
 
         getVideos(requireContext())
 
-        var postList: MutableList<ProfilePost> = ArrayList()
+
 
 
         recylcerPost = recyclerview
@@ -166,42 +154,40 @@ class ProfileFragment : Fragment() {
             .into(imageprofile)
 
     }
+    //4147768
+
 
     fun getVideos(context: Context) {
-        val preferences: SharedPreferences =
-            requireActivity().getSharedPreferences("pref", Context.MODE_PRIVATE)
+        thread(isDaemon = true) {
 
-        val id = preferences.getString("id", "")
-        val apiInterface = ApiInterface.create()
-        apiInterface.GetVideosByUser(ApiInterface.PublicationRequestBody(id.toString(), ""))
-            .enqueue(object : Callback<ApiInterface.VideoResponse> {
-                override fun onResponse(
-                    call: Call<ApiInterface.VideoResponse>,
-                    response: Response<ApiInterface.VideoResponse>
-                ) {
-                    if (response.code() == 200) {
+            val id = preferences.getString("id", "")
+            val apiInterface = ApiInterface.create()
+            apiInterface.GetVideosByUser(ApiInterface.PublicationRequestBodyGet(id.toString()))
+                .enqueue(object : Callback<ApiInterface.VideoResponse> {
+                    override fun onResponse(
+                        call: Call<ApiInterface.VideoResponse>,
+                        response: Response<ApiInterface.VideoResponse>
+                    ) {
+                        if (response.code() == 200) {
 
-                        val list: ArrayList<ProfilePost>? = response.body()?.publications
-                        if(list==null){
-                            noContentProfile.visibility=View.VISIBLE
-                            recylcerPost.visibility=View.GONE
-                        }else{
-                            adapter = ProfilePostAdapter(list)
-                   //         noContentProfile.visibility=View.GONE
+                            val list: ArrayList<ProfilePost>? = response.body()?.publications
+                            if (list == null) {
+                                noContentProfile.visibility = View.VISIBLE
+                                recylcerPost.visibility = View.GONE
+                            } else {
+                                adapter = ProfilePostAdapter(list)
+                                recylcerPost.adapter = adapter
+                                recylcerPost.layoutManager = GridLayoutManager(context, 3)
 
-                            recylcerPost.adapter = adapter
-                            recylcerPost.layoutManager = GridLayoutManager(context, 3)
+                            }
 
                         }
-//                        Log.i("success", list!![0]?.description)
-
                     }
-                }
-
-                override fun onFailure(call: Call<ApiInterface.VideoResponse>, t: Throwable) {
-                    Log.i("get videos", "failed")
-                }
-            })
+                    override fun onFailure(call: Call<ApiInterface.VideoResponse>, t: Throwable) {
+                        Log.i("get videos", "failed")
+                    }
+                })
+        }
     }
 
     fun gotToDiscover() {
@@ -316,7 +302,7 @@ class ProfileFragment : Fragment() {
 
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
-            Log.i("image", data.toString())
+
             when (requestCode) {
                 REQUEST_CODE_IMAGE_PICKER -> {
                     selectedImage = data?.data
@@ -346,10 +332,8 @@ class ProfileFragment : Fragment() {
             requireActivity().getSharedPreferences("pref", Context.MODE_PRIVATE)
 
 
-        Log.d("token", preferences.getString("token", "defaultName").toString())
-        preferences.edit().clear().commit()
 
-        Log.d("token removed", preferences.getString("token", "defaultName").toString())
+        preferences.edit().clear().commit()
 
 
         val changePage = Intent(requireContext(), MainActivity::class.java)

@@ -43,7 +43,8 @@ interface ApiInterface {
     data class registerBody(val email: String, val password: String, val username: String)
     data class updateUserBody(val id: String, val username: String)
 
-    data class PublicationRequestBody(val userid :String , val caption :String)
+    data class PublicationRequestBody(val userid :String , val caption :String,val visibility:Boolean)
+    data class PublicationRequestBodyGet(val userid :String )
     data class PublicationResponse(
         @SerializedName("publicationId")
         val publicationId:String)
@@ -78,11 +79,11 @@ interface ApiInterface {
     fun CreatePublicatin(@Body publication :PublicationRequestBody):Call<PublicationResponse>
 
     @POST("api/publication/byuser/",)
-    fun GetVideosByUser(@Body videos :PublicationRequestBody):Call<VideoResponse>
+    fun GetVideosByUser(@Body videos :PublicationRequestBodyGet):Call<VideoResponse>
 
 
     companion object {
-        var BASE_URL = "http://192.168.1.18:6000/"
+        var BASE_URL = "http://192.168.1.20:6000/"
 
         fun create(): ApiInterface {
             val retrofit = Retrofit.Builder()

@@ -220,15 +220,16 @@ xmlns:android="http://schemas.android.com/apk/res/android"
             app:layout_constraintStart_toStartOf="@+id/buttonlogout"
             app:layout_constraintTop_toBottomOf="@+id/buttonlogout" />
 
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview"
+            android:layout_marginTop="@dimen/_10sdp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             app:layout_constraintTop_toBottomOf="@+id/buttonupdate"
-
             tools:itemCount="2"
             tools:listitem="@layout/profile_post" />
+
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/noContentProfile"

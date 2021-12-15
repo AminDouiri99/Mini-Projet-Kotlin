@@ -31,24 +31,25 @@ class UploadVideo : AppCompatActivity() {
 
         uploadBtn.setOnClickListener {
             val caption = captionText.text.toString()
-
-            createPublication(this ,id.toString(), caption,myvideoUri)
+            val visiblity = visibility.isChecked
+            createPublication(this ,id.toString(), caption, visiblity, myvideoUri)
         }
         cancel_btn.setOnClickListener {
             // delete the video and return to main camera
             val intent = Intent(this, LandingActivity::class.java)
 
             startActivity(intent)
-            finish()
+
         }
     }
 
-    fun createPublication(activity : Activity ,id: String, caption: String,uri:Uri) {
+    fun createPublication(activity : Activity ,id: String, caption: String,visiblity:Boolean,uri:Uri) {
         val apiInterface = ApiInterface.create()
         apiInterface.CreatePublicatin(
             ApiInterface.PublicationRequestBody(
                 id,
-                caption
+                caption,
+                visiblity
             )
         )
             .enqueue(object : Callback<ApiInterface.PublicationResponse> {

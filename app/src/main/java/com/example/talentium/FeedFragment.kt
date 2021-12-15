@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SnapHelper
 import kotlinx.android.synthetic.main.activity_main.view.*
+import kotlin.concurrent.thread
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -46,12 +47,15 @@ class FeedFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
        // feedrecyclerview.layoutManager = LinearLayoutManager(view.context);
-        val data = ArrayList<Post>()
-        for (i in 1..10) {
-            data.add(Post("artical " + i, "role " + i,"https://videocdn.bodybuilding.com/video/mp4/62000/62792m.mp4"))
-        }
-        val adapter = FeedAdapter(data)
-        feedrecyclerview.adapter = adapter
+        thread  (){
+            val data = ArrayList<Post>()
+            for (i in 1..10) {
+                data.add(Post("artical " + i, "role " + i,"https://videocdn.bodybuilding.com/video/mp4/62000/62792m.mp4"))
+            }
+            val adapter = FeedAdapter(data)
+            feedrecyclerview.adapter = adapter
+            }
+
 
         val snapHelper: SnapHelper = LinearSnapHelper()
       //  snapHelper.attachToRecyclerView(feedrecyclerview)

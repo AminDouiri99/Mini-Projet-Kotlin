@@ -42,6 +42,10 @@ class UserAdapter(
 
         }
         holder.ProfilePic.setOnClickListener{
+            if (id == idConncted) {
+                //holder.itemView.context.
+            }
+
             val intent = Intent(holder.itemView.context, OthersProfileActivity::class.java)
             intent.apply {
                 putExtra("id", mList[position]._id)

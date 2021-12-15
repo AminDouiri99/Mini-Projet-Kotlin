@@ -1,38 +1,36 @@
-
-    <androidx.cardview.widget.CardView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="@dimen/_90sdp"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:layout_marginLeft="@dimen/_5sdp"
-        android:layout_marginRight="@dimen/_5sdp"
-
-        android:layout_height="@dimen/_100sdp"
-
-
-        >
-<LinearLayout
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:background="@color/Mint_Cream"
-    android:layout_width="match_parent"
+    android:layout_width="@dimen/_95sdp"
     android:foreground="?attr/selectableItemBackgroundBorderless"
 
-    android:layout_height="match_parent">
+    android:layout_height="@dimen/_90sdp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
     <ImageView
+        android:layout_margin="3dp"
+        android:padding="@dimen/_3sdp"
         android:id="@+id/PostImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:layout_width="@dimen/_90sdp"
-        android:layout_height="@dimen/_80sdp"
-        app:srcCompat="@drawable/dummyimage" />
+        android:src="@drawable/dummyimage" />
 
-    <TextView
-        android:id="@+id/PostDescription"
-        android:layout_width="wrap_content"
-        android:gravity="center"
-        android:textColor="@color/Roman_Silver"
-        android:background="@drawable/backgroundlight"
-        android:layout_height="wrap_content"
-        android:text="TextView" />
-</LinearLayout>
+    <ImageView
+        android:id="@+id/postVisibility"
+        android:layout_width="26dp"
+        android:layout_height="25dp"
+        android:src="@drawable/ic_baseline_lock_24"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/PostImage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.7"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/PostImage"
+        app:layout_constraintVertical_bias="0.0" />
 
-    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+

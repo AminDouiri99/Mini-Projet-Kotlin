@@ -1,12 +1,16 @@
 package com.example.talentium
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.talentium.API.ApiInterface
+import com.example.talentium.Model.ProfilePost
 import kotlinx.android.synthetic.main.activity_others_profile.*
 import kotlinx.android.synthetic.main.activity_others_profile.textView10
 import kotlinx.android.synthetic.main.activity_others_profile.textView7
@@ -16,12 +20,18 @@ import kotlinx.android.synthetic.main.fragment_profile.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import kotlin.concurrent.thread
 
 class OthersProfileActivity : AppCompatActivity() {
+
+    lateinit var id: String
+    lateinit var recylcerPost: RecyclerView
+    lateinit var adapter: ProfilePostAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_others_profile)
-        val id = intent.getStringExtra("id")
+        id = intent.getStringExtra("id").toString()
+        //Add videos for other user in recycle view
         val idConnected = intent.getStringExtra("idConnected")
         val apiInterface = ApiInterface.create()
         if (id == idConnected) {
@@ -30,6 +40,7 @@ class OthersProfileActivity : AppCompatActivity() {
             unFollowImageButton.visibility = View.INVISIBLE
             reportPerson.visibility = View.INVISIBLE
         }
+
         unFollowImageButton.setOnClickListener {
             apiInterface.unFollow(ApiInterface.FollowBody(idConnected!!, id!!)).enqueue(object :
                 Callback<String> {
@@ -45,8 +56,9 @@ class OthersProfileActivity : AppCompatActivity() {
             FollowImageButton.visibility = View.VISIBLE
         }
         backWrapper.setOnClickListener {
-            //onBackPressed()
+            onBackPressed()
         }
+
         FollowImageButton.setOnClickListener {
             apiInterface.Follow(ApiInterface.FollowBody(idConnected!!, id!!)).enqueue(object :
                 Callback<String> {
@@ -56,50 +68,54 @@ class OthersProfileActivity : AppCompatActivity() {
                 }
 
                 override fun onFailure(call: Call<String>, t: Throwable) {
-                    Log.i("followFaile","true")
+                    Log.i("followFaile", "true")
                 }
 
             })
             FollowImageButton.visibility = View.GONE
             unFollowImageButton.visibility = View.VISIBLE
         }
+
         apiInterface.getUser(ApiInterface.GetUserBody(id!!)).enqueue(
             object : Callback<ApiInterface.GetUserResponse> {
                 override fun onResponse(
                     call: Call<ApiInterface.GetUserResponse>,
                     response: Response<ApiInterface.GetUserResponse>
-                ){
+                ) {
                     username.text = "@" + response.body()?.user?.username.toString()
                     textView7.text = "@" + response.body()?.user?.username.toString()
                     textView9.text = response.body()?.user?.following?.size.toString()
                     textView10.text = response.body()?.user?.followers?.size.toString()
-                  //  if(response.body()?.user?)
-                   /* Glide.with(OthersProfileActivity())
-                        .load(ApiInterface.BASE_URL + response.body()?.user?.avatar).fitCenter()
-                        .into(imageprofileothers)*/
+                    //  if(response.body()?.user?)
+                    /* Glide.with(OthersProfileActivity())
+                         .load(ApiInterface.BASE_URL + response.body()?.user?.avatar).fitCenter()
+                         .into(imageprofileothers)*/
                 }
 
                 override fun onFailure(call: Call<ApiInterface.GetUserResponse>, t: Throwable) {
                 }
 
             })
+
         apiInterface.getUser(ApiInterface.GetUserBody(idConnected!!)).enqueue(
             object : Callback<ApiInterface.GetUserResponse> {
                 override fun onResponse(
                     call: Call<ApiInterface.GetUserResponse>,
                     response: Response<ApiInterface.GetUserResponse>
-                ){
-                  //  username.text = "@" + response.body()?.user?.username.toString()
+                ) {
+                    //  username.text = "@" + response.body()?.user?.username.toString()
                     val userFollowers = response.body()?.user?.following!!
-                    if(id in userFollowers){
+                    if (id in userFollowers) {
                         FollowImageButton.visibility = View.GONE
                         unFollowImageButton.visibility = View.VISIBLE
-                    }                }
+                    }
+                }
 
                 override fun onFailure(call: Call<ApiInterface.GetUserResponse>, t: Throwable) {
                 }
 
             })
+
         pulltorefreshOther.setOnRefreshListener {
             val apiInterface = ApiInterface.create()
             apiInterface.getUser(ApiInterface.GetUserBody(id!!)).enqueue(
@@ -125,6 +141,52 @@ class OthersProfileActivity : AppCompatActivity() {
             )
         }
 
+
+        getVideos(this)
+        recylcerPost = recyclerOtherProfilview
+
+
+    }
+
+
+    fun getVideos(context: Context) {
+        thread(isDaemon = true) {
+            val apiInterface = ApiInterface.create()
+            apiInterface.GetVideosByUser(ApiInterface.PublicationRequestBodyGet(id))
+                .enqueue(object : Callback<ApiInterface.VideoResponse> {
+                    override fun onResponse(
+                        call: Call<ApiInterface.VideoResponse>,
+                        response: Response<ApiInterface.VideoResponse>
+                    ) {
+                        if (response.code() == 200) {
+
+                            val list: ArrayList<ProfilePost>? = response.body()?.publications
+                            val listToDisplay: ArrayList<ProfilePost>? = null
+                            list?.forEach {
+                                Log.i("post",it.toString())
+                                if (it.display)
+                                    listToDisplay?.add(it)
+                            }
+                            Log.i("post",listToDisplay.toString())
+
+                             if (list == null) {
+                                noContentProfile.visibility = View.VISIBLE
+                                recylcerPost.visibility = View.GONE
+                            } else {
+                                adapter = ProfilePostAdapter(list)
+                                recylcerPost.adapter = adapter
+                                recylcerPost.layoutManager = GridLayoutManager(context, 3)
+
+                            }
+
+                        }
+                    }
+
+                    override fun onFailure(call: Call<ApiInterface.VideoResponse>, t: Throwable) {
+                        Log.i("get videos", "failed")
+                    }
+                })
+        }
     }
 
 }
