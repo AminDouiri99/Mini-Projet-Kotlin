@@ -52,6 +52,9 @@ interface ApiInterface {
     data class VideoResponse(
         val publications:ArrayList<ProfilePost>
     )
+    data class getGollowingResponse(
+        val following:ArrayList<String>
+    )
 
     @POST("api/users/search")
     fun search(@Body text: SearchBody): Call<SearchResponse>
@@ -77,13 +80,15 @@ interface ApiInterface {
 
     @POST("api/publication/create/video")
     fun CreatePublicatin(@Body publication :PublicationRequestBody):Call<PublicationResponse>
+    @POST("api/publication/getfeedbyuser/")
+    fun GetFollowingByUser(@Body videos :PublicationRequestBodyGet):Call<getGollowingResponse>
 
     @POST("api/publication/byuser/",)
     fun GetVideosByUser(@Body videos :PublicationRequestBodyGet):Call<VideoResponse>
 
 
     companion object {
-        var BASE_URL = "http://192.168.1.20:6000/"
+        var BASE_URL = "http://192.168.1.18:6000/"
 
         fun create(): ApiInterface {
             val retrofit = Retrofit.Builder()
