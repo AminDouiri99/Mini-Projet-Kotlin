@@ -117,7 +117,7 @@ class LoginFragment : Fragment() {
                         val editor = preferences.edit()
                         editor.putString("token", response.body()?.token.toString())
 
-                        Log.i("id from back", response.body()?.user.toString())
+
                         editor.putString("username", response.body()?.user?.username.toString())
                             .apply()
                         editor.putInt("followersNumber", response.body()!!.user.followers.size)

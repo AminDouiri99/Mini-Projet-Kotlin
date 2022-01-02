@@ -2,14 +2,14 @@
     <item
         android:id="@+id/feedPage"
         android:enabled="true"
-        android:icon="@drawable/ic_baseline_person_24"
-        
-        android:title="@string/feed"/>
+        android:icon="@drawable/ic_baseline_home_24"
+
+        android:title="@string/feed" />
     <item
         android:id="@+id/livePage"
         android:enabled="true"
-        android:icon="@drawable/ic_baseline_person_24"
-        android:title="@string/live"/>
+        android:icon="@drawable/ic_baseline_camera_24"
+        android:title="@string/live" />
 
     <item
         android:id="@+id/profilePage"

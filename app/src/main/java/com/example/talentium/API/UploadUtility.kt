@@ -67,7 +67,8 @@ class UploadUtility(activity: Activity, userId: String,videoId:String) {
 
                     override fun onResponse(call: Call, response: Response) {
                         // Handle this
-                        Log.i("suucess", response.toString())
+
+                        Log.i("suucess", response.body.toString())
                     }
                 })
             }else if (type=="video"){

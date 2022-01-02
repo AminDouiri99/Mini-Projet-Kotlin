@@ -27,6 +27,7 @@ class VideoPlayer : AppCompatActivity() {
         val mediaController = MediaController(this)
         mediaController.setBackgroundColor(resources.getColor(R.color.Mango_Tango))
         mediaController.setAnchorView(videoPlyaer)
+
         videoPlyaer.setMediaController(mediaController)
         videoPlyaer.setVideoURI(uri)
         videoPlyaer.requestFocus()

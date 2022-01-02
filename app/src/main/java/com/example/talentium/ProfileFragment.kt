@@ -92,7 +92,9 @@ class ProfileFragment : Fragment() {
         /*val preferences: SharedPreferences =
             requireActivity().getSharedPreferences("pref", Context.MODE_PRIVATE)*/
         gotoSettings()
-
+        val preferences: SharedPreferences =
+            requireActivity().getSharedPreferences("pref", Context.MODE_PRIVATE)
+        val editor = preferences.edit()
         gotToDiscover()
         pulltorefresh.setOnRefreshListener {
             val apiInterface = ApiInterface.create()
@@ -106,6 +108,19 @@ class ProfileFragment : Fragment() {
                         call: Call<ApiInterface.GetUserResponse>,
                         response: Response<ApiInterface.GetUserResponse>
                     ) {
+                        editor.putString("avatar", response.body()?.user?.avatar.toString()).apply()
+
+
+
+                        editor.putString("username", response.body()?.user?.username.toString())
+                            .apply()
+                        editor.putInt("followersNumber", response.body()!!.user.followers.size)
+                            .apply()
+                        editor.putInt("followingNumber", response.body()!!.user.following.size)
+                            .apply()
+                        editor.putInt("publication", response.body()!!.user.publication.size)
+                            .apply()
+                        Log.i("avatar",response.body()?.user?.avatar.toString())
                         username.text = "@" + response.body()?.user?.username.toString()
                         textView7.text = "@" + response.body()?.user?.username.toString()
                         textView9.text = response.body()?.user?.following?.size.toString()
@@ -307,6 +322,7 @@ class ProfileFragment : Fragment() {
                 REQUEST_CODE_IMAGE_PICKER -> {
                     selectedImage = data?.data
                     imageprofile.setImageURI(selectedImage)
+                    //Log.i("profile",selectedImage)
                     UploadUtility(requireActivity(), id.toString(), "").uploadFile(
                         selectedImage!!,
                         "image"

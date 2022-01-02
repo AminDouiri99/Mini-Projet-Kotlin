@@ -6,12 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".VideoPlayer">
     <VideoView
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/videoPlyaer">
     </VideoView>
 
     <ImageView
+
         android:id="@+id/nextBtn"
         android:layout_width="95dp"
         android:layout_height="67dp"
