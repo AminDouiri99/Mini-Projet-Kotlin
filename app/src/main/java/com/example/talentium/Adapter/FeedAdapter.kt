@@ -10,10 +10,11 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.VideoView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.talentium.Model.ProfilePost
 import com.example.talentium.Post
 import com.example.talentium.R
 
-class FeedAdapter(private val ProductList: List<Post>) :
+class FeedAdapter(private val ProductList: List<ProfilePost>) :
     RecyclerView.Adapter<FeedAdapter.ViewHolder>() {
 
 
@@ -28,8 +29,8 @@ class FeedAdapter(private val ProductList: List<Post>) :
 
         val ItemsViewModel = ProductList[position]
 
-        holder.text.setText(ItemsViewModel.name)
-        holder.video.setVideoURI(Uri.parse(ItemsViewModel.src));
+        holder.text.setText(ItemsViewModel.description)
+        holder.video.setVideoURI(Uri.parse(ItemsViewModel.source));
 
         holder.video.setOnPreparedListener {
             holder.progressbar.visibility=View.GONE

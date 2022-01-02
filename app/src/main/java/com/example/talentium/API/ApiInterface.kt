@@ -52,6 +52,9 @@ interface ApiInterface {
     data class VideoResponse(
         val publications:ArrayList<ProfilePost>
     )
+    data class getGollowingResponse(
+        val following:ArrayList<String>
+    )
 
     @POST("api/users/search")
     fun search(@Body text: SearchBody): Call<SearchResponse>
@@ -77,6 +80,8 @@ interface ApiInterface {
 
     @POST("api/publication/create/video")
     fun CreatePublicatin(@Body publication :PublicationRequestBody):Call<PublicationResponse>
+    @POST("api/publication/getfeedbyuser/")
+    fun GetFollowingByUser(@Body videos :PublicationRequestBodyGet):Call<getGollowingResponse>
 
     @POST("api/publication/byuser/",)
     fun GetVideosByUser(@Body videos :PublicationRequestBodyGet):Call<VideoResponse>
