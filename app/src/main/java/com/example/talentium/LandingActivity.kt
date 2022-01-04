@@ -17,23 +17,14 @@ class LandingActivity : AppCompatActivity() {
             when (item.itemId) {
 
                 R.id.feedPage -> {
-
-                    // Respond to navigation item 1 click
-
                     makeCurrentFragment(FeedFragment());
-
                 }
                 R.id.livePage -> {
-                    // Respond to navigation item 2 click
                     makeCurrentFragment(VideoFragment());
                 }
                 R.id.profilePage -> {
-
                     makeCurrentFragment(ProfileFragment());
-
-
                 }
-
             }
             true
         }

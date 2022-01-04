@@ -3,50 +3,42 @@ package com.example.talentium
 import android.app.Activity
 import android.app.ActivityOptions
 import android.app.AlertDialog
-import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
-import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Build
 
 import android.os.Bundle
-import android.os.Environment
-import android.provider.MediaStore
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.android.volley.toolbox.Volley
-import com.bumptech.glide.Glide
 import com.example.talentium.API.ApiInterface
 import com.example.talentium.API.ApiInterface.Companion.BASE_URL
-import com.example.talentium.API.UploadRequestBody
 import com.example.talentium.Model.ProfilePost
-import com.example.talentium.Model.User
 import com.example.talentium.Model.Users
 import com.example.talentium.util.AppDataBase
-import com.google.android.material.snackbar.Snackbar
 import com.mvp.handyopinion.UploadUtility
-import kotlinx.android.synthetic.main.activity_landing.*
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.fragment_register.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
+import ly.img.android.pesdk.utils.runOnMainThread
 import okhttp3.MultipartBody
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import retrofit2.*
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
@@ -69,12 +61,15 @@ class ProfileFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    lateinit var profilView: View
+
     lateinit var recylcerPost: RecyclerView
     lateinit var adapter: ProfilePostAdapter
     var selectedImage: Uri? = null
     val READ_EXTERNEL_CODE = 41
-    lateinit var dataBase: AppDataBase
+
     lateinit var user: MutableList<Users>
+    lateinit var noContentResponse: ConstraintLayout
 
     lateinit var preferences: SharedPreferences
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -88,10 +83,33 @@ class ProfileFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+
         super.onViewCreated(view, savedInstanceState)
-        /*val preferences: SharedPreferences =
-            requireActivity().getSharedPreferences("pref", Context.MODE_PRIVATE)*/
+
         gotoSettings()
+
+        getVideos(requireContext())
+
+        val id = preferences.getString("id", "")
+        val apiInterface = ApiInterface.create()
+       /* var list:ArrayList<ProfilePost> = ArrayList()
+        GlobalScope.launch {
+            list=  apiInterface.GetVideosByUser(ApiInterface.PublicationRequestBodyGet(id.toString()))
+                .await().publications
+        }
+
+
+
+        runOnMainThread {
+            adapter = ProfilePostAdapter(list, "mine")
+            recylcerPost.adapter = adapter
+            recylcerPost.layoutManager = GridLayoutManager(context, 3)
+        }*/
+
+        recylcerPost = recyclerview
+
+
         val preferences: SharedPreferences =
             requireActivity().getSharedPreferences("pref", Context.MODE_PRIVATE)
         val editor = preferences.edit()
@@ -110,21 +128,25 @@ class ProfileFragment : Fragment() {
                     ) {
                         editor.putString("avatar", response.body()?.user?.avatar.toString()).apply()
 
-
-
                         editor.putString("username", response.body()?.user?.username.toString())
                             .apply()
                         editor.putInt("followersNumber", response.body()!!.user.followers.size)
                             .apply()
                         editor.putInt("followingNumber", response.body()!!.user.following.size)
                             .apply()
-                        editor.putInt("publication", response.body()!!.user.publication.size)
+                        editor.putInt("publicationsize", response.body()!!.user.publication.size)
                             .apply()
-                        Log.i("avatar",response.body()?.user?.avatar.toString())
+                        val set: MutableSet<String> = HashSet()
+                        set.addAll(response.body()!!.user.publication)
+                        editor.putStringSet("publication", set)
+                            .apply()
+
+                        Log.i("avatar", response.body()?.user?.avatar.toString())
                         username.text = "@" + response.body()?.user?.username.toString()
                         textView7.text = "@" + response.body()?.user?.username.toString()
                         textView9.text = response.body()?.user?.following?.size.toString()
                         textView10.text = response.body()?.user?.followers?.size.toString()
+                        PostsNumber.text = response.body()?.user?.publication?.size.toString()
                         pulltorefresh.isRefreshing = false
 
 
@@ -141,13 +163,11 @@ class ProfileFragment : Fragment() {
         }
 
 
-        //dataBase = AppDataBase.getDatabase(requireActivity())
-
-
         val usernameValue = preferences.getString("username", "")
 
-        textView9.text = preferences.getInt("followingNumber", 45).toString()
-        textView10.text = preferences.getInt("followersNumber", 45).toString()
+        textView9.text = preferences.getInt("followingNumber", 0).toString()
+        textView10.text = preferences.getInt("followersNumber", 0).toString()
+        PostsNumber.text = preferences.getInt("publicationsize", 0).toString()
         username.text = "@" + usernameValue
         textView7.text = "@" + usernameValue
         updatePhoto()
@@ -157,52 +177,52 @@ class ProfileFragment : Fragment() {
 
         //get publications
 
-        getVideos(requireContext())
 
-
-
-
-        recylcerPost = recyclerview
-
-        Glide.with(this)
-            .load(BASE_URL + preferences.getString("avatar", "")).fitCenter()
+        Picasso.get()
+            .load(BASE_URL + preferences.getString("avatar", ""))
             .into(imageprofile)
 
     }
     //4147768
-
-
     fun getVideos(context: Context) {
-        thread(isDaemon = true) {
 
-            val id = preferences.getString("id", "")
-            val apiInterface = ApiInterface.create()
-            apiInterface.GetVideosByUser(ApiInterface.PublicationRequestBodyGet(id.toString()))
-                .enqueue(object : Callback<ApiInterface.VideoResponse> {
-                    override fun onResponse(
-                        call: Call<ApiInterface.VideoResponse>,
-                        response: Response<ApiInterface.VideoResponse>
-                    ) {
-                        if (response.code() == 200) {
+    val id = preferences.getString("id", "")
 
-                            val list: ArrayList<ProfilePost>? = response.body()?.publications
-                            if (list == null) {
-                                noContentProfile.visibility = View.VISIBLE
-                                recylcerPost.visibility = View.GONE
-                            } else {
-                                adapter = ProfilePostAdapter(list)
-                                recylcerPost.adapter = adapter
-                                recylcerPost.layoutManager = GridLayoutManager(context, 3)
+    val apiInterface = ApiInterface.create()
 
-                            }
+    apiInterface.GetVideosByUser(ApiInterface.PublicationRequestBodyGet(id.toString()))
+        .enqueue(object : Callback<ApiInterface.VideoResponse> {
 
-                        }
+            override fun onResponse(
+                call: Call<ApiInterface.VideoResponse>,
+                response: Response<ApiInterface.VideoResponse>
+            ) {
+                if (response.code() == 200) {
+                    var list = response.body()?.publications!!
+                    Log.i("list", list.toString())
+                    Log.i("list2", response.body()?.publications!!.toString())
+                    if (list == null) {
+
+                    } else {
+
+                        noContentResponse.visibility = View.GONE
+
+                        recylcerPost.visibility = View.VISIBLE
+                        adapter = ProfilePostAdapter(list, "mine")
+                        recylcerPost.adapter = adapter
+                        recylcerPost.layoutManager = GridLayoutManager(context, 3)
+
                     }
-                    override fun onFailure(call: Call<ApiInterface.VideoResponse>, t: Throwable) {
-                        Log.i("get videos", "failed")
-                    }
-                })
-        }
+
+                }
+
+            }
+
+            override fun onFailure(call: Call<ApiInterface.VideoResponse>, t: Throwable) {
+                Log.i("failresponse", t.toString())
+            }
+        })
+
     }
 
     fun gotToDiscover() {
@@ -337,7 +357,13 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false)
+
+
+        profilView = inflater.inflate(R.layout.fragment_profile, container, false)
+        noContentResponse = profilView.findViewById(R.id.noContentProfile)
+
+
+        return profilView
 
     }
 

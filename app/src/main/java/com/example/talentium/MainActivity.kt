@@ -44,11 +44,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-
     fun init(){
-
-
-
         iamLogin=true
 
         backToLogin=findViewById(R.id.buttonBacktoLogin)

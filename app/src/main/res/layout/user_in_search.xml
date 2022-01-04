@@ -2,24 +2,31 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/_55sdp">
-
+    android:orientation="vertical"
+    android:layout_height="wrap_content">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:layout_height="match_parent">
     <androidx.cardview.widget.CardView
+        android:layout_marginTop="@dimen/_10sdp"
         android:id="@+id/cardView"
-        android:layout_width="@dimen/_45sdp"
-        android:layout_height="@dimen/_45sdp"
-
-        android:layout_gravity="center_vertical"
+        android:layout_width="47dp"
         android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:layout_height="47dp"
         android:background="@drawable/fbroundbckground"
-        app:cardCornerRadius="@dimen/_15sdp">
+        app:cardCornerRadius="@dimen/_35sdp"
+        app:layout_constraintBottom_toTopOf="@+id/DescriptionPost"
+        app:layout_constraintStart_toStartOf="parent">
 
         <ImageView
             android:id="@+id/imageprofileInsearch"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="47dp"
             android:clipToOutline="true"
             android:foreground="?attr/selectableItemBackgroundBorderless"
+
             android:src="@drawable/logotemp_background" />
     </androidx.cardview.widget.CardView>
 
@@ -55,4 +62,14 @@
             android:backgroundTint="@color/Black_Coffe"
             android:src="@drawable/addperson" />
     </RelativeLayout>
+
+</LinearLayout>
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="@dimen/_280sdp"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="1dp"
+        android:background="@color/Roman_Silver" />
+
 </LinearLayout>

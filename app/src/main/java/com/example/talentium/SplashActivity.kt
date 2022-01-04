@@ -12,20 +12,26 @@ class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
-        Handler(Looper.getMainLooper()).postDelayed({
-            val preferences: SharedPreferences =
-                this.getSharedPreferences("pref", Context.MODE_PRIVATE)
-            if (preferences.getString("token", "").toString() != "") {
-                val intent = Intent(this, LandingActivity::class.java)
-                startActivity(intent)
-                finish()
-            } else {
-                val mainIntent = Intent(this, MainActivity::class.java)
-                startActivity(mainIntent)
-                finish()
-            }
+        val preferences: SharedPreferences =
+            this.getSharedPreferences("pref", Context.MODE_PRIVATE)
+        if(preferences.getString("id", "").toString() != ""){
+            val intent = Intent(this, LandingActivity::class.java)
+            startActivity(intent)
+            finish()
+        }else{
+            Handler(Looper.getMainLooper()).postDelayed({
 
-        }, 3000)
+                if (preferences.getString("id", "").toString() != "") {
+                    val intent = Intent(this, LandingActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                } else {
+                    val mainIntent = Intent(this, MainActivity::class.java)
+                    startActivity(mainIntent)
+                    finish()
+                }
 
+            }, 3000)
+        }
     }
 }

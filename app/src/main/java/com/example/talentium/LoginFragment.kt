@@ -99,8 +99,7 @@ class LoginFragment : Fragment() {
         getActivity()?.window?.addFlags(
             WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
         )
-        Log.i("http", pass)
-        Log.i("http", email)
+
         apiInterface.seConnecter(ApiInterface.LoginBody(email, pass))
             .enqueue(object : Callback<ApiInterface.LoginResponse> {
                 override fun onResponse(
@@ -124,7 +123,12 @@ class LoginFragment : Fragment() {
                             .apply()
                         editor.putInt("followingNumber", response.body()!!.user.following.size)
                             .apply()
-                        editor.putInt("publication", response.body()!!.user.publication.size)
+                        editor.putInt("publicationsize", response.body()!!.user.publication.size)
+                            .apply()
+
+                        val set: MutableSet<String> = HashSet()
+                        set.addAll(response.body()!!.user.publication)
+                        editor.putStringSet("publication",set )
                             .apply()
                         editor.putString("id", response.body()?.user?._id.toString()).apply()
                         editor.putString("avatar", response.body()?.user?.avatar.toString()).apply()

@@ -9,6 +9,9 @@
     >
 
 
+
+
+
     <ImageView
         android:id="@+id/back_btn"
         android:layout_width="@dimen/_20sdp"
@@ -35,7 +38,7 @@
 
 
     <TextView
-        android:id="@+id/textView19"
+        android:id="@+id/editVideo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -47,18 +50,74 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-
     <VideoView
         android:id="@+id/videoPostPlyaer"
-        android:layout_width="411dp"
-        android:layout_height="543dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginTop="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/editCaption"
+
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView18"></VideoView>
 
 
+
+
+    <ImageView
+        android:id="@+id/likeIcon"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_marginBottom="@dimen/_25sdp"
+        android:src="@drawable/ic_baseline_favorite_border_24"
+        app:layout_constraintBottom_toTopOf="@+id/imageView5"
+        app:layout_constraintEnd_toEndOf="@id/imageView6" />
+    <ImageView
+        android:id="@+id/likeIconRed"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_marginBottom="@dimen/_25sdp"
+        android:visibility="invisible"
+        android:src="@drawable/ic_baseline_favorite_24"
+        app:layout_constraintBottom_toTopOf="@+id/imageView5"
+        app:layout_constraintEnd_toEndOf="@id/imageView6" />
+    <TextView
+        android:id="@+id/likesnumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="150"
+        app:layout_constraintEnd_toEndOf="@+id/likeIcon"
+        app:layout_constraintStart_toStartOf="@+id/likeIcon"
+        app:layout_constraintTop_toBottomOf="@+id/likeIcon" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_marginBottom="@dimen/_25sdp"
+        android:src="@drawable/ic_baseline_comment_24"
+        app:layout_constraintBottom_toTopOf="@+id/imageView6"
+        app:layout_constraintEnd_toEndOf="@+id/imageView6" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_marginRight="@dimen/_20sdp"
+        android:layout_marginBottom="@dimen/_90sdp"
+        android:src="@drawable/ic_baseline_share_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+    <ProgressBar
+        android:id="@+id/progressvideo"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
     <TextView
         android:id="@+id/videoLegnth"
         android:layout_width="wrap_content"
@@ -68,7 +127,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.901"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView19" />
+        app:layout_constraintTop_toBottomOf="@+id/editVideo" />
     <ImageView
         android:id="@+id/replay_btn"
         android:visibility="invisible"
@@ -91,5 +150,42 @@
         android:text="Place holder for video description"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/videoPostPlyaer" />
+
+    <EditText
+        android:id="@+id/editCaption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/videoPostPlyaer" />
+
+    <Button
+        android:id="@+id/edit_Btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="edit"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/videoPostPlyaer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/visibility"
+        android:visibility="invisible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="28dp"
+        android:checked="true"
+        android:text="Video visibility"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.853"
+        app:layout_constraintTop_toBottomOf="@+id/videoCaption"
+        app:layout_constraintVertical_bias="0.948" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,16 +1,18 @@
 package com.example.talentium
 
 import android.content.Context
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.AttributeSet
 import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.talentium.API.ApiInterface
 import com.example.talentium.Model.ProfilePost
+import com.squareup.picasso.Picasso
+import koleton.api.hideSkeleton
+import koleton.api.loadSkeleton
 import kotlinx.android.synthetic.main.activity_others_profile.*
 import kotlinx.android.synthetic.main.activity_others_profile.textView10
 import kotlinx.android.synthetic.main.activity_others_profile.textView7
@@ -20,26 +22,33 @@ import kotlinx.android.synthetic.main.fragment_profile.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import kotlin.concurrent.thread
 
 class OthersProfileActivity : AppCompatActivity() {
 
     lateinit var id: String
     lateinit var recylcerPost: RecyclerView
     lateinit var adapter: ProfilePostAdapter
+    lateinit var apiInterface: ApiInterface
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_others_profile)
         id = intent.getStringExtra("id").toString()
         //Add videos for other user in recycle view
         val idConnected = intent.getStringExtra("idConnected")
-        val apiInterface = ApiInterface.create()
+        apiInterface = ApiInterface.create()
         if (id == idConnected) {
             FollowImageButton.visibility = View.INVISIBLE
             MessageBtn.visibility = View.INVISIBLE
             unFollowImageButton.visibility = View.INVISIBLE
             reportPerson.visibility = View.INVISIBLE
         }
+
+        textView9.loadSkeleton()
+        username.loadSkeleton()
+        textView7.loadSkeleton()
+        textView10.loadSkeleton()
+        textView8.loadSkeleton()
+        imageprofileothers.loadSkeleton()
 
         unFollowImageButton.setOnClickListener {
             apiInterface.unFollow(ApiInterface.FollowBody(idConnected!!, id!!)).enqueue(object :
@@ -76,26 +85,13 @@ class OthersProfileActivity : AppCompatActivity() {
             unFollowImageButton.visibility = View.VISIBLE
         }
 
-        apiInterface.getUser(ApiInterface.GetUserBody(id!!)).enqueue(
-            object : Callback<ApiInterface.GetUserResponse> {
-                override fun onResponse(
-                    call: Call<ApiInterface.GetUserResponse>,
-                    response: Response<ApiInterface.GetUserResponse>
-                ) {
-                    username.text = "@" + response.body()?.user?.username.toString()
-                    textView7.text = "@" + response.body()?.user?.username.toString()
-                    textView9.text = response.body()?.user?.following?.size.toString()
-                    textView10.text = response.body()?.user?.followers?.size.toString()
-                    //  if(response.body()?.user?)
-                    /* Glide.with(OthersProfileActivity())
-                         .load(ApiInterface.BASE_URL + response.body()?.user?.avatar).fitCenter()
-                         .into(imageprofileothers)*/
-                }
 
-                override fun onFailure(call: Call<ApiInterface.GetUserResponse>, t: Throwable) {
-                }
+            getUserInformation()
 
-            })
+
+        getVideos(this)
+
+
 
         apiInterface.getUser(ApiInterface.GetUserBody(idConnected!!)).enqueue(
             object : Callback<ApiInterface.GetUserResponse> {
@@ -126,6 +122,7 @@ class OthersProfileActivity : AppCompatActivity() {
                     ) {
 
                         textView9.text = response.body()?.user?.following?.size.toString()
+
                         textView10.text = response.body()?.user?.followers?.size.toString()
                         pulltorefreshOther.isRefreshing = false
 
@@ -142,17 +139,56 @@ class OthersProfileActivity : AppCompatActivity() {
         }
 
 
-        getVideos(this)
+
         recylcerPost = recyclerOtherProfilview
+
+
+    }
+
+    override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? {
+        return super.onCreateView(name, context, attrs)
+
+    }
+
+     fun getUserInformation() {
+
+             apiInterface.getUser(ApiInterface.GetUserBody(id!!)).enqueue(
+                 object : Callback<ApiInterface.GetUserResponse> {
+                     override fun onResponse(
+                         call: Call<ApiInterface.GetUserResponse>,
+                         response: Response<ApiInterface.GetUserResponse>
+                     ) {
+                         textView9.hideSkeleton()
+                         username.hideSkeleton()
+                         textView7.hideSkeleton()
+                         textView10.hideSkeleton()
+                         textView8.hideSkeleton()
+                         username.text = "@" + response.body()?.user?.username.toString()
+                         textView7.text = "@" + response.body()?.user?.username.toString()
+                         textView9.text = response.body()?.user?.following?.size.toString()
+                         textView10.text = response.body()?.user?.followers?.size.toString()
+                         textView8.text=response.body()?.user?.publication?.size.toString()
+                         imageprofileothers.hideSkeleton()
+
+                         Picasso.get()
+                             .load(ApiInterface.BASE_URL + response.body()?.user?.avatar)
+                             .into(imageprofileothers)
+                     }
+
+                     override fun onFailure(call: Call<ApiInterface.GetUserResponse>, t: Throwable) {
+                     }
+
+                 })
 
 
     }
 
 
     fun getVideos(context: Context) {
-        thread(isDaemon = true) {
+
+
             val apiInterface = ApiInterface.create()
-            apiInterface.GetVideosByUser(ApiInterface.PublicationRequestBodyGet(id))
+            apiInterface.GetOtherUserVideo(ApiInterface.PublicationRequestBodyGet(id))
                 .enqueue(object : Callback<ApiInterface.VideoResponse> {
                     override fun onResponse(
                         call: Call<ApiInterface.VideoResponse>,
@@ -163,17 +199,18 @@ class OthersProfileActivity : AppCompatActivity() {
                             val list: ArrayList<ProfilePost>? = response.body()?.publications
                             val listToDisplay: ArrayList<ProfilePost>? = null
                             list?.forEach {
-                                Log.i("post",it.toString())
+                                Log.i("post", it.toString())
                                 if (it.display)
                                     listToDisplay?.add(it)
                             }
-                            Log.i("post",listToDisplay.toString())
+                            Log.i("post", listToDisplay.toString())
 
-                             if (list == null) {
+                            if (list == null) {
                                 noContentProfile.visibility = View.VISIBLE
                                 recylcerPost.visibility = View.GONE
                             } else {
-                                adapter = ProfilePostAdapter(list)
+
+                                adapter = ProfilePostAdapter(list, "other")
                                 recylcerPost.adapter = adapter
                                 recylcerPost.layoutManager = GridLayoutManager(context, 3)
 
@@ -186,7 +223,7 @@ class OthersProfileActivity : AppCompatActivity() {
                         Log.i("get videos", "failed")
                     }
                 })
-        }
+
     }
 
 }

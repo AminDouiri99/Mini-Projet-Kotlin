@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.talentium.API.ApiInterface
 import com.example.talentium.Model.User
+import com.squareup.picasso.Picasso
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -33,8 +34,8 @@ class UserAdapter(
         val id = mList[position]._id
         lateinit var userFollowers : Array<String>
         holder.UserName.text = username
-        Glide.with(holder.itemView)
-            .load(ApiInterface.BASE_URL + image).fitCenter()
+        Picasso.get()
+            .load(ApiInterface.BASE_URL + image)
             .into(holder.ProfilePic)
         if (id == idConncted) {
             holder.follow.visibility = View.GONE

@@ -12,6 +12,7 @@ import com.example.talentium.Adapter.FeedAdapter
 import kotlinx.android.synthetic.main.fragment_feed.*
 import android.widget.AbsListView
 import androidx.recyclerview.widget.*
+import androidx.viewpager2.widget.ViewPager2
 
 import com.example.talentium.API.ApiInterface
 import com.example.talentium.Model.ProfilePost
@@ -22,7 +23,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import kotlin.concurrent.thread
 
-data class Post(val name: String, val role: String,val src:String) {
+data class Post(val name: String, val role: String, val src: String) {
 
 }
 
@@ -31,6 +32,9 @@ class FeedFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     lateinit var preferences: SharedPreferences
+    lateinit var feedView: View
+
+    lateinit var feedrecyclerviewFeed: ViewPager2
 
     override fun onCreate(savedInstanceState: Bundle?) {
         preferences = requireActivity().getSharedPreferences("pref", Context.MODE_PRIVATE)
@@ -41,80 +45,50 @@ class FeedFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-       // feedrecyclerview.layoutManager = LinearLayoutManager(view.context);
-        thread  (){
-            val data = ArrayList<ProfilePost>()
 
-            for (i in 1..10) {
-                data.add(ProfilePost(1 , "role " + i,"https://videocdn.bodybuilding.com/video/mp4/62000/62792m.mp4",true))
-            }
-            val id = preferences.getString("id", "")
-            val apiInterface = ApiInterface.create()
-            apiInterface.GetFollowingByUser(ApiInterface.PublicationRequestBodyGet(id.toString())).enqueue(
-                object : Callback<ApiInterface.getGollowingResponse>{
+        val id = preferences.getString("id", "")
+        val apiInterface = ApiInterface.create()
+
+        apiInterface.GetFollowingVideos(ApiInterface.PublicationRequestBodyGet(id.toString()))
+            .enqueue(
+                object : Callback<ApiInterface.VideoResponse> {
                     override fun onResponse(
-                        call: Call<ApiInterface.getGollowingResponse>,
-                        response: Response<ApiInterface.getGollowingResponse>
+                        call: Call<ApiInterface.VideoResponse>,
+                        response: Response<ApiInterface.VideoResponse>
                     ) {
-                        val list: ArrayList<String>? = response.body()?.following
-                        list?.forEach {
+                        if (response.code() == 200) {
+                            val list: ArrayList<ProfilePost>? = response.body()?.publications
+                            if (list == null) {
+                                if (list != null) {
+                                    Log.i("listvideo", list.size.toString())
+                                }
+                            } else {
+                                Log.i("listvideo", list!!.size.toString())
+                                val adapter = FeedAdapter(list, id.toString())
+                                if(list!!.size==0){
+                                    noContentFeed.visibility=View.VISIBLE
+                                }else{
+                                    noContentFeed.visibility=View.GONE
+                                    feedrecyclerview.visibility=View.VISIBLE
+                                    feedrecyclerviewFeed.adapter = adapter
+                                }
 
-
-                            apiInterface.GetVideosByUser(ApiInterface.PublicationRequestBodyGet(it.toString()))
-                                .enqueue(object : Callback<ApiInterface.VideoResponse> {
-                                    override fun onResponse(
-                                        call: Call<ApiInterface.VideoResponse>,
-                                        response: Response<ApiInterface.VideoResponse>
-                                    ) {
-                                        if (response.code() == 200) {
-
-                                            val list: ArrayList<ProfilePost>? = response.body()?.publications
-                                            list?.forEach {
-                                                data.add(it)
-                                            }
-                                            Log.i("feeeeed",list.toString())
-                                        }
-                                    }
-                                    override fun onFailure(call: Call<ApiInterface.VideoResponse>, t: Throwable) {
-                                        Log.i("get videos", "failed")
-                                    }
-                                })
-
-
-
-
-
-
-
+                            }
                         }
-                        Log.i("feeeeeed",list.toString())
                     }
 
                     override fun onFailure(
-                        call: Call<ApiInterface.getGollowingResponse>,
+                        call: Call<ApiInterface.VideoResponse>,
                         t: Throwable
                     ) {
-                        TODO("Not yet implemented")
+                        //  TODO("Not yet implemented")
                     }
 
                 }
             )
 
-            val adapter = FeedAdapter(data)
-            feedrecyclerview.adapter = adapter
 
-
-
-
-
-
-
-
-
-
-
-            }
-
+        //   }
 
     }
 
@@ -123,7 +97,10 @@ class FeedFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_feed, container, false)
+
+        feedView = inflater.inflate(R.layout.fragment_feed, container, false)
+        feedrecyclerviewFeed = feedView.findViewById(R.id.feedrecyclerview)
+        return feedView
     }
 
 

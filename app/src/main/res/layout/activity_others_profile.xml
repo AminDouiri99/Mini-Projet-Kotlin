@@ -103,7 +103,7 @@
             android:id="@+id/textView11"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Likes"
+            android:text="Posts"
             android:textColor="@color/Roman_Silver"
             android:textSize="@dimen/_14sdp"
             app:layout_constraintEnd_toEndOf="@+id/textView8"

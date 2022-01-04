@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Mini-Projet-Kotlin.Talentium.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Mini-Projet-Kotlin.Talentium.app.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Talentium.iml" filepath="$PROJECT_DIR$/.idea/modules/Talentium.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Talentium.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Talentium.app.iml" />
     </modules>

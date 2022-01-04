@@ -44,6 +44,8 @@ interface ApiInterface {
     data class updateUserBody(val id: String, val username: String)
 
     data class PublicationRequestBody(val userid :String , val caption :String,val visibility:Boolean)
+    data class LikeVideoRequestBody(val userId :String , val videoId :String)
+    data class LikeVideoResponseBody(val likeNumber :Int)
     data class PublicationRequestBodyGet(val userid :String )
     data class PublicationResponse(
         @SerializedName("publicationId")
@@ -81,14 +83,27 @@ interface ApiInterface {
     @POST("api/publication/create/video")
     fun CreatePublicatin(@Body publication :PublicationRequestBody):Call<PublicationResponse>
     @POST("api/publication/getfeedbyuser/")
-    fun GetFollowingByUser(@Body videos :PublicationRequestBodyGet):Call<getGollowingResponse>
+    fun GetFollowingVideos(@Body videos :PublicationRequestBodyGet):Call<VideoResponse>
 
     @POST("api/publication/byuser/",)
-    fun GetVideosByUser(@Body videos :PublicationRequestBodyGet):Call<VideoResponse>
+     fun GetVideosByUser(@Body videos :PublicationRequestBodyGet):Call<VideoResponse>
+
+    @POST("api/publication/getotheruser/",)
+    fun GetOtherUserVideo(@Body videos :PublicationRequestBodyGet):Call<VideoResponse>
+
+    @PUT("api/publication/update/video/")
+    fun UpdateVideo(@Body video:PublicationRequestBody):Call<PublicationResponse>
+
+    @PUT("api/publication/like/video/")
+    fun LikeVideo(@Body video:LikeVideoRequestBody):Call<LikeVideoResponseBody>
+
+    @PUT("api/publication/unlike/video/")
+    fun UnLikeVideo(@Body video:LikeVideoRequestBody):Call<LikeVideoResponseBody>
 
 
     companion object {
-        var BASE_URL = "https://miniprojet-server.herokuapp.com/"
+        var BASE_URL ="https://miniprojet-server.herokuapp.com/"
+           // "http://192.168.1.20:6000/"
 
         fun create(): ApiInterface {
             val retrofit = Retrofit.Builder()
